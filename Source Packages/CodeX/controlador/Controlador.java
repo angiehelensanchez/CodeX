@@ -100,7 +100,57 @@ public class Controlador {
                     break;
                 case 2:
                     // Implementa la lógica para editar un cliente.
-                    break;
+                    private void editarCliente() {
+                    Scanner scanner = new Scanner(System.in);
+
+                    System.out.println("----- Editar Cliente -----");
+                    System.out.print("Ingrese el ID del cliente que desea editar: ");
+                    int idCliente = scanner.nextInt();
+
+                    // Buscar el cliente por ID en la lista de clientes
+                    Cliente clienteAEditar = listaClientes.buscarClientePorID(idCliente);
+
+                    if (clienteAEditar == null) {
+                        System.out.println("Cliente no encontrado. Verifique el ID del cliente.");
+                        return;
+                    }
+
+                    System.out.println("Cliente encontrado:");
+                    System.out.println("ID: " + clienteAEditar.getId());
+                    System.out.println("Nombre: " + clienteAEditar.getNombre());
+                    System.out.println("Apellido: " + clienteAEditar.getApellido());
+                    System.out.println("Tipo de Cliente: " + clienteAEditar.getTipo());
+
+                    System.out.println("----- Nuevo Registro -----");
+                    System.out.print("Ingrese el nuevo nombre (deje en blanco para mantener el actual): ");
+                    String nuevoNombre = scanner.nextLine().trim();
+                    if (!nuevoNombre.isEmpty()) {
+                        clienteAEditar.setNombre(nuevoNombre);
+                    }
+
+                    System.out.print("Ingrese el nuevo apellido (deje en blanco para mantener el actual): ");
+                    String nuevoApellido = scanner.nextLine().trim();
+                    if (!nuevoApellido.isEmpty()) {
+                        clienteAEditar.setApellido(nuevoApellido);
+                    }
+
+                    System.out.print("Ingrese el nuevo tipo de cliente (deje en blanco para mantener el actual): ");
+                    String nuevoTipo = scanner.nextLine().trim();
+                    if (!nuevoTipo.isEmpty()) {
+                        // Validar el tipo de cliente ingresado
+                        if (!nuevoTipo.equalsIgnoreCase("Estandar") && !nuevoTipo.equalsIgnoreCase("Premium")) {
+                            System.out.println("Tipo de cliente no válido. Use 'Estandar' o 'Premium'.");
+                            return;
+                        }
+
+                        clienteAEditar.setTipo(nuevoTipo);
+                    }
+
+                    System.out.println("Cliente editado con éxito.");
+                }
+
+
+                break;
                 case 3:
                     // Implementa la lógica para eliminar un cliente.
                     break;
