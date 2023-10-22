@@ -65,6 +65,38 @@ public class Controlador {
             switch (opcionClientes) {
                 case 1:
                     // Implementa la lógica para agregar un cliente.
+                    private void agregarCliente() {
+                    Scanner scanner = new Scanner(System.in);
+
+                    System.out.println("----- Agregar Cliente -----");
+                    System.out.print("Ingrese el nombre del cliente: ");
+                    String nombre = scanner.nextLine();
+
+                    System.out.print("Ingrese el apellido del cliente: ");
+                    String apellido = scanner.nextLine();
+
+                    System.out.print("Ingrese el tipo de cliente (Estandar/Premium): ");
+                    String tipoCliente = scanner.nextLine();
+
+                    // Validar el tipo de cliente ingresado
+                    if (!tipoCliente.equalsIgnoreCase("Estandar") && !tipoCliente.equalsIgnoreCase("Premium")) {
+                        System.out.println("Tipo de cliente no válido. Use 'Estandar' o 'Premium'.");
+                        return;
+                    }
+
+                    // Crear una instancia del cliente según el tipo
+                    Cliente nuevoCliente;
+                    if (tipoCliente.equalsIgnoreCase("Estandar")) {
+                        nuevoCliente = new ClienteEstandar(nombre, apellido);
+                    } else {
+                        nuevoCliente = new ClientePremium(nombre, apellido);
+                    }
+
+                    // Agregar el cliente a la lista de clientes
+                    listaClientes.agregarCliente(nuevoCliente);
+
+                    System.out.println("Cliente agregado con éxito.");
+                }
                     break;
                 case 2:
                     // Implementa la lógica para editar un cliente.
