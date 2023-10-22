@@ -49,15 +49,120 @@ public class Controlador {
     }
 
     private void gestionarClientes() {
-        // Implementa la lógica para gestionar clientes (agregar, editar, eliminar, listar, etc.).
+        Scanner scanner = new Scanner(System.in);
+        int opcionClientes;
+
+        do {
+            System.out.println("----- Gestionar Clientes -----");
+            System.out.println("1. Agregar Cliente");
+            System.out.println("2. Editar Cliente");
+            System.out.println("3. Eliminar Cliente");
+            System.out.println("4. Listar Clientes");
+            System.out.println("5. Volver al Menú Principal");
+            System.out.print("Ingrese su opción: ");
+            opcionClientes = scanner.nextInt();
+
+            switch (opcionClientes) {
+                case 1:
+                    // Implementa la lógica para agregar un cliente.
+                    break;
+                case 2:
+                    // Implementa la lógica para editar un cliente.
+                    break;
+                case 3:
+                    // Implementa la lógica para eliminar un cliente.
+                    break;
+                case 4:
+                    // Implementa la lógica para listar clientes.
+                    break;
+                case 5:
+                    System.out.println("Volviendo al Menú Principal.");
+                    break;
+                default:
+                    System.out.println("Opción no válida. Intente de nuevo.");
+                    break;
+            }
+        } while (opcionClientes != 5);
+
+        scanner.close();
     }
 
     private void gestionarArticulos() {
-        // Implementa la lógica para gestionar artículos (agregar, editar, eliminar, listar, etc.).
+        Scanner scanner = new Scanner(System.in);
+        int opcionArticulos;
+
+        do {
+            System.out.println("----- Gestionar Artículos -----");
+            System.out.println("1. Agregar Artículo");
+            System.out.println("2. Editar Artículo");
+            System.out.println("3. Eliminar Artículo");
+            System.out.println("4. Listar Artículos");
+            System.out.println("5. Volver al Menú Principal");
+            System.out.print("Ingrese su opción: ");
+            opcionArticulos = scanner.nextInt();
+
+            switch (opcionArticulos) {
+                case 1:
+                    // Implementa la lógica para agregar un artículo.
+                    break;
+                case 2:
+                    // Implementa la lógica para editar un artículo.
+                    break;
+                case 3:
+                    // Implementa la lógica para eliminar un artículo.
+                    break;
+                case 4:
+                    // Implementa la lógica para listar artículos.
+                    break;
+                case 5:
+                    System.out.println("Volviendo al Menú Principal.");
+                    break;
+                default:
+                    System.out.println("Opción no válida. Intente de nuevo.");
+                    break;
+            }
+        } while (opcionArticulos != 5);
+
+        scanner.close();
     }
 
     private void realizarPedidos() {
-        // Implementa la lógica para realizar pedidos.
+        Scanner scanner = new Scanner(System.in);
+        int opcionPedidos;
+
+        do {
+            System.out.println("----- Realizar Pedidos -----");
+            System.out.println("1. Crear Pedido");
+            System.out.println("2. Editar Pedido");
+            System.out.println("3. Eliminar Pedido");
+            System.out.println("4. Listar Pedidos");
+            System.out.println("5. Volver al Menú Principal");
+            System.out.print("Ingrese su opción: ");
+            opcionPedidos = scanner.nextInt();
+
+            switch (opcionPedidos) {
+                case 1:
+                    // Implementa la lógica para crear un pedido.
+                    break;
+                case 2:
+                    // Implementa la lógica para editar un pedido.
+                    break;
+                case 3:
+                    // Implementa la lógica para eliminar un pedido.
+                    break;
+                case 4:
+                    // Implementa la lógica para listar pedidos.
+                    break;
+                case 5:
+                    System.out.println("Volviendo al Menú Principal.");
+                    break;
+                default:
+                    System.out.println("Opción no válida. Intente de nuevo.");
+                    break;
+            }
+        } while (opcionPedidos != 5);
+
+        scanner.close();
     }
 
     public static void main(String[] args) {
@@ -65,4 +170,3 @@ public class Controlador {
         controlador.iniciar();
     }
 }
-
