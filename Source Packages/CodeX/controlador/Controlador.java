@@ -189,7 +189,26 @@ public class Controlador {
                 break;
                 case 4:
                     // Implementa la lógica para listar clientes.
-                    break;
+                    private void listarClientes() {
+                    System.out.println("----- Lista de Clientes -----");
+
+                    // Obtener la lista de clientes desde la clase ListaClientes
+                    ArrayList<Cliente> clientes = listaClientes.getListaClientes();
+
+                    if (clientes.isEmpty()) {
+                        System.out.println("No hay clientes registrados.");
+                    } else {
+                        for (Cliente cliente : clientes) {
+                            System.out.println("ID: " + cliente.getId());
+                            System.out.println("Nombre: " + cliente.getNombre());
+                            System.out.println("Apellido: " + cliente.getApellido());
+                            System.out.println("Tipo de Cliente: " + cliente.getTipo());
+                            System.out.println("----------------------");
+                        }
+                    }
+                }
+
+                break;
                 case 5:
                     System.out.println("Volviendo al Menú Principal.");
                     break;
@@ -219,13 +238,117 @@ public class Controlador {
             switch (opcionArticulos) {
                 case 1:
                     // Implementa la lógica para agregar un artículo.
-                    break;
+                    private void agregarArticulo() {
+                    Scanner scanner = new Scanner(System.in);
+
+                    System.out.println("----- Agregar Artículo -----");
+                    System.out.print("Ingrese el nombre del artículo: ");
+                    String nombre = scanner.nextLine();
+
+                    System.out.print("Ingrese la descripción del artículo: ");
+                    String descripcion = scanner.nextLine();
+
+                    System.out.print("Ingrese el precio del artículo: ");
+                    double precio = scanner.nextDouble();
+
+                    // Crear una instancia del artículo
+                    Articulo nuevoArticulo = new Articulo(nombre, descripcion, precio);
+
+                    // Agregar el artículo a la lista de artículos
+                    listaArticulos.agregarArticulo(nuevoArticulo);
+
+                    System.out.println("Artículo agregado con éxito.");
+                }
+
+                break;
                 case 2:
                     // Implementa la lógica para editar un artículo.
-                    break;
+                    private void editarArticulo() {
+                    Scanner scanner = new Scanner(System.in);
+
+                    System.out.println("----- Editar Artículo -----");
+                    System.out.print("Ingrese el ID del artículo que desea editar: ");
+                    int idArticulo = scanner.nextInt();
+
+                    // Buscar el artículo por ID en la lista de artículos
+                    Articulo articuloAEditar = listaArticulos.buscarArticuloPorID(idArticulo);
+
+                    if (articuloAEditar == null) {
+                        System.out.println("Artículo no encontrado. Verifique el ID del artículo.");
+                        return;
+                    }
+
+                    System.out.println("Artículo encontrado:");
+                    System.out.println("ID: " + articuloAEditar.getId());
+                    System.out.println("Nombre: " + articuloAEditar.getNombre());
+                    System.out.println("Descripción: " + articuloAEditar.getDescripcion());
+                    System.out.println("Precio: " + articuloAEditar.getPrecio());
+
+                    System.out.println("----- Nuevo Registro -----");
+                    System.out.print("Ingrese el nuevo nombre (deje en blanco para mantener el actual): ");
+                    String nuevoNombre = scanner.nextLine().trim();
+                    if (!nuevoNombre.isEmpty()) {
+                        articuloAEditar.setNombre(nuevoNombre);
+                    }
+
+                    System.out.print("Ingrese la nueva descripción (deje en blanco para mantener la actual): ");
+                    String nuevaDescripcion = scanner.nextLine().trim();
+                    if (!nuevaDescripcion.isEmpty()) {
+                        articuloAEditar.setDescripcion(nuevaDescripcion);
+                    }
+
+                    System.out.print("Ingrese el nuevo precio (deje en blanco para mantener el actual): ");
+                    String nuevoPrecioStr = scanner.nextLine().trim();
+                    if (!nuevoPrecioStr.isEmpty()) {
+                        try {
+                            double nuevoPrecio = Double.parseDouble(nuevoPrecioStr);
+                            articuloAEditar.setPrecio(nuevoPrecio);
+                        } catch (NumberFormatException e) {
+                            System.out.println("Precio no válido. Ingrese un número válido.");
+                            return;
+                        }
+                    }
+
+                    System.out.println("Artículo editado con éxito.");
+                }
+
+                break;
                 case 3:
                     // Implementa la lógica para eliminar un artículo.
-                    break;
+                    private void eliminarArticulo() {
+                    Scanner scanner = new Scanner(System.in);
+
+                    System.out.println("----- Eliminar Artículo -----");
+                    System.out.print("Ingrese el ID del artículo que desea eliminar: ");
+                    int idArticulo = scanner.nextInt();
+
+                    // Buscar el artículo por ID en la lista de artículos
+                    Articulo articuloAEliminar = listaArticulos.buscarArticuloPorID(idArticulo);
+
+                    if (articuloAEliminar == null) {
+                        System.out.println("Artículo no encontrado. Verifique el ID del artículo.");
+                        return;
+                    }
+
+                    System.out.println("Artículo encontrado:");
+                    System.out.println("ID: " + articuloAEliminar.getId());
+                    System.out.println("Nombre: " + articuloAEliminar.getNombre());
+                    System.out.println("Descripción: " + articuloAEliminar.getDescripcion());
+                    System.out.println("Precio: " + articuloAEliminar.getPrecio());
+
+                    System.out.print("¿Está seguro de que desea eliminar este artículo? (S/N): ");
+                    String confirmacion = scanner.next();
+
+                    if (confirmacion.equalsIgnoreCase("S")) {
+                        // Eliminar el artículo de la lista de artículos
+                        listaArticulos.eliminarArticulo(articuloAEliminar);
+                        System.out.println("Artículo eliminado con éxito.");
+                    } else {
+                        System.out.println("Artículo no eliminado.");
+                    }
+                }
+
+                break;
                 case 4:
                     // Implementa la lógica para listar artículos.
                     break;
