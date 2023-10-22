@@ -153,7 +153,40 @@ public class Controlador {
                 break;
                 case 3:
                     // Implementa la lógica para eliminar un cliente.
-                    break;
+                    private void eliminarCliente() {
+                    Scanner scanner = new Scanner(System.in);
+
+                    System.out.println("----- Eliminar Cliente -----");
+                    System.out.print("Ingrese el ID del cliente que desea eliminar: ");
+                    int idCliente = scanner.nextInt();
+
+                    // Buscar el cliente por ID en la lista de clientes
+                    Cliente clienteAEliminar = listaClientes.buscarClientePorID(idCliente);
+
+                    if (clienteAEliminar == null) {
+                        System.out.println("Cliente no encontrado. Verifique el ID del cliente.");
+                        return;
+                    }
+
+                    System.out.println("Cliente encontrado:");
+                    System.out.println("ID: " + clienteAEliminar.getId());
+                    System.out.println("Nombre: " + clienteAEliminar.getNombre());
+                    System.out.println("Apellido: " + clienteAEliminar.getApellido());
+                    System.out.println("Tipo de Cliente: " + clienteAEliminar.getTipo());
+
+                    System.out.print("¿Está seguro de que desea eliminar este cliente? (S/N): ");
+                    String confirmacion = scanner.next();
+
+                    if (confirmacion.equalsIgnoreCase("S")) {
+                        // Eliminar el cliente de la lista de clientes
+                        listaClientes.eliminarCliente(clienteAEliminar);
+                        System.out.println("Cliente eliminado con éxito.");
+                    } else {
+                        System.out.println("Cliente no eliminado.");
+                    }
+                }
+
+                break;
                 case 4:
                     // Implementa la lógica para listar clientes.
                     break;
