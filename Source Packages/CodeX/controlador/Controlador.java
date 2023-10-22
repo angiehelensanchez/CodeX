@@ -64,7 +64,7 @@ public class Controlador {
 
             switch (opcionClientes) {
                 case 1:
-                    // Implementa la lógica para agregar un cliente.
+                    // Implementa la lógica para agregar un cliente.///////////////////////
                     private void agregarCliente() {
                     Scanner scanner = new Scanner(System.in);
 
@@ -99,7 +99,7 @@ public class Controlador {
                 }
                     break;
                 case 2:
-                    // Implementa la lógica para editar un cliente.
+                    // Implementa la lógica para editar un cliente.///////////////////////
                     private void editarCliente() {
                     Scanner scanner = new Scanner(System.in);
 
@@ -152,7 +152,7 @@ public class Controlador {
 
                 break;
                 case 3:
-                    // Implementa la lógica para eliminar un cliente.
+                    // Implementa la lógica para eliminar un cliente.///////////////////////
                     private void eliminarCliente() {
                     Scanner scanner = new Scanner(System.in);
 
@@ -188,7 +188,7 @@ public class Controlador {
 
                 break;
                 case 4:
-                    // Implementa la lógica para listar clientes.
+                    // Implementa la lógica para listar clientes.///////////////////////
                     private void listarClientes() {
                     System.out.println("----- Lista de Clientes -----");
 
@@ -237,7 +237,7 @@ public class Controlador {
 
             switch (opcionArticulos) {
                 case 1:
-                    // Implementa la lógica para agregar un artículo.
+                    // Implementa la lógica para agregar un artículo.///////////////////////
                     private void agregarArticulo() {
                     Scanner scanner = new Scanner(System.in);
 
@@ -262,7 +262,7 @@ public class Controlador {
 
                 break;
                 case 2:
-                    // Implementa la lógica para editar un artículo.
+                    // Implementa la lógica para editar un artículo.///////////////////////
                     private void editarArticulo() {
                     Scanner scanner = new Scanner(System.in);
 
@@ -314,7 +314,7 @@ public class Controlador {
 
                 break;
                 case 3:
-                    // Implementa la lógica para eliminar un artículo.
+                    // Implementa la lógica para eliminar un artículo.///////////////////////
                     private void eliminarArticulo() {
                     Scanner scanner = new Scanner(System.in);
 
@@ -350,8 +350,27 @@ public class Controlador {
 
                 break;
                 case 4:
-                    // Implementa la lógica para listar artículos.
-                    break;
+                    // Implementa la lógica para listar artículos.///////////////////////
+                    private void listarArticulos() {
+                    System.out.println("----- Lista de Artículos -----");
+
+                    // Obtener la lista de artículos desde la clase ListaArticulos
+                    ArrayList<Articulo> articulos = listaArticulos.getListaArticulos();
+
+                    if (articulos.isEmpty()) {
+                        System.out.println("No hay artículos registrados.");
+                    } else {
+                        for (Articulo articulo : articulos) {
+                            System.out.println("ID: " + articulo.getId());
+                            System.out.println("Nombre: " + articulo.getNombre());
+                            System.out.println("Descripción: " + articulo.getDescripcion());
+                            System.out.println("Precio: " + articulo.getPrecio());
+                            System.out.println("----------------------");
+                        }
+                    }
+                }
+
+                break;
                 case 5:
                     System.out.println("Volviendo al Menú Principal.");
                     break;
@@ -380,17 +399,215 @@ public class Controlador {
 
             switch (opcionPedidos) {
                 case 1:
-                    // Implementa la lógica para crear un pedido.
-                    break;
+                    // Implementa la lógica para crear un pedido.///////////////////////
+                    private void crearPedido() {
+                    Scanner scanner = new Scanner(System.in);
+
+                    System.out.println("----- Crear Pedido -----");
+
+                    // Solicitar el ID del cliente que realiza el pedido
+                    System.out.print("Ingrese el ID del cliente que realiza el pedido: ");
+                    int idCliente = scanner.nextInt();
+
+                    // Buscar el cliente por ID en la lista de clientes
+                    Cliente cliente = listaClientes.buscarClientePorID(idCliente);
+
+                    if (cliente == null) {
+                        System.out.println("Cliente no encontrado. Verifique el ID del cliente.");
+                        return;
+                    }
+
+                    System.out.println("Cliente encontrado:");
+                    System.out.println("ID: " + cliente.getId());
+                    System.out.println("Nombre: " + cliente.getNombre());
+                    System.out.println("Apellido: " + cliente.getApellido());
+                    System.out.println("Tipo de Cliente: " + cliente.getTipo());
+
+                    // Crear una lista para los artículos seleccionados en el pedido
+                    ArrayList<Articulo> articulosSeleccionados = new ArrayList<>();
+
+                    // Solicitar los artículos que se agregarán al pedido
+                    while (true) {
+                        System.out.print("Ingrese el ID del artículo a agregar al pedido (0 para finalizar): ");
+                        int idArticulo = scanner.nextInt();
+
+                        if (idArticulo == 0) {
+                            break;
+                        }
+
+                        // Buscar el artículo por ID en la lista de artículos
+                        Articulo articulo = listaArticulos.buscarArticuloPorID(idArticulo);
+
+                        if (articulo == null) {
+                            System.out.println("Artículo no encontrado. Verifique el ID del artículo.");
+                        } else {
+                            // Agregar el artículo a la lista de artículos seleccionados en el pedido
+                            articulosSeleccionados.add(articulo);
+                        }
+                    }
+
+                    // Calcular el monto total del pedido
+                    double montoTotal = 0;
+                    for (Articulo articulo : articulosSeleccionados) {
+                        montoTotal += articulo.getPrecio();
+                    }
+
+                    // Crear un nuevo pedido
+                    Pedido nuevoPedido = new Pedido(cliente, articulosSeleccionados, montoTotal);
+
+                    // Agregar el pedido a la lista de pedidos
+                    listaPedidos.agregarPedido(nuevoPedido);
+
+                    System.out.println("Pedido creado con éxito.");
+                }
+
+                break;
                 case 2:
-                    // Implementa la lógica para editar un pedido.
-                    break;
+                    // Implementa la lógica para editar un pedido.///////////////////////
+                    private void editarPedido() {
+                    Scanner scanner = new Scanner(System.in);
+
+                    System.out.println("----- Editar Pedido -----");
+                    System.out.print("Ingrese el ID del pedido que desea editar: ");
+                    int idPedido = scanner.nextInt();
+
+                    // Buscar el pedido por ID en la lista de pedidos
+                    Pedido pedidoAEditar = listaPedidos.buscarPedidoPorID(idPedido);
+
+                    if (pedidoAEditar == null) {
+                        System.out.println("Pedido no encontrado. Verifique el ID del pedido.");
+                        return;
+                    }
+
+                    System.out.println("Pedido encontrado:");
+                    System.out.println("ID: " + pedidoAEditar.getId());
+                    System.out.println("Cliente: " + pedidoAEditar.getCliente().getNombre() + " " + pedidoAEditar.getCliente().getApellido());
+                    System.out.println("Monto Total: " + pedidoAEditar.getMontoTotal());
+
+                    // Mostrar los artículos en el pedido
+                    System.out.println("Artículos en el pedido:");
+                    for (Articulo articulo : pedidoAEditar.getArticulos()) {
+                        System.out.println("- " + articulo.getNombre() + " (ID: " + articulo.getId() + ")");
+                    }
+
+                    System.out.println("----- Nuevo Registro -----");
+
+                    // Solicitar la edición del monto total (opcional)
+                    System.out.print("Ingrese el nuevo monto total (deje en blanco para mantener el actual): ");
+                    String nuevoMontoTotalStr = scanner.nextLine().trim();
+                    if (!nuevoMontoTotalStr.isEmpty()) {
+                        try {
+                            double nuevoMontoTotal = Double.parseDouble(nuevoMontoTotalStr);
+                            pedidoAEditar.setMontoTotal(nuevoMontoTotal);
+                        } catch (NumberFormatException e) {
+                            System.out.println("Monto total no válido. Ingrese un número válido.");
+                            return;
+                        }
+                    }
+
+                    // Solicitar la edición de los artículos en el pedido (opcional)
+                    System.out.println("¿Desea editar los artículos en el pedido? (S/N): ");
+                    String editarArticulos = scanner.next();
+
+                    if (editarArticulos.equalsIgnoreCase("S")) {
+                        // Crear una lista temporal de artículos para el pedido editado
+                        ArrayList<Articulo> nuevosArticulos = new ArrayList<>();
+
+                        while (true) {
+                            System.out.print("Ingrese el ID del artículo a agregar al pedido (0 para finalizar): ");
+                            int idArticulo = scanner.nextInt();
+
+                            if (idArticulo == 0) {
+                                break;
+                            }
+
+                            // Buscar el artículo por ID en la lista de artículos
+                            Articulo articulo = listaArticulos.buscarArticuloPorID(idArticulo);
+
+                            if (articulo == null) {
+                                System.out.println("Artículo no encontrado. Verifique el ID del artículo.");
+                            } else {
+                                // Agregar el artículo a la lista de artículos seleccionados en el pedido editado
+                                nuevosArticulos.add(articulo);
+                            }
+                        }
+
+                        // Actualizar la lista de artículos en el pedido editado
+                        pedidoAEditar.setArticulos(nuevosArticulos);
+                    }
+
+                    System.out.println("Pedido editado con éxito.");
+                }
+
+                break;
                 case 3:
-                    // Implementa la lógica para eliminar un pedido.
-                    break;
+                    // Implementa la lógica para eliminar un pedido.///////////////////////
+                    private void eliminarPedido() {
+                    Scanner scanner = new Scanner(System.in);
+
+                    System.out.println("----- Eliminar Pedido -----");
+                    System.out.print("Ingrese el ID del pedido que desea eliminar: ");
+                    int idPedido = scanner.nextInt();
+
+                    // Buscar el pedido por ID en la lista de pedidos
+                    Pedido pedidoAEliminar = listaPedidos.buscarPedidoPorID(idPedido);
+
+                    if (pedidoAEliminar == null) {
+                        System.out.println("Pedido no encontrado. Verifique el ID del pedido.");
+                        return;
+                    }
+
+                    System.out.println("Pedido encontrado:");
+                    System.out.println("ID: " + pedidoAEliminar.getId());
+                    System.out.println("Cliente: " + pedidoAEliminar.getCliente().getNombre() + " " + pedidoAEliminar.getCliente().getApellido());
+                    System.out.println("Monto Total: " + pedidoAEliminar.getMontoTotal());
+
+                    // Mostrar los artículos en el pedido
+                    System.out.println("Artículos en el pedido:");
+                    for (Articulo articulo : pedidoAEliminar.getArticulos()) {
+                        System.out.println("- " + articulo.getNombre() + " (ID: " + articulo.getId() + ")");
+                    }
+
+                    System.out.print("¿Está seguro de que desea eliminar este pedido? (S/N): ");
+                    String confirmacion = scanner.next();
+
+                    if (confirmacion.equalsIgnoreCase("S")) {
+                        // Eliminar el pedido de la lista de pedidos
+                        listaPedidos.eliminarPedido(pedidoAEliminar);
+                        System.out.println("Pedido eliminado con éxito.");
+                    } else {
+                        System.out.println("Pedido no eliminado.");
+                    }
+                }
+
+                break;
                 case 4:
-                    // Implementa la lógica para listar pedidos.
-                    break;
+                    // Implementa la lógica para listar pedidos.///////////////////////
+                    private void listarPedidos() {
+                    System.out.println("----- Lista de Pedidos -----");
+
+                    // Obtener la lista de pedidos desde la clase ListaPedidos
+                    ArrayList<Pedido> pedidos = listaPedidos.getListaPedidos();
+
+                    if (pedidos.isEmpty()) {
+                        System.out.println("No hay pedidos registrados.");
+                    } else {
+                        for (Pedido pedido : pedidos) {
+                            System.out.println("ID del Pedido: " + pedido.getId());
+                            System.out.println("Cliente: " + pedido.getCliente().getNombre() + " " + pedido.getCliente().getApellido());
+                            System.out.println("Monto Total: " + pedido.getMontoTotal());
+
+                            System.out.println("Artículos en el Pedido:");
+                            for (Articulo articulo : pedido.getArticulos()) {
+                                System.out.println("- " + articulo.getNombre() + " (ID: " + articulo.getId() + ")");
+                            }
+
+                            System.out.println("----------------------");
+                        }
+                    }
+                }
+
+                break;
                 case 5:
                     System.out.println("Volviendo al Menú Principal.");
                     break;
