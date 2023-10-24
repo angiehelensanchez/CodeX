@@ -1,5 +1,6 @@
 package CodeX.modelo;
-
+import java.io.Serializable;
+import java.util.Date;
 public class Pedidos {
 
     private ListaArticulos listaArticulos;

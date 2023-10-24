@@ -1,5 +1,7 @@
 package CodeX.modelo;
 
+import java.io.Serializable;
+
 public class ClientePremium extends Cliente{
 
     private Float desEnvio;

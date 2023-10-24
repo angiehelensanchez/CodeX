@@ -1,6 +1,13 @@
 package CodeX.controlador;
 
+import codex.modelo.Datos;
+import codex.modelo.Pedido;
+import codex.vista.OnlineStore;
+import javax.swing.*;
+import codex.vista.*;
 import java.util.Scanner;
+import java.util.Locale;
+import java.util.List;
 
 public class Controlador {
     private ListaClientes listaClientes;
