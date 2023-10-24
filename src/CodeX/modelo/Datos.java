@@ -59,6 +59,7 @@ public class Datos {
         Articulo articulo = buscarArticulo(id);
         if (articulo != null) {
             listaArticulos.eliminar(articulo);
+
         } else {
             System.out.println("Artículo no encontrado.");
         }
@@ -74,13 +75,16 @@ public class Datos {
 
     // PEDIDOS -------------------------------------
     public void hacerPedido(Pedido pedido) {
+
         listaPedidos.agregar(pedido);
+        //ListaPedidos.agregarPedido(pedido);
     }
 
     public void eliminarPedido(int idPedido) {
         Pedido pedido = buscarPedido(idPedido);
         if (pedido != null) {
             listaPedidos.eliminar(pedido);
+
         } else {
             System.out.println("Pedido no encontrado.");
         }
