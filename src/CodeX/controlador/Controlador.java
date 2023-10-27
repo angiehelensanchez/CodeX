@@ -10,12 +10,9 @@ public class Controlador {
             datos = new Datos ();
         }
 
-    public void agregarCliente(ClienteEstandard cliente) {
-        String tipocliente;
-        tipocliente = GestionOS.seleccionartipocliente();
-        if tipocliente == "Premium"{
-            ClienteEstandard nuevocliente;
-            nuevocliente = agregarClientePremium();
+    public void agregarCliente(String tipocliente) {
+        if (tipocliente.equals("Premium")){
+
 
         }
 

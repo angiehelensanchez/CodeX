@@ -1,8 +1,7 @@
 package CodeX.vista;
 
 import CodeX.controlador.Controlador;
-import CodeX.modelo.Articulo;
-import CodeX.modelo.ListaArticulos;
+
 
 import java.util.Scanner;
 public class GestionOS {
@@ -44,7 +43,7 @@ public class GestionOS {
         }
         return resp.charAt(0);
     }
-
+// ARTICULOS
     private void menuArticulos() {
         Scanner scanner = new Scanner(System.in);
         int opcionArticulos;
@@ -68,12 +67,57 @@ public class GestionOS {
                 case 3:
                     controlador.listarArticulos();
                     break;
+                case 4:
+                    System.out.println("Volviendo al Menú Principal.");
+                    break;
+                default:
+                    System.out.println("Opción no válida. Intente de nuevo.");
+                    break;
             }
         }while (opcionArticulos != 4);
     }
 
+    //CLIENTES
+    private void gestionarClientes() {
+        Scanner scanner = new Scanner(System.in);
+        int opcionClientes;
 
-    public String seleccionartipocliente(){
+        do {
+            System.out.println("----- Gestionar Clientes -----");
+            System.out.println("1. Agregar Cliente");
+            System.out.println("2. Editar Cliente");
+            System.out.println("3. Eliminar Cliente");
+            System.out.println("4. Listar Clientes");
+            System.out.println("5. Volver al Menú Principal");
+            System.out.print("Ingrese su opción: ");
+            opcionClientes = scanner.nextInt();
+
+            switch (opcionClientes) {
+                case 1:
+                   seleccionartipocliente();
+                break;
+                case 2:
+
+                break;
+                case 3:
+
+                break;
+                case 4:
+
+                break;
+                case 5:
+                    System.out.println("Volviendo al Menú Principal.");
+                    break;
+                default:
+                    System.out.println("Opción no válida. Intente de nuevo.");
+                    break;
+            }
+        } while (opcionClientes != 5);
+
+        scanner.close();
+    }
+
+    public void seleccionartipocliente(){
         Scanner scanner = new Scanner(System.in);
         String tipocliente = "";
         int optio;
@@ -86,13 +130,14 @@ public class GestionOS {
             switch (optio) {
                 case 1:
                     tipocliente = "Estandar";
-                    //return tipocliente;
+                    controlador.agregarCliente(tipocliente);
                 case 2:
                     tipocliente = "Premium";
-                    //return tipocliente;
+                    /controlador.agregarCliente(tipocliente);
+                case 3:
+                    System.out.println("Cancelando...");
             }
         }while (optio != 3);
-        return tipocliente;
     }
     public void agregarclientepremiun(){
 
