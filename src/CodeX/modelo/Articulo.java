@@ -8,12 +8,14 @@ public class Articulo {
     private String descripcion;
     private float precio;
     private float gastosenvio;
+    private int tpreparacion;
 
-    public Articulo(String codigo, String descripcion, float precio, float gastosenvio) {
+    public Articulo(String codigo, String descripcion, float precio, float gastosenvio, int tpreparacion) {
         this.codigo = codigo;
         this.descripcion = descripcion;
         this.precio = precio;
         this.gastosenvio = gastosenvio;
+        this.tpreparacion = tpreparacion;
     }
 
     public String getCodigo() {
@@ -46,6 +48,14 @@ public class Articulo {
 
     public void setGastosenvio(float gastosenvio) {
         this.gastosenvio = gastosenvio;
+    }
+
+    public int getTpreparacion() {
+        return tpreparacion;
+    }
+
+    public void setTpreparacion(int tpreparacion) {
+        this.tpreparacion = tpreparacion;
     }
 
     @Override

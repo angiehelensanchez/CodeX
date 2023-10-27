@@ -1,16 +1,36 @@
 package CodeX.controlador;
+import CodeX.modelo.*;
+import CodeX.vista.GestionOS;
 
-import codex.modelo.Datos;
-import codex.modelo.Pedido;
-import codex.vista.OnlineStore;
-import javax.swing.*;
-import codex.vista.*;
-import java.util.Scanner;
-import java.util.Locale;
 import java.util.List;
 
 public class Controlador {
-    private ListaClientes listaClientes;
+        private Datos datos;
+        public Controlador() {
+            datos = new Datos ();
+        }
+
+    public void agregarCliente(ClienteEstandard cliente) {
+        String tipocliente;
+        tipocliente = GestionOS.seleccionartipocliente();
+        if tipocliente == "Premium"{
+            ClienteEstandard nuevocliente;
+            nuevocliente = agregarClientePremium();
+
+        }
+
+    }
+    public void agregarArticulo(){
+        datos.crearArticulo();
+    }
+    public void eliminarArticulo(){
+        datos.eliminarArticulo();
+    }
+    public ListaArticulos listarArticulos(){
+        datos.listArticulos();
+    }
+// TO-BE-DONE
+   /* private ListaClientes listaClientes;
     private ListaArticulos listaArticulos;
     private ListaPedidos listaPedidos;
 
@@ -18,9 +38,9 @@ public class Controlador {
         listaClientes = new ListaClientes();
         listaArticulos = new ListaArticulos();
         listaPedidos = new ListaPedidos();
-    }
+    }*/
 
-    public void iniciar() {
+/*    public void iniciar() {
         Scanner scanner = new Scanner(System.in);
         int opcion;
 
@@ -53,8 +73,9 @@ public class Controlador {
         } while (opcion != 4);
 
         scanner.close();
-    }
+    }*/
 
+/*
     private void gestionarClientes() {
         Scanner scanner = new Scanner(System.in);
         int opcionClientes;
@@ -226,9 +247,9 @@ public class Controlador {
         } while (opcionClientes != 5);
 
         scanner.close();
-    }
+    }*/
 
-    private void gestionarArticulos() {
+    /*private void gestionarArticulos() {
         Scanner scanner = new Scanner(System.in);
         int opcionArticulos;
 
@@ -626,10 +647,6 @@ public class Controlador {
 
         scanner.close();
     }
+*/
 
-    public static void main(String[] args) {
-        Controlador controlador = new Controlador();
-        controlador.iniciar();
-        ListaPedidos.agregarPedido();
-    }
 }

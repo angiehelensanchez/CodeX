@@ -1,5 +1,7 @@
 package CodeX.modelo;
 
+import java.util.List;
+
 public class ListaArticulos extends Lista<Articulo> {
     public ListaArticulos(){
         super();
@@ -13,7 +15,11 @@ public class ListaArticulos extends Lista<Articulo> {
         }
         return null;
     }
-    public void agregar(Articulo articulo) {
+    public void agregarArticulo(Articulo articulo) {
         lista.add(articulo);
     }
+    public void eliminarArticulo(Articulo articulo){
+        lista.remove(articulo);
+    }
+
 }

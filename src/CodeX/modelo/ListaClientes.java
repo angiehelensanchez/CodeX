@@ -13,7 +13,7 @@ public class ListaClientes {
         return listaClientes.size();
     }
 
-    public void agregar(Cliente cliente) {
+    public void agregarclienteEstandar(ClienteEstandard cliente) {
         listaClientes.add(cliente);
     }
 
@@ -21,7 +21,7 @@ public class ListaClientes {
         listaClientes.remove(cliente);
     }
 
-    public Cliente buscarPorId(int index) {
+    public Cliente buscarPorMail(String index) {
         if (index >= 0 && index < listaClientes.size()) {
             return listaClientes.get(index);
         }
