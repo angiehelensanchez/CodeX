@@ -92,8 +92,13 @@ public class Datos {
         }
     }
 
-    public ListaArticulos listArticulos() {
-        return listaArticulos;
+    public String listArticulos() {
+        int cLista = listaArticulos.getSize();
+        for(int i = 0;i<= cLista;i++){
+            Articulo arti = listaArticulos.listarInventario(i);
+            return  arti.toString();
+        }
+        return null;
     }
 
 

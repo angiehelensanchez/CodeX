@@ -22,7 +22,6 @@ public class GestionOS {
             opcio = pedirOpcion();
             switch (opcio) {
                 case '1':
-// TO-BE-DONE
                     menuArticulos();
                     break;
                 case '2':
@@ -67,19 +66,12 @@ public class GestionOS {
                     controlador.eliminarArticulo();
                     break;
                 case 3:
-                    ListadoArticulos(controlador.listarArticulos());
+                    controlador.listarArticulos();
                     break;
-
             }
-        }while (opcionArticulos != 5);
+        }while (opcionArticulos != 4);
     }
 
-    private void ListadoArticulos(ListaArticulos lista){
-
-        for (Articulo articulo : lista){
-
-        }
-    }
 
     public String seleccionartipocliente(){
         Scanner scanner = new Scanner(System.in);

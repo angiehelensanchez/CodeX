@@ -26,9 +26,10 @@ public class Controlador {
     public void eliminarArticulo(){
         datos.eliminarArticulo();
     }
-    public ListaArticulos listarArticulos(){
-        datos.listArticulos();
+    public String listarArticulos(){
+        return datos.listArticulos();
     }
+
 // TO-BE-DONE
    /* private ListaClientes listaClientes;
     private ListaArticulos listaArticulos;
