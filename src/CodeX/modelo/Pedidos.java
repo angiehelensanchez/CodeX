@@ -1,6 +1,8 @@
 package CodeX.modelo;
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
+
 public class Pedidos {
 
     private ListaArticulos listaArticulos;
@@ -12,7 +14,7 @@ public class Pedidos {
     private Date fecha; // Fecha en que se hizo el pedido
     private double total; // Total del pedido
 
-    public Pedido(int idPedido, Cliente cliente, List<Articulo> articulos) {
+    public Pedidos (int idPedido, Cliente cliente, List<Articulo> articulos) {
         this.idPedido = idPedido;
         this.cliente = cliente;
         this.articulos = articulos;
@@ -39,7 +41,7 @@ public class Pedidos {
 
         // Setter para idPedido
         public void setIdPedido(int idPedidos) {
-            this.idPedidos = idPedidos;
+            this.idPedido = idPedidos;
         }
 
         // Getter para cliente
@@ -73,12 +75,6 @@ public class Pedidos {
             this.fecha = fecha;
         }
 
-        // Getter para total
-        public double getTotal() {
-            return total;
-        }
-
-        // No incluiría un setter para "total", ya que este valor se calcula a partir de la lista de artículos.
     }
 
-}
+

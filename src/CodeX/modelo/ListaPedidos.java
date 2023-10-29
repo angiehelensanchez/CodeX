@@ -3,7 +3,7 @@ package CodeX.modelo;
 import java.util.ArrayList;
 
 public class ListaPedidos {
-    private ArrayList<Pedido> listaPedidos;
+    private ArrayList<Pedidos> listaPedidos;
 
     public ListaPedidos() {
         listaPedidos = new ArrayList<>();
@@ -13,15 +13,15 @@ public class ListaPedidos {
         return listaPedidos.size();
     }
 
-    public void agregarPedido(Pedido pedido) {
+    public void agregarPedido(Pedidos pedido) {
         listaPedidos.add(pedido);
     }
 
-    public void eliminarPedido(Pedido pedido) {
+    public void eliminarPedido(Pedidos pedido) {
         listaPedidos.remove(pedido);
     }
 
-    public Pedido obtenerPedido(int indice) {
+    public Pedidos obtenerPedido(int indice) {
         if (indice >= 0 && indice < listaPedidos.size()) {
             return listaPedidos.get(indice);
         }
@@ -36,7 +36,17 @@ public class ListaPedidos {
         return listaPedidos.isEmpty();
     }
 
-    public ArrayList<Pedido> obtenerLista() {
+    public ArrayList<Pedidos> obtenerLista() {
         return new ArrayList<>(listaPedidos);
     }
+
+    public Pedidos buscarPorId(int idPedido) {
+        for (Pedidos pedido : listaPedidos) {
+            if (pedido.getIdPedido() == idPedido) {
+                return pedido;
+            }
+        }
+        return null;
+    }
+
 }

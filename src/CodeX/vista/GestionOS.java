@@ -133,7 +133,7 @@ public class GestionOS {
                     controlador.agregarCliente(tipocliente);
                 case 2:
                     tipocliente = "Premium";
-                    /controlador.agregarCliente(tipocliente);
+                    controlador.agregarCliente(tipocliente);
                 case 3:
                     System.out.println("Cancelando...");
             }

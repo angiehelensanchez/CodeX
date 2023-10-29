@@ -23,8 +23,9 @@ public class Datos {
 
     // CLIENTES -------------------------------------
     public void agregarClienteEstandar(ClienteEstandard cliente) {
-        listaClientes.agregar(cliente);
+        listaClientes.agregarclienteEstandar(cliente);
     }
+
 
     public void eliminarCliente(int id) {
         Cliente cliente = buscarCliente(id);
@@ -35,8 +36,8 @@ public class Datos {
         }
     }
 
-    public Cliente buscarCliente(int id) {
-        return listaClientes.buscarPorId(id); // ListaClientes debe tener un método buscarPorId
+    public Cliente buscarCliente(int tostring) {
+        return listaClientes.buscarPorMail(toString()); // ListaClientes debe tener un método buscarPorId
     }
 
     public List<Cliente> listarClientes() {
@@ -107,20 +108,18 @@ public class Datos {
 
     // PEDIDOS -------------------------------------
     public void hacerPedido(Pedidos pedido) {
-
-        listaPedidos.agregar(pedido);
-        //ListaPedidos.agregarPedido(pedido);
+        listaPedidos.agregarPedido(pedido);
     }
 
     public void eliminarPedido(int idPedido) {
         Pedidos pedido = buscarPedido(idPedido);
         if (pedido != null) {
-            listaPedidos.eliminar(pedido);
-
+            listaPedidos.eliminarPedido(pedido);
         } else {
             System.out.println("Pedido no encontrado.");
         }
     }
+
 
     public Pedidos buscarPedido(int idPedido) {
         return listaPedidos.buscarPorId(idPedido); // ListaPedidos debe tener un método buscarPorId

@@ -21,12 +21,15 @@ public class ListaClientes {
         listaClientes.remove(cliente);
     }
 
-    public Cliente buscarPorMail(String index) {
-        if (index >= 0 && index < listaClientes.size()) {
-            return listaClientes.get(index);
+    public Cliente buscarPorMail(String email) {
+        for (Cliente cliente : listaClientes) {
+            if (cliente.getEmail().equals(email)) { // Suponiendo que la clase Cliente tiene un método getEmail
+                return cliente;
+            }
         }
         return null;
     }
+
 
     public void clear() {
         listaClientes.clear();
