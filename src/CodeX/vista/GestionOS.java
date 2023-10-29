@@ -24,7 +24,7 @@ public class GestionOS {
                     menuArticulos();
                     break;
                 case '2':
-// TO-BE-DONE
+                    gestionarClientes();
                     break;
                 case '3':
 // TO-BE-DONE
@@ -136,6 +136,7 @@ public class GestionOS {
                     controlador.agregarCliente(tipocliente);
                 case 3:
                     System.out.println("Cancelando...");
+                    break;
             }
         }while (optio != 3);
     }

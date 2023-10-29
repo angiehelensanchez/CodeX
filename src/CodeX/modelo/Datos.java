@@ -22,12 +22,23 @@ public class Datos {
     }
 
     // CLIENTES -------------------------------------
-    public void agregarClienteEstandar(ClienteEstandard cliente) {
-        listaClientes.agregarclienteEstandar(cliente);
+    public void agregarClienteEstandar() {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("----- Agregar Cliente -----");
+        System.out.print("Ingrese el nombre del Cliente: ");
+        String nombre = scanner.nextLine();
+        System.out.print("Ingrese domicilio del Cliente: ");
+        String domicilio = scanner.nextLine();
+        System.out.print("Ingrese el email del Cliente: ");
+        String email = scanner.nextLine();
+        System.out.print("Ingrese el nif del Cliente: ");
+        String nif = scanner.nextLine();
+        // Crear una instancia del cliente
+        ClienteEstandard cnuevo = new ClienteEstandard(nombre, domicilio, email, nif);
+        listaClientes.agregarclienteEstandar(cnuevo);
     }
 
-
-    public void eliminarCliente(int id) {
+    public void eliminarCliente(String id) {
         Cliente cliente = buscarCliente(id);
         if (cliente != null) {
             listaClientes.eliminar(cliente);
@@ -36,8 +47,8 @@ public class Datos {
         }
     }
 
-    public Cliente buscarCliente(int tostring) {
-        return listaClientes.buscarPorMail(toString()); // ListaClientes debe tener un método buscarPorId
+    public Cliente buscarCliente(String id) {
+        return listaClientes.buscarPorMail(id); // ListaClientes debe tener un método buscarPorId
     }
 
     public List<Cliente> listarClientes() {

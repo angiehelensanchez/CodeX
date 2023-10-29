@@ -10,13 +10,15 @@ public class Controlador {
             datos = new Datos ();
         }
 
+    //clientes
     public void agregarCliente(String tipocliente) {
-        if (tipocliente.equals("Premium")){
-
+        if (tipocliente.equals("Estandar")){
+            datos.agregarClienteEstandar();
 
         }
 
     }
+    //ARTICULOS
     public void agregarArticulo(){
         datos.crearArticulo();
     }
