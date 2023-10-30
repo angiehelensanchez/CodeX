@@ -105,13 +105,20 @@ public class Datos {
         }
     }
 
-    public String listArticulos() {
+    public void listArticulos() {
         int cLista = listaArticulos.getSize();
-        for(int i = 0;i<= cLista;i++){
-            Articulo arti = listaArticulos.listarInventario(i);
-            return  arti.toString();
+        if (cLista >= 1){
+            System.out.println("Los artículos disponibles son los siguientes");
+            System.out.println("═════════════════════════════════════════════");
+            for(int i = 0;i < cLista;i++){
+                Articulo arti = listaArticulos.listarInventario(i);
+                System.out.println(arti.toString());
+
+            }
+        } else {
+            System.out.println("No hay artículos en el inventario...");
         }
-        return null;
+
     }
 
 

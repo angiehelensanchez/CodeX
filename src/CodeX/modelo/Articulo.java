@@ -60,11 +60,10 @@ public class Articulo {
 
     @Override
     public String toString() {
-        return "Articulo{" +
-                "codigo='" + codigo + '\'' +
-                ", descripcion='" + descripcion + '\'' +
+        return "| * Codigo=" + codigo  +
+                ", descripcion=" + descripcion +
                 ", precio=" + precio +
-                ", gastosenvio=" + gastosenvio +
-                '}';
+                ", gastos de envio=" + gastosenvio +
+                ", tiempo de preparacion=" + tpreparacion;
     }
 }
