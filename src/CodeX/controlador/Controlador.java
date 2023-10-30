@@ -15,6 +15,20 @@ public class Controlador {
         datos.agregarCliente(tipocliente);
 
     }
+    public void eliminarCliente(String email){
+        datos.eliminarCliente(email);
+    }
+
+    public void listarCliente(){
+        datos.listarClientes();
+    }
+
+    public void listarCEstandar(){
+
+    }
+    public void listarCPremium(){
+
+    }
     //ARTICULOS
     public void agregarArticulo(){
         datos.crearArticulo();

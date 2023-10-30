@@ -17,4 +17,16 @@ public class ClientePremium extends Cliente{
     public float descuentoEnv() {
         return desEnvio;
     }
+
+    public String tipoCliente() {
+        String tipocliente = "Premium";
+        return tipocliente ;
+    }
+
+    @Override
+    public String toString() {
+        return "ClientePremium{" +
+                "desEnvio=" + desEnvio +
+                "} " + super.toString();
+    }
 }

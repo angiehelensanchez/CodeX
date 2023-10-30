@@ -36,7 +36,7 @@ public class GestionOS {
     }
     char pedirOpcion() {
         String resp;
-        System.out.println("Elige una opción (1,2,3 o 0): ");
+        System.out.print("Elige una opción (1,2,3 o 0): ");
                 resp = teclado.nextLine();
         if (resp.isEmpty()) {
             resp = " ";
@@ -85,27 +85,35 @@ public class GestionOS {
         do {
             System.out.println("----- Gestionar Clientes -----");
             System.out.println("1. Agregar Cliente");
-            System.out.println("2. Editar Cliente");
-            System.out.println("3. Eliminar Cliente");
-            System.out.println("4. Listar Clientes");
-            System.out.println("5. Volver al Menú Principal");
+            System.out.println("2. Mostrar Clientes");
+            System.out.println("3. Mostrar Clientes Premium");
+            System.out.println("4. Mostrar Clientes Estandar");
+            System.out.println("5. Eliminar Cliente");
+            System.out.println("6. Volver al Menú Principal");
             System.out.print("Ingrese su opción: ");
             opcionClientes = scanner.nextInt();
 
             switch (opcionClientes) {
                 case 1:
-                   seleccionartipocliente();
+                    seleccionartipocliente();
                 break;
                 case 2:
-
+                    controlador.listarCliente();
                 break;
                 case 3:
-
+                    String tipo = "Estandar";
+                    controlador.listarCEstandar(tipo);
                 break;
                 case 4:
-
+                    String tipo = "Premium";
+                    controlador.listarCEstandar(tipo);
                 break;
                 case 5:
+                    System.out.print("Por favor introduzca el email del cliente: ");
+                    String email = scanner.nextLine();
+                    controlador.eliminarCliente(email);
+                    break;
+                case 6:
                     System.out.println("Volviendo al Menú Principal.");
                     break;
                 default:
@@ -131,18 +139,18 @@ public class GestionOS {
                 case 1:
                     tipocliente = "Estandar";
                     controlador.agregarCliente(tipocliente);
+                    break;
                 case 2:
                     tipocliente = "Premium";
                     controlador.agregarCliente(tipocliente);
+                    break;
                 case 3:
                     System.out.println("Cancelando...");
                     break;
             }
         }while (optio != 3);
     }
-    public void agregarclientepremiun(){
 
-    }
 
 }
 

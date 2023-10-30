@@ -38,7 +38,6 @@ public class Datos {
         }
 
     }
-
     public void eliminarCliente(String email) {
         Cliente cliente = buscarCliente(email);
         if (cliente != null) {
@@ -47,13 +46,25 @@ public class Datos {
             System.out.println("Cliente no encontrado.");
         }
     }
-
     public Cliente buscarCliente(String id) {
         return listaClientes.buscarPorMail(id); // ListaClientes debe tener un método buscarPorId
     }
 
-    public List<Cliente> listarClientes() {
-        return listaClientes.getListado(); // ListaClientes debe tener un método getListado
+    public void listarClientes() {
+        int cLista = listaClientes.getSize();
+        if (cLista >= 1){
+            System.out.println("Los clientes disponibles son los siguientes");
+            System.out.println("═════════════════════════════════════════════");
+            for(int i = 0;i < cLista;i++){
+                Cliente cListar = listaClientes.listarCliente(i);
+                System.out.println(cListar.toString());
+            }
+        } else {
+            System.out.println("No hay clientes registrados...");
+        }
+    }
+    public void listarClientesFiltro(){
+
     }
 
     // ARTÍCULOS -------------------------------------
@@ -111,7 +122,7 @@ public class Datos {
             System.out.println("Los artículos disponibles son los siguientes");
             System.out.println("═════════════════════════════════════════════");
             for(int i = 0;i < cLista;i++){
-                Articulo arti = listaArticulos.listarInventario(i);
+                Articulo arti = listaArticulos.getAt(i);
                 System.out.println(arti.toString());
 
             }

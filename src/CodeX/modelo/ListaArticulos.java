@@ -21,12 +21,14 @@ public class ListaArticulos extends Lista<Articulo> {
     public void eliminarArticulo(Articulo articulo){
         lista.remove(articulo);
     }
-    public Articulo listarInventario(int position) {
+/*    public Articulo listarInventario(int position) {
         if (position >= 0 && position < lista.size()){
             return  lista.get(position);
         }
         return null;
     }
+
+ */
     @Override
     public String toString() {
 

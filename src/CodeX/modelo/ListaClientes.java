@@ -16,14 +16,20 @@ public class ListaClientes {
     public void agregarclienteEstandar(ClienteEstandar cliente) {
         listaClientes.add(cliente);
     }
+    public Cliente listarCliente(int i){
+        return listaClientes.get(i);
+    }
     public void agregarclientesPremium(ClientePremium cliente){
         listaClientes.add(cliente);
     }
 
     public void eliminar(Cliente cliente) {
         listaClientes.remove(cliente);
+        System.out.println("Cliente eliminado con exito.");
     }
-
+    public String tipos(int i){
+        return listaClientes.get(i).tipoCliente();
+    }
     public Cliente buscarPorMail(String email) {
         for (Cliente cliente : listaClientes) {
             if (cliente.getEmail().equals(email)) { // Suponiendo que la clase Cliente tiene un método getEmail
@@ -34,15 +40,5 @@ public class ListaClientes {
     }
 
 
-    public void clear() {
-        listaClientes.clear();
-    }
 
-    public boolean isEmpty() {
-        return listaClientes.isEmpty();
-    }
-
-    public ArrayList<Cliente> getListado() {
-        return new ArrayList<>(listaClientes);
-    }
 }

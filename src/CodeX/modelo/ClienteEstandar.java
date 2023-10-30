@@ -14,4 +14,16 @@ public class ClienteEstandar extends Cliente {
     public float descuentoEnv() {
         return 0;
     }
+
+    public String tipoCliente() {
+        String tipocliente = "Estandar";
+        return tipocliente ;
+    }
+
+    @Override
+    public String toString() {
+        return "ClienteEstandar{" +
+                "email='" + email + '\'' +
+                "} " + super.toString();
+    }
 }

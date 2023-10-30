@@ -49,4 +49,15 @@ public abstract class Cliente {
     public abstract float calcAnual();
 
     public abstract float descuentoEnv();
+    public abstract String tipoCliente();
+
+    @Override
+    public String toString() {
+        return "Cliente{" +
+                "nombre='" + nombre + '\'' +
+                ", domicilio='" + domicilio + '\'' +
+                ", email='" + email + '\'' +
+                ", nif='" + nif + '\'' +
+                '}';
+    }
 }
