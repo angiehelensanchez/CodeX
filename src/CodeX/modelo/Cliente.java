@@ -1,7 +1,5 @@
 package CodeX.modelo;
 
-import java.io.Serializable;
-import java.util.List;
 public abstract class Cliente {
 
     private String nombre;
@@ -47,7 +45,6 @@ public abstract class Cliente {
     public void setNif(String nif) {
         this.nif = nif;
     }
-    public abstract String tipoCliente();
 
     public abstract float calcAnual();
 

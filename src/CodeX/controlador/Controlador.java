@@ -12,10 +12,7 @@ public class Controlador {
 
     //clientes
     public void agregarCliente(String tipocliente) {
-        if (tipocliente.equals("Estandar")){
-            datos.agregarClienteEstandar();
-
-        }
+        datos.agregarCliente(tipocliente);
 
     }
     //ARTICULOS
@@ -25,8 +22,8 @@ public class Controlador {
     public void eliminarArticulo(){
         datos.eliminarArticulo();
     }
-    public String listarArticulos(){
-        return datos.listArticulos();
+    public void listarArticulos(){
+         datos.listArticulos();
     }
 
 // TO-BE-DONE

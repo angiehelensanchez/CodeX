@@ -13,7 +13,10 @@ public class ListaClientes {
         return listaClientes.size();
     }
 
-    public void agregarclienteEstandar(ClienteEstandard cliente) {
+    public void agregarclienteEstandar(ClienteEstandar cliente) {
+        listaClientes.add(cliente);
+    }
+    public void agregarclientesPremium(ClientePremium cliente){
         listaClientes.add(cliente);
     }
 

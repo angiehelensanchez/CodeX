@@ -1,12 +1,7 @@
 package CodeX.modelo;
 
 
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import java.util.List;
-import java.util.ArrayList;
-import java.time.*;
-import java.util.Date;
 import java.util.Scanner;
 
 public class Datos {
@@ -22,7 +17,7 @@ public class Datos {
     }
 
     // CLIENTES -------------------------------------
-    public void agregarClienteEstandar() {
+    public void agregarCliente(String tipocliente) {
         Scanner scanner = new Scanner(System.in);
         System.out.println("----- Agregar Cliente -----");
         System.out.print("Ingrese el nombre del Cliente: ");
@@ -34,12 +29,18 @@ public class Datos {
         System.out.print("Ingrese el nif del Cliente: ");
         String nif = scanner.nextLine();
         // Crear una instancia del cliente
-        ClienteEstandard cnuevo = new ClienteEstandard(nombre, domicilio, email, nif);
-        listaClientes.agregarclienteEstandar(cnuevo);
+        if (tipocliente.equals("Estandar")){
+            ClienteEstandar cnuevo = new ClienteEstandar(nombre, domicilio, email, nif);
+            listaClientes.agregarclienteEstandar(cnuevo);
+        } else if (tipocliente.equals("Premium")) {
+            ClientePremium cnuevo = new ClientePremium(nombre, domicilio, email, nif);
+            listaClientes.agregarclientesPremium(cnuevo);
+        }
+
     }
 
-    public void eliminarCliente(String id) {
-        Cliente cliente = buscarCliente(id);
+    public void eliminarCliente(String email) {
+        Cliente cliente = buscarCliente(email);
         if (cliente != null) {
             listaClientes.eliminar(cliente);
         } else {
@@ -61,8 +62,8 @@ public class Datos {
             Scanner scanner = new Scanner(System.in);
 
             System.out.println("----- Agregar Artículo -----");
-            System.out.print("Ingrese el nombre del artículo: ");
-            String nombre = scanner.nextLine();
+            System.out.print("Ingrese el codigo del artículo: ");
+            String codigo = scanner.nextLine();
 
             System.out.print("Ingrese la descripción del artículo: ");
             String descripcion = scanner.nextLine();
@@ -77,7 +78,7 @@ public class Datos {
             int tpreparacion = scanner.nextInt();
             scanner.nextLine();
             // Crear una instancia del artículo
-            Articulo nuevoArticulo = new Articulo(nombre, descripcion, precio, gastosenvios, tpreparacion);
+            Articulo nuevoArticulo = new Articulo(codigo, descripcion, precio, gastosenvios, tpreparacion);
             agregarArticulo(nuevoArticulo);
     }
     public void agregarArticulo(Articulo articulo) {
@@ -88,8 +89,8 @@ public class Datos {
             System.out.println("Artículo ya existe.");
         }
     }
-    public Articulo buscarArticulo(String  id) {
-        return listaArticulos.buscarPorCodigo(id); // ListaArticulos debe tener un método buscarPorId
+    public Articulo buscarArticulo(String codigo) {
+        return listaArticulos.buscarPorCodigo(codigo); // ListaArticulos debe tener un método buscarPorId
     }
     public void eliminarArticulo() {
         Scanner scanner = new Scanner(System.in);

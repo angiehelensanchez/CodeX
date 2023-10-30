@@ -124,7 +124,7 @@ public class GestionOS {
         do {
             System.out.println("----- Seleccionar tipo de cliente -----");
             System.out.println("1. Estandar");
-            System.out.println("2. Premium");
+            System.out.println("2. Premium -- Indicar cuota anual de 30€ y ventajas en un 20% de descuento en gastos de envío");
             System.out.println("3. Salir");
             optio = scanner.nextInt();
             switch (optio) {
