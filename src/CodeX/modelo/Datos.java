@@ -16,7 +16,7 @@ public class Datos {
         this.listaPedidos = new ListaPedidos();
     }
 
-    // CLIENTES -------------------------------------
+    // CLIENTES
     public void agregarCliente(String tipocliente) {
         Scanner scanner = new Scanner(System.in);
         System.out.println("----- Agregar Cliente -----");
@@ -63,11 +63,32 @@ public class Datos {
             System.out.println("No hay clientes registrados...");
         }
     }
-    public void listarClientesFiltro(){
-
+    public void listarClientesFiltro(String tipo){
+        int cLista = listaClientes.getSize();
+        boolean check = false;
+        if (cLista >= 1){
+            for(int i = 0;i < cLista;i++){
+                Cliente cListar = listaClientes.listarClienteFiltro(i, tipo);
+                if (cListar != null){
+                    if(!check){
+                        System.out.println("Los clientes "+ tipo + " disponibles son los siguientes");
+                        System.out.println("═════════════════════════════════════════════");
+                        check = true;
+                    }
+                    System.out.println(cListar.toString());
+                }
+            }
+            if (!check){
+                System.out.println("═════════════════════════════════════════════");
+                System.out.println("No hay clientes " + tipo + " registrados...");
+            }
+        } else {
+            System.out.println("═════════════════════════════════════════════");
+            System.out.println("No hay clientes " + tipo + " registrados...");
+        }
     }
 
-    // ARTÍCULOS -------------------------------------
+    // ARTÍCULOS
 
     public void crearArticulo(){
             Scanner scanner = new Scanner(System.in);
@@ -133,12 +154,17 @@ public class Datos {
     }
 
 
+    // PEDIDOS
+    public void hacerPedido() {
+        Scanner teclado = new Scanner(System.in);
+        System.out.print("Introduzca el email del ciente: ");
+        String email = teclado.nextLine();
+        Cliente cliente = listaClientes.existeCliente(email);
+        if (cliente == null){
 
+        }
 
-
-    // PEDIDOS -------------------------------------
-    public void hacerPedido(Pedidos pedido) {
-        listaPedidos.agregarPedido(pedido);
+        //listaPedidos.agregarPedido();
     }
 
     public void eliminarPedido(int idPedido) {

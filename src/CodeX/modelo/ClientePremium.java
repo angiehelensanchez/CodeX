@@ -19,14 +19,11 @@ public class ClientePremium extends Cliente{
     }
 
     public String tipoCliente() {
-        String tipocliente = "Premium";
-        return tipocliente ;
+        return "Premium";
     }
 
     @Override
     public String toString() {
-        return "ClientePremium{" +
-                "desEnvio=" + desEnvio +
-                "} " + super.toString();
+        return "| * Cliente: " + super.toString();
     }
 }

@@ -53,11 +53,9 @@ public abstract class Cliente {
 
     @Override
     public String toString() {
-        return "Cliente{" +
-                "nombre='" + nombre + '\'' +
-                ", domicilio='" + domicilio + '\'' +
-                ", email='" + email + '\'' +
-                ", nif='" + nif + '\'' +
-                '}';
+        return "nombre= " + nombre +
+                ", domicilio= " + domicilio +
+                ", email= " + email +
+                ", nif=" + nif;
     }
 }

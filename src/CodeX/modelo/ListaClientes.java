@@ -14,13 +14,52 @@ public class ListaClientes {
     }
 
     public void agregarclienteEstandar(ClienteEstandar cliente) {
-        listaClientes.add(cliente);
+        int c = listaClientes.size();
+        boolean check = false;
+        for (int i = 0; i < c; i++) {
+            if (listaClientes.get(i).getEmail().equals(cliente.getEmail())) {
+                check = true;
+            }
+        }
+        if (check) {
+            System.out.println("Ya hay un cliente registrado con el email: " + cliente.getEmail());
+        } else {
+            listaClientes.add(cliente);
+        }
+    }
+    public Cliente existeCliente(String email){
+        int c = listaClientes.size();
+        for(int i = 0; i<c; i++){
+            if ( listaClientes.get(i).getEmail().equals(email)) {
+                return listaClientes.get(i);
+            }
+        }
+        return null;
     }
     public Cliente listarCliente(int i){
         return listaClientes.get(i);
     }
+    public Cliente listarClienteFiltro(int i, String tipo){
+        if (listaClientes.get(i).tipoCliente().equals(tipo)){
+            return listaClientes.get(i);
+        }else {
+            return null;
+        }
+    }
     public void agregarclientesPremium(ClientePremium cliente){
-        listaClientes.add(cliente);
+        int c = listaClientes.size();
+        boolean check = false;
+        for(int i = 0; i<c; i++){
+            if ( listaClientes.get(i).getEmail().equals(cliente.getEmail())){
+                check = true;
+            }
+        }
+        if(check){
+            System.out.println("Ya hay un cliente registrado con el email: " + cliente.getEmail());
+        }else {
+            listaClientes.add(cliente);
+        }
+
     }
 
     public void eliminar(Cliente cliente) {

@@ -16,14 +16,11 @@ public class ClienteEstandar extends Cliente {
     }
 
     public String tipoCliente() {
-        String tipocliente = "Estandar";
-        return tipocliente ;
+        return "Estandar";
     }
 
     @Override
     public String toString() {
-        return "ClienteEstandar{" +
-                "email='" + email + '\'' +
-                "} " + super.toString();
+        return "| * Cliente: " + super.toString();
     }
 }

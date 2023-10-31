@@ -14,6 +14,8 @@ public class GestionOS {
         boolean salir = false;
         char opcio;
         do {
+            System.out.println("\n═════════════════════════════════════════════");
+            System.out.println("══════════════ Menu Inicial ═════════════════");
             System.out.println("1. Gestión Articulos");
             System.out.println("2. Gestión Clientes");
             System.out.println("3. Gestión Pedidos");
@@ -49,7 +51,8 @@ public class GestionOS {
         int opcionArticulos;
 
         do {
-            System.out.println("----- Gestionar Artículos -----");
+            System.out.println("\n═════════════════════════════════════════════");
+            System.out.println("════════════ Gestionar Artículos ═════════════");
             System.out.println("1. Agregar Artículo");
             System.out.println("2. Eliminar Artículo");
             System.out.println("3. Listar Artículos");
@@ -83,11 +86,12 @@ public class GestionOS {
         int opcionClientes;
 
         do {
-            System.out.println("----- Gestionar Clientes -----");
+            System.out.println("\n═════════════════════════════════════════════");
+            System.out.println("════════════ Gestionar Clientes ═════════════");
             System.out.println("1. Agregar Cliente");
             System.out.println("2. Mostrar Clientes");
-            System.out.println("3. Mostrar Clientes Premium");
-            System.out.println("4. Mostrar Clientes Estandar");
+            System.out.println("3. Mostrar Clientes Estandar");
+            System.out.println("4. Mostrar Clientes Premium");
             System.out.println("5. Eliminar Cliente");
             System.out.println("6. Volver al Menú Principal");
             System.out.print("Ingrese su opción: ");
@@ -101,12 +105,12 @@ public class GestionOS {
                     controlador.listarCliente();
                 break;
                 case 3:
-                    String tipo = "Estandar";
-                    controlador.listarCEstandar(tipo);
+                    String tipo1 = "Estandar";
+                    controlador.listarCFiltrado(tipo1);
                 break;
                 case 4:
-                    String tipo = "Premium";
-                    controlador.listarCEstandar(tipo);
+                    String tipo2 = "Premium";
+                    controlador.listarCFiltrado(tipo2);
                 break;
                 case 5:
                     System.out.print("Por favor introduzca el email del cliente: ");
@@ -120,7 +124,7 @@ public class GestionOS {
                     System.out.println("Opción no válida. Intente de nuevo.");
                     break;
             }
-        } while (opcionClientes != 5);
+        } while (opcionClientes != 6);
 
         scanner.close();
     }
@@ -130,7 +134,8 @@ public class GestionOS {
         String tipocliente = "";
         int optio;
         do {
-            System.out.println("----- Seleccionar tipo de cliente -----");
+            System.out.println("\n═════════════════════════════════════════════");
+            System.out.println("════════ Seleccionar tipo de cliente ════════");
             System.out.println("1. Estandar");
             System.out.println("2. Premium -- Indicar cuota anual de 30€ y ventajas en un 20% de descuento en gastos de envío");
             System.out.println("3. Salir");
@@ -150,7 +155,44 @@ public class GestionOS {
             }
         }while (optio != 3);
     }
+// Pedidos
+    private void menuPedidos() {
+        Scanner scanner = new Scanner(System.in);
+        int opcionpedidos;
 
+        do {
+            System.out.println("\n═════════════════════════════════════════════");
+            System.out.println("════════════ Gestionar Pedidos ═════════════");
+            System.out.println("1. Agregar pedido");
+            System.out.println("2. Eliminar pedido");
+            System.out.println("3. Mostrar pedidos pendientes");
+            System.out.println("4. Mostar pedidos enviados");
+            System.out.println("5. Volver al Menú Principal");
+            System.out.print("Ingrese su opción: ");
+            opcionpedidos = scanner.nextInt();
+
+            switch (opcionpedidos) {
+                case 1:
+
+                    break;
+                case 2:
+
+                    break;
+                case 3:
+
+                    break;
+                case 4:
+
+                    break;
+                case 5:
+                    System.out.println("Volviendo al Menú Principal.");
+                    break;
+                default:
+                    System.out.println("Opción no válida. Intente de nuevo.");
+                    break;
+            }
+        }while (opcionpedidos != 5);
+    }
 
 }
 

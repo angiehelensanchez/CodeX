@@ -10,7 +10,7 @@ public class Controlador {
             datos = new Datos ();
         }
 
-    //clientes
+    //CLIENTES
     public void agregarCliente(String tipocliente) {
         datos.agregarCliente(tipocliente);
 
@@ -18,17 +18,13 @@ public class Controlador {
     public void eliminarCliente(String email){
         datos.eliminarCliente(email);
     }
-
     public void listarCliente(){
         datos.listarClientes();
     }
-
-    public void listarCEstandar(){
-
+    public void listarCFiltrado(String tipo){
+        datos.listarClientesFiltro(tipo);
     }
-    public void listarCPremium(){
 
-    }
     //ARTICULOS
     public void agregarArticulo(){
         datos.crearArticulo();
@@ -39,7 +35,10 @@ public class Controlador {
     public void listarArticulos(){
          datos.listArticulos();
     }
-
+    //PEDIDOS
+    public void agregarPedidos(){
+            //TODO
+    }
 // TO-BE-DONE
    /* private ListaClientes listaClientes;
     private ListaArticulos listaArticulos;
