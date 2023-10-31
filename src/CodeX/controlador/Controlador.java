@@ -11,7 +11,8 @@ public class Controlador {
         }
 
     //CLIENTES
-    public void agregarCliente(String tipocliente) {
+    public void agregarCliente() {
+        String tipocliente = datos.seleccionartipocliente();
         datos.agregarCliente(tipocliente);
 
     }

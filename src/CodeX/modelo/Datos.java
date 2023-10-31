@@ -15,7 +15,31 @@ public class Datos {
         this.listaArticulos = new ListaArticulos();
         this.listaPedidos = new ListaPedidos();
     }
-
+    public String seleccionartipocliente(){
+        Scanner scanner = new Scanner(System.in);
+        String tipocliente = "";
+        int optio;
+        do {
+            System.out.println("\n═════════════════════════════════════════════");
+            System.out.println("════════ Seleccionar tipo de cliente ════════");
+            System.out.println("1. Estandar");
+            System.out.println("2. Premium -- Indicar cuota anual de 30€ y ventajas en un 20% de descuento en gastos de envío");
+            System.out.println("3. Salir");
+            optio = scanner.nextInt();
+            switch (optio) {
+                case 1:
+                    tipocliente = "Estandar";
+                    return tipocliente;
+                case 2:
+                    tipocliente = "Premium";
+                    return tipocliente;
+                case 3:
+                    System.out.println("Cancelando...");
+                    break;
+            }
+        }while (optio != 3);
+        return null;
+    }
     // CLIENTES
     public void agregarCliente(String tipocliente) {
         Scanner scanner = new Scanner(System.in);
@@ -138,6 +162,8 @@ public class Datos {
     }
 
     public void listArticulos() {
+
+
         int cLista = listaArticulos.getSize();
         if (cLista >= 1){
             System.out.println("Los artículos disponibles son los siguientes");
@@ -156,15 +182,45 @@ public class Datos {
 
     // PEDIDOS
     public void hacerPedido() {
-        Scanner teclado = new Scanner(System.in);
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Ingrese el codigo del pedido: ");
+        String id = scanner.nextLine();
+        for (Pedidos ped: listaPedidos.lista){
+
+
+        System.out.print("Ingrese el codigo del articulo: ");
+        String codigo = scanner.nextLine();
+        Articulo arti = null;
+        if (buscarArticulo(codigo)!=null){
+            for (Articulo articulo: listaArticulos.lista){
+                if (articulo.getCodigo().equals(codigo)){
+                    arti = articulo;
+                }
+            }
+        }
+        System.out.print("Ingrese la cantidad del articulo: ");
+        int cantidad  = scanner.nextInt();
+        scanner.nextLine();
         System.out.print("Introduzca el email del ciente: ");
-        String email = teclado.nextLine();
+        String email = scanner.nextLine();
         Cliente cliente = listaClientes.existeCliente(email);
         if (cliente == null){
-
+            System.out.print("Ingrese el nombre del Cliente: ");
+            String nombre = scanner.nextLine();
+            System.out.print("Ingrese domicilio del Cliente: ");
+            String domicilio = scanner.nextLine();
+            System.out.print("Ingrese el nif del Cliente: ");
+            String nif = scanner.nextLine();
+            String tipocliente = seleccionartipocliente();
+            if (tipocliente.equals("Estandar")){
+                ClienteEstandar cnuevo = new ClienteEstandar(nombre, domicilio, email, nif);
+                listaClientes.agregarclienteEstandar(cnuevo);
+                Pedidos pedido = new Pedidos()
+            } else if (tipocliente.equals("Premium")) {
+                ClientePremium cnuevo = new ClientePremium(nombre, domicilio, email, nif);
+                listaClientes.agregarclientesPremium(cnuevo);
+            }
         }
-
-        //listaPedidos.agregarPedido();
     }
 
     public void eliminarPedido(int idPedido) {

@@ -2,7 +2,7 @@ package CodeX.modelo;
 
 import java.util.ArrayList;
 
-public class ListaClientes {
+public class ListaClientes extends Lista<Cliente>{
     private ArrayList<Cliente> listaClientes;
 
     public ListaClientes() {

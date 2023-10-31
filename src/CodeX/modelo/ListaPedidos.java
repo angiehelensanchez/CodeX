@@ -2,46 +2,41 @@ package CodeX.modelo;
 
 import java.util.ArrayList;
 
-public class ListaPedidos {
-    private ArrayList<Pedidos> listaPedidos;
+public class ListaPedidos extends Lista<Pedidos> {
 
-    public ListaPedidos() {
-        listaPedidos = new ArrayList<>();
-    }
-
-    public int getSize() {
-        return listaPedidos.size();
+    public ListaPedidos(){
+        super();
     }
 
     public void agregarPedido(Pedidos pedido) {
-        listaPedidos.add(pedido);
+        lista.add(pedido);
     }
 
     public void eliminarPedido(Pedidos pedido) {
-        listaPedidos.remove(pedido);
+        lista.remove(pedido);
     }
 
     public Pedidos obtenerPedido(int indice) {
-        if (indice >= 0 && indice < listaPedidos.size()) {
-            return listaPedidos.get(indice);
+        if (indice >= 0 && indice < lista.size()) {
+            return lista.get(indice);
         }
         return null;
     }
 
     public void limpiarLista() {
-        listaPedidos.clear();
+        lista.clear();
     }
 
     public boolean estaVacia() {
-        return listaPedidos.isEmpty();
+        return lista.isEmpty();
     }
 
     public ArrayList<Pedidos> obtenerLista() {
-        return new ArrayList<>(listaPedidos);
+        return new ArrayList<>(lista);
     }
 
     public Pedidos buscarPorId(int idPedido) {
-        for (Pedidos pedido : listaPedidos) {
+        for (Pedidos pedido : lista ) {
             if (pedido.getIdPedido() == idPedido) {
                 return pedido;
             }

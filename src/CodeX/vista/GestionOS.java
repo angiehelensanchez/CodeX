@@ -99,7 +99,7 @@ public class GestionOS {
 
             switch (opcionClientes) {
                 case 1:
-                    seleccionartipocliente();
+                    controlador.agregarCliente();
                 break;
                 case 2:
                     controlador.listarCliente();
@@ -129,32 +129,7 @@ public class GestionOS {
         scanner.close();
     }
 
-    public void seleccionartipocliente(){
-        Scanner scanner = new Scanner(System.in);
-        String tipocliente = "";
-        int optio;
-        do {
-            System.out.println("\n═════════════════════════════════════════════");
-            System.out.println("════════ Seleccionar tipo de cliente ════════");
-            System.out.println("1. Estandar");
-            System.out.println("2. Premium -- Indicar cuota anual de 30€ y ventajas en un 20% de descuento en gastos de envío");
-            System.out.println("3. Salir");
-            optio = scanner.nextInt();
-            switch (optio) {
-                case 1:
-                    tipocliente = "Estandar";
-                    controlador.agregarCliente(tipocliente);
-                    break;
-                case 2:
-                    tipocliente = "Premium";
-                    controlador.agregarCliente(tipocliente);
-                    break;
-                case 3:
-                    System.out.println("Cancelando...");
-                    break;
-            }
-        }while (optio != 3);
-    }
+
 // Pedidos
     private void menuPedidos() {
         Scanner scanner = new Scanner(System.in);

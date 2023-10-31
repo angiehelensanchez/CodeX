@@ -23,10 +23,6 @@ public class Pedidos {
         this.fecha = new Date(); // La fecha actual
         calcularTotal();
 
-    //public Datos (){
-        //listaArticulos = new ListaArticulos ();
-        //listaClientes = new ListaClientes();
-        //listaPedidos = new ListaPedidos ();
     }
 
     // Método para calcular el total del pedido ¿se calcula en la lista articulos? si es el caso no seria necesario en clase pedidos
@@ -70,6 +66,8 @@ public class Pedidos {
         public void setFecha(Date fecha) {
             this.fecha = fecha;
         }
+
+
 
     }
 
