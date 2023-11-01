@@ -2,20 +2,17 @@ package CodeX.modelo;
 
 public class ClientePremium extends Cliente{
 
-    private Float desEnvio;
-
     public ClientePremium(String nombre, String domicilio, String email, String nif) {
         super(nombre, domicilio, email, nif);
-        this.desEnvio = 30f;
     }
 
 
     public float calcAnual() {
-        return 0;
+        return 30f;
     }
 
     public float descuentoEnv() {
-        return desEnvio;
+        return 20f;
     }
 
     public String tipoCliente() {

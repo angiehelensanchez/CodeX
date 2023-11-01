@@ -29,7 +29,7 @@ public class GestionOS {
                     gestionarClientes();
                     break;
                 case '3':
-// TO-BE-DONE
+                    menuPedidos();
                     break;
                 case '0':
                     salir = true;
@@ -148,10 +148,10 @@ public class GestionOS {
 
             switch (opcionpedidos) {
                 case 1:
-
+                    controlador.agregarPedidos();
                     break;
                 case 2:
-
+                    controlador.eliminarPedido();
                     break;
                 case 3:
 

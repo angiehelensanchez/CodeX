@@ -12,7 +12,7 @@ public class ClienteEstandar extends Cliente {
     }
 
     public float descuentoEnv() {
-        return 0;
+        return 0f;
     }
 
     public String tipoCliente() {

@@ -35,7 +35,7 @@ public class ListaPedidos extends Lista<Pedidos> {
         return new ArrayList<>(lista);
     }
 
-    public Pedidos buscarPorId(int idPedido) {
+    public Pedidos buscarPorId(String idPedido) {
         for (Pedidos pedido : lista ) {
             if (pedido.getIdPedido() == idPedido) {
                 return pedido;

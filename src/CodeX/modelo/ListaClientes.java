@@ -3,74 +3,77 @@ package CodeX.modelo;
 import java.util.ArrayList;
 
 public class ListaClientes extends Lista<Cliente>{
-    private ArrayList<Cliente> listaClientes;
+    //private ArrayList<Cliente> listaClientes;
 
-    public ListaClientes() {
-        listaClientes = new ArrayList<>();
+    //public ListaClientes() {
+    //    listaClientes = new ArrayList<>();
+    //}
+    public ListaClientes(){
+        super();
     }
 
     public int getSize() {
-        return listaClientes.size();
+        return lista.size();
     }
 
     public void agregarclienteEstandar(ClienteEstandar cliente) {
-        int c = listaClientes.size();
+        int c = lista.size();
         boolean check = false;
         for (int i = 0; i < c; i++) {
-            if (listaClientes.get(i).getEmail().equals(cliente.getEmail())) {
+            if (lista.get(i).getEmail().equals(cliente.getEmail())) {
                 check = true;
             }
         }
         if (check) {
             System.out.println("Ya hay un cliente registrado con el email: " + cliente.getEmail());
         } else {
-            listaClientes.add(cliente);
+            lista.add(cliente);
         }
     }
     public Cliente existeCliente(String email){
-        int c = listaClientes.size();
+        int c = lista.size();
         for(int i = 0; i<c; i++){
-            if ( listaClientes.get(i).getEmail().equals(email)) {
-                return listaClientes.get(i);
+            if ( lista.get(i).getEmail().equals(email)) {
+                return lista.get(i);
             }
         }
         return null;
     }
     public Cliente listarCliente(int i){
-        return listaClientes.get(i);
+        return lista.get(i);
     }
     public Cliente listarClienteFiltro(int i, String tipo){
-        if (listaClientes.get(i).tipoCliente().equals(tipo)){
-            return listaClientes.get(i);
+        if (lista.get(i).tipoCliente().equals(tipo)){
+            return lista.get(i);
         }else {
             return null;
         }
     }
     public void agregarclientesPremium(ClientePremium cliente){
-        int c = listaClientes.size();
+        int c = lista.size();
         boolean check = false;
         for(int i = 0; i<c; i++){
-            if ( listaClientes.get(i).getEmail().equals(cliente.getEmail())){
+            if ( lista.get(i).getEmail().equals(cliente.getEmail())){
                 check = true;
             }
         }
         if(check){
             System.out.println("Ya hay un cliente registrado con el email: " + cliente.getEmail());
         }else {
-            listaClientes.add(cliente);
+            lista.add(cliente);
         }
 
     }
 
     public void eliminar(Cliente cliente) {
-        listaClientes.remove(cliente);
+        lista.remove(cliente);
         System.out.println("Cliente eliminado con exito.");
     }
     public String tipos(int i){
-        return listaClientes.get(i).tipoCliente();
+        return lista.get(i).tipoCliente();
     }
     public Cliente buscarPorMail(String email) {
-        for (Cliente cliente : listaClientes) {
+        for (Cliente cliente : lista) {
             if (cliente.getEmail().equals(email)) { // Suponiendo que la clase Cliente tiene un método getEmail
                 return cliente;
             }

@@ -38,7 +38,11 @@ public class Controlador {
     }
     //PEDIDOS
     public void agregarPedidos(){
-            //TODO
+            datos.hacerPedido();
+
+    }
+    public void eliminarPedido(){
+
     }
 // TO-BE-DONE
    /* private ListaClientes listaClientes;

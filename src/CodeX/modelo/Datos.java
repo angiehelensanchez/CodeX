@@ -3,6 +3,7 @@ package CodeX.modelo;
 
 import java.util.List;
 import java.util.Scanner;
+import java.util.*;
 
 public class Datos {
 
@@ -146,7 +147,7 @@ public class Datos {
         }
     }
     public Articulo buscarArticulo(String codigo) {
-        return listaArticulos.buscarPorCodigo(codigo); // ListaArticulos debe tener un método buscarPorId
+        return listaArticulos.buscarPorCodigo(codigo);
     }
     public void eliminarArticulo() {
         Scanner scanner = new Scanner(System.in);
@@ -183,11 +184,7 @@ public class Datos {
     // PEDIDOS
     public void hacerPedido() {
         Scanner scanner = new Scanner(System.in);
-        System.out.print("Ingrese el codigo del pedido: ");
-        String id = scanner.nextLine();
-        for (Pedidos ped: listaPedidos.lista){
-
-
+        Calendar fecha = new GregorianCalendar();
         System.out.print("Ingrese el codigo del articulo: ");
         String codigo = scanner.nextLine();
         Articulo arti = null;
@@ -197,44 +194,46 @@ public class Datos {
                     arti = articulo;
                 }
             }
-        }
-        System.out.print("Ingrese la cantidad del articulo: ");
-        int cantidad  = scanner.nextInt();
-        scanner.nextLine();
-        System.out.print("Introduzca el email del ciente: ");
-        String email = scanner.nextLine();
-        Cliente cliente = listaClientes.existeCliente(email);
-        if (cliente == null){
-            System.out.print("Ingrese el nombre del Cliente: ");
-            String nombre = scanner.nextLine();
-            System.out.print("Ingrese domicilio del Cliente: ");
-            String domicilio = scanner.nextLine();
-            System.out.print("Ingrese el nif del Cliente: ");
-            String nif = scanner.nextLine();
-            String tipocliente = seleccionartipocliente();
-            if (tipocliente.equals("Estandar")){
-                ClienteEstandar cnuevo = new ClienteEstandar(nombre, domicilio, email, nif);
-                listaClientes.agregarclienteEstandar(cnuevo);
-                Pedidos pedido = new Pedidos()
-            } else if (tipocliente.equals("Premium")) {
-                ClientePremium cnuevo = new ClientePremium(nombre, domicilio, email, nif);
-                listaClientes.agregarclientesPremium(cnuevo);
+            System.out.print("Ingrese la cantidad del articulo: ");
+            int cantidad  = scanner.nextInt();
+            scanner.nextLine();
+            System.out.print("Introduzca el email del ciente: ");
+            String email = scanner.nextLine();
+            Cliente cliente = listaClientes.existeCliente(email);
+            if (cliente == null){
+                System.out.print("Ingrese el nombre del Cliente: ");
+                String nombre = scanner.nextLine();
+                System.out.print("Ingrese domicilio del Cliente: ");
+                String domicilio = scanner.nextLine();
+                System.out.print("Ingrese el nif del Cliente: ");
+                String nif = scanner.nextLine();
+                String tipocliente = seleccionartipocliente();
+                if (tipocliente.equals("Estandar")){
+                    ClienteEstandar cnuevo = new ClienteEstandar(nombre, domicilio, email, nif);
+                    listaClientes.agregarclienteEstandar(cnuevo);
+                    String id = cnuevo.getNif() + "_" + fecha.get(Calendar.DAY_OF_YEAR) + "_" + fecha.get(Calendar.YEAR) +
+                            "_" + fecha.get(Calendar.HOUR_OF_DAY) + fecha.get(Calendar.MINUTE)+ fecha.get(Calendar.MILLISECOND);
+                    Pedidos pedido = new Pedidos(id,cnuevo,arti,cantidad);
+                    listaPedidos.agregarPedido(pedido);
+                } else if (tipocliente.equals("Premium")) {
+                    ClientePremium cnuevo = new ClientePremium(nombre, domicilio, email, nif);
+                    listaClientes.agregarclientesPremium(cnuevo);
+                    String id = cnuevo.getNif() + "_" + fecha.get(Calendar.DAY_OF_YEAR) + "_" + fecha.get(Calendar.YEAR) +
+                            "_" + fecha.get(Calendar.HOUR_OF_DAY) + fecha.get(Calendar.MINUTE)+ fecha.get(Calendar.MILLISECOND);
+                    Pedidos pedido = new Pedidos(id,cnuevo,arti,cantidad);
+                    listaPedidos.agregarPedido(pedido);
+                }
+            }else {
+                String id = cliente.getNif() + "_" + fecha.get(Calendar.DAY_OF_YEAR) + "_" + fecha.get(Calendar.YEAR) +
+                        "_" + fecha.get(Calendar.HOUR_OF_DAY) + fecha.get(Calendar.MINUTE)+ fecha.get(Calendar.MILLISECOND);
+                Pedidos pedido = new Pedidos(id,cliente,arti,cantidad);
+                listaPedidos.agregarPedido(pedido);
             }
+        }else {
+            System.out.println("No existe el artículo indicado.");
         }
-    }
-
-    public void eliminarPedido(int idPedido) {
-        Pedidos pedido = buscarPedido(idPedido);
-        if (pedido != null) {
-            listaPedidos.eliminarPedido(pedido);
-        } else {
-            System.out.println("Pedido no encontrado.");
-        }
-    }
 
 
-    public Pedidos buscarPedido(int idPedido) {
-        return listaPedidos.buscarPorId(idPedido); // ListaPedidos debe tener un método buscarPorId
     }
 
 }
