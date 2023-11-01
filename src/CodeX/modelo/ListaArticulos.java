@@ -1,7 +1,5 @@
 package CodeX.modelo;
 
-import java.util.List;
-
 public class ListaArticulos extends Lista<Articulo> {
     public ListaArticulos(){
         super();

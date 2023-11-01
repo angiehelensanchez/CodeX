@@ -1,8 +1,6 @@
 package CodeX.modelo;
 
-import java.time.Duration;
 import java.util.Date;
-import java.util.List;
 
 public class Pedidos {
 

@@ -1,8 +1,5 @@
 package CodeX.controlador;
 import CodeX.modelo.*;
-import CodeX.vista.GestionOS;
-
-import java.util.List;
 
 public class Controlador {
         private Datos datos;
@@ -35,12 +32,7 @@ public class Controlador {
     }
     public void listarArticulos(){datos.listArticulos();}
     //PEDIDOS
-    public void hacerPedido(){ datos.hacerPedido();}
-    public void eliminarPedido(){ datos.eliminarPedido();}
-    public void listarPedidos(){ datos.listarPedidos();}
-    public void buscarPedido(){ datos.buscarPedido();}
-        datos.hacerPedido();
-    }
+    public void hacerPedido(){ datos.hacerPedidos();}
     public void eliminarPedido(){
         datos.eliminarPedidos();
     }

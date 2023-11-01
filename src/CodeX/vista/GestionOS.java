@@ -148,7 +148,7 @@ public class GestionOS {
 
             switch (opcionpedidos) {
                 case 1:
-                    controlador.agregarPedidos();
+                    controlador.hacerPedido();
                     break;
                 case 2:
                     controlador.eliminarPedido();

@@ -13,15 +13,13 @@ import static org.junit.Assert.*;
 public class ListaClientesTest {
 
     private ListaClientes listaClientes;
-
     @Before
     public void setUp() throws Exception {
         listaClientes = new ListaClientes();
     }
-
     @Test
     public void testAgregarclienteEstandar() {
-        ClienteEstandar clienteEstandar = new ClienteEstandar("test@email.com", ...);
+        ClienteEstandar clienteEstandar = new ClienteEstandar("Angie Helen Rodas Sánchez", "Casa teste", "1@gmail.com", "12123123");
         listaClientes.agregarclienteEstandar(clienteEstandar);
         assertEquals(1, listaClientes.getSize());
 
@@ -32,22 +30,22 @@ public class ListaClientesTest {
 
     @Test
     public void testExisteCliente() {
-        ClienteEstandar clienteEstandar = new ClienteEstandar("test@email.com");
+        ClienteEstandar clienteEstandar = new ClienteEstandar("Angie Helen Rodas Sánchez", "Casa teste", "1@gmail.com", "12123123");
         listaClientes.agregarclienteEstandar(clienteEstandar);
-        assertNotNull(listaClientes.existeCliente("test@email.com"));
-        assertNull(listaClientes.existeCliente("notexist@email.com"));
+        assertNotNull(listaClientes.existeCliente("1@email.com"));
+        assertNull(listaClientes.existeCliente("no1@email.com"));
     }
 
     @Test
     public void testListarCliente() {
-        ClienteEstandar clienteEstandar = new ClienteEstandar("test@email.com");
+        ClienteEstandar clienteEstandar = new ClienteEstandar("Angie Helen Rodas Sánchez", "Casa teste", "1@gmail.com", "12123123");
         listaClientes.agregarclienteEstandar(clienteEstandar);
         assertEquals(clienteEstandar, listaClientes.listarCliente(0));
     }
 
     @Test
     public void testListarClienteFiltro() {
-        ClienteEstandar clienteEstandar = new ClienteEstandar("test@email.com");
+        ClienteEstandar clienteEstandar = new ClienteEstandar("Angie Helen Rodas Sánchez", "Casa teste", "1@gmail.com", "12123123");
         listaClientes.agregarclienteEstandar(clienteEstandar);
         assertNotNull(listaClientes.listarClienteFiltro(0, "estandar"));
         assertNull(listaClientes.listarClienteFiltro(0, "premium"));
@@ -55,7 +53,7 @@ public class ListaClientesTest {
 
     @Test
     public void testAgregarclientesPremium() {
-        ClientePremium clientePremium = new ClientePremium("premium@email.com");
+        ClientePremium clientePremium = new ClientePremium("Daniel", "Casa teste Daniel", "2@gmail.com", "12987765");
         listaClientes.agregarclientesPremium(clientePremium);
         assertEquals(1, listaClientes.getSize());
 
@@ -66,7 +64,7 @@ public class ListaClientesTest {
 
     @Test
     public void testEliminar() {
-        ClienteEstandar clienteEstandar = new ClienteEstandar("test@email.com", ...);
+        ClienteEstandar clienteEstandar = new ClienteEstandar("Daniel", "Casa teste Daniel", "2@gmail.com", "12987765");
         listaClientes.agregarclienteEstandar(clienteEstandar);
         assertEquals(1, listaClientes.getSize());
 

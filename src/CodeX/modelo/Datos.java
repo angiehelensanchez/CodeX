@@ -1,7 +1,5 @@
 package CodeX.modelo;
 
-
-import java.util.List;
 import java.util.Scanner;
 import java.util.*;
 
@@ -185,7 +183,7 @@ public class Datos {
 
 
     // PEDIDOS
-    public void hacerPedido() {
+    public void hacerPedidos() {
         Scanner scanner = new Scanner(System.in);
         Calendar fecha = new GregorianCalendar();
         System.out.print("Ingrese el codigo del articulo: ");
