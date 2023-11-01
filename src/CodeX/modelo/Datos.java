@@ -24,6 +24,10 @@ public class Datos {
             System.out.println("1. Estandar");
             System.out.println("2. Premium -- Indicar cuota anual de 30€ y ventajas en un 20% de descuento en gastos de envío");
             System.out.println("3. Salir");
+            while (!scanner.hasNextInt()) {
+                System.out.println("Entrada no válida. Debes ingresar un número.");
+                scanner.next(); // Descarta la entrada incorrecta
+            }
             optio = scanner.nextInt();
             switch (optio) {
                 case 1:
@@ -220,6 +224,7 @@ public class Datos {
                 if (tipocliente.equals("Estandar")){
                     ClienteEstandar cnuevo = new ClienteEstandar(nombre, domicilio, email, nif);
                     listaClientes.agregarclienteEstandar(cnuevo);
+                    //id = nif+_+diaaño+_+año+_+horaminutosmilisegundos
                     String id = cnuevo.getNif() + "_" + fecha.get(Calendar.DAY_OF_YEAR) + "_" + fecha.get(Calendar.YEAR) +
                             "_" + fecha.get(Calendar.HOUR_OF_DAY) + fecha.get(Calendar.MINUTE)+ fecha.get(Calendar.MILLISECOND);
                     Pedidos pedido = new Pedidos(id,cnuevo,arti,cantidad);
@@ -257,6 +262,7 @@ public class Datos {
         } else {
             System.out.println("Pedido no encontrado.");
         }
+        System.out.println("Pedido eliminado.");
 
     }
     public Pedidos buscarPedidos(String id) {

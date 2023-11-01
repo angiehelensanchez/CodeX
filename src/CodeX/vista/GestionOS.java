@@ -40,6 +40,10 @@ public class GestionOS {
         Scanner scanner = new Scanner(System.in);
         String resp;
         System.out.print("Elige una opción (1,2,3 o 0): ");
+        while (!scanner.hasNextInt()) {
+            System.out.println("Entrada no válida. Debes ingresar un número.");
+            scanner.next(); // Descarta la entrada incorrecta
+        }
         resp = scanner.nextLine();
         if (resp.isEmpty()) {
             resp = " ";
@@ -59,6 +63,10 @@ public class GestionOS {
             System.out.println("3. Listar Artículos");
             System.out.println("4. Volver al Menú Principal");
             System.out.print("Ingrese su opción: ");
+            while (!scanner.hasNextInt()) {
+                System.out.println("Entrada no válida. Debes ingresar un número.");
+                scanner.next(); // Descarta la entrada incorrecta
+            }
             opcionArticulos = scanner.nextInt();
 
             switch (opcionArticulos) {
@@ -96,6 +104,10 @@ public class GestionOS {
             System.out.println("5. Eliminar Cliente");
             System.out.println("6. Volver al Menú Principal");
             System.out.print("Ingrese su opción: ");
+            while (!scanner.hasNextInt()) {
+                System.out.println("Entrada no válida. Debes ingresar un número.");
+                scanner.next(); // Descarta la entrada incorrecta
+            }
             opcionClientes = scanner.nextInt();
             scanner.nextLine();
 
@@ -144,6 +156,10 @@ public class GestionOS {
             System.out.println("4. Mostar pedidos enviados");
             System.out.println("5. Volver al Menú Principal");
             System.out.print("Ingrese su opción: ");
+            while (!scanner.hasNextInt()) {
+                System.out.println("Entrada no válida. Debes ingresar un número.");
+                scanner.next(); // Descarta la entrada incorrecta
+            }
             opcionpedidos = scanner.nextInt();
 
             switch (opcionpedidos) {
