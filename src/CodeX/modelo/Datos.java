@@ -130,9 +130,14 @@ public class Datos {
             float precio = scanner.nextFloat();
             scanner.nextLine();
             System.out.print("Ingrese el importe de gastos de envios: ");
+            while (!scanner.hasNextFloat()) {
+                System.out.println("Entrada no válida. Debes ingresar un número flotante.");
+                scanner.next(); // Descarta la entrada incorrecta
+            }
             float gastosenvios = scanner.nextFloat();
             scanner.nextLine();
             System.out.print("Ingrese el tiempo de preparacion: ");
+
             int tpreparacion = scanner.nextInt();
             scanner.nextLine();
             // Crear una instancia del artículo
