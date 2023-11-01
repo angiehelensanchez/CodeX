@@ -32,7 +32,7 @@ public class ListaClientesTest {
     public void testExisteCliente() {
         ClienteEstandar clienteEstandar = new ClienteEstandar("Angie Helen Rodas Sánchez", "Casa teste", "1@gmail.com", "12123123");
         listaClientes.agregarclienteEstandar(clienteEstandar);
-        assertNotNull(listaClientes.existeCliente("1@email.com"));
+        assertNotNull(listaClientes.existeCliente("1@gmail.com"));
         assertNull(listaClientes.existeCliente("no1@email.com"));
     }
 
@@ -47,8 +47,8 @@ public class ListaClientesTest {
     public void testListarClienteFiltro() {
         ClienteEstandar clienteEstandar = new ClienteEstandar("Angie Helen Rodas Sánchez", "Casa teste", "1@gmail.com", "12123123");
         listaClientes.agregarclienteEstandar(clienteEstandar);
-        assertNotNull(listaClientes.listarClienteFiltro(0, "estandar"));
-        assertNull(listaClientes.listarClienteFiltro(0, "premium"));
+        assertNotNull(listaClientes.listarClienteFiltro(0, "Estandar"));
+        assertNull(listaClientes.listarClienteFiltro(0, "Premium"));
     }
 
     @Test

@@ -1,7 +1,6 @@
-/*package modelo;
+package modelo;
 
-import CodeX.modelo.ListaPedidos;
-import CodeX.modelo.Pedidos;
+import CodeX.modelo.*;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -18,14 +17,18 @@ public class ListaPedidosTest {
 
     @Test
     public void testAgregarPedido() {
-        Pedidos pedido = new Pedidos("01_1220_1521120", "");
+        ClienteEstandar clienteEstandar = new ClienteEstandar("Daniel", "Casa teste Daniel", "2@gmail.com", "12987765");
+        Articulo articulo = new Articulo("123","Test 1", 123f, 45f,35);
+        Pedidos pedido = new Pedidos("01_1220_1521120", clienteEstandar, articulo,13);
         listaPedidos.agregarPedido(pedido);
         assertEquals(1, listaPedidos.obtenerLista().size());
     }
 
     @Test
     public void testEliminarPedido() {
-        Pedidos pedido = new Pedidos("002");
+        ClienteEstandar clienteEstandar = new ClienteEstandar("Daniel", "Casa teste Daniel", "2@gmail.com", "12987765");
+        Articulo articulo = new Articulo("123","Test 1", 123f, 45f,35);
+        Pedidos pedido = new Pedidos("01_1220_1521120", clienteEstandar, articulo,13);
         listaPedidos.agregarPedido(pedido);
         listaPedidos.eliminarPedido(pedido);
         assertTrue(listaPedidos.estaVacia());
@@ -33,30 +36,35 @@ public class ListaPedidosTest {
 
     @Test
     public void testObtenerPedido() {
-        Pedidos pedido = new Pedidos("003");
+        ClienteEstandar clienteEstandar = new ClienteEstandar("Daniel", "Casa teste Daniel", "2@gmail.com", "12987765");
+        Articulo articulo = new Articulo("123","Test 1", 123f, 45f,35);
+        Pedidos pedido = new Pedidos("01_1220_1521120", clienteEstandar, articulo,13);
         listaPedidos.agregarPedido(pedido);
         assertEquals(pedido, listaPedidos.obtenerPedido(0));
     }
 
     @Test
     public void testLimpiarLista() {
-        listaPedidos.agregarPedido(new Pedidos("004"));
-        listaPedidos.agregarPedido(new Pedidos("005"));
+        ClienteEstandar clienteEstandar = new ClienteEstandar("Daniel", "Casa teste Daniel", "2@gmail.com", "12987765");
+        Articulo articulo = new Articulo("123","Test 1", 123f, 45f,35);
+        Pedidos pedido = new Pedidos("01_1220_1521120", clienteEstandar, articulo,13);
         listaPedidos.limpiarLista();
         assertTrue(listaPedidos.estaVacia());
     }
 
     @Test
     public void testBuscarPorId() {
-        Pedidos pedido = new Pedidos("006");
+        ClienteEstandar clienteEstandar = new ClienteEstandar("Daniel", "Casa teste Daniel", "2@gmail.com", "12987765");
+        Articulo articulo = new Articulo("123","Test 1", 123f, 45f,35);
+        Pedidos pedido = new Pedidos("01_1220_1521120", clienteEstandar, articulo,13);
         listaPedidos.agregarPedido(pedido);
-        assertEquals(pedido, listaPedidos.buscarPorId("006"));
+        assertEquals(pedido, listaPedidos.buscarPorId("01_1220_1521120"));
     }
 
     @Test
     public void testBuscarPorIdInexistente() {
-        assertNull(listaPedidos.buscarPorId("999"));
+        assertNull(listaPedidos.buscarPorId("123"));
     }
 
 }
-*/
+
