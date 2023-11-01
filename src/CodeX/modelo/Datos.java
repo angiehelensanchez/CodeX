@@ -61,7 +61,6 @@ public class Datos {
             ClientePremium cnuevo = new ClientePremium(nombre, domicilio, email, nif);
             listaClientes.agregarclientesPremium(cnuevo);
         }
-
     }
     public void eliminarCliente(String email) {
         Cliente cliente = buscarCliente(email);
@@ -72,7 +71,7 @@ public class Datos {
         }
     }
     public Cliente buscarCliente(String id) {
-        return listaClientes.buscarPorMail(id); // ListaClientes debe tener un método buscarPorId
+        return listaClientes.buscarPorMail(id);
     }
 
     public void listarClientes() {
@@ -126,6 +125,10 @@ public class Datos {
             String descripcion = scanner.nextLine();
 
             System.out.print("Ingrese el precio del artículo: ");
+            while (!scanner.hasNextFloat()) {
+                System.out.println("Entrada no válida. Debes ingresar un número flotante.");
+                scanner.next(); // Descarta la entrada incorrecta
+            }
             float precio = scanner.nextFloat();
             scanner.nextLine();
             System.out.print("Ingrese el importe de gastos de envios: ");
@@ -137,6 +140,7 @@ public class Datos {
             // Crear una instancia del artículo
             Articulo nuevoArticulo = new Articulo(codigo, descripcion, precio, gastosenvios, tpreparacion);
             agregarArticulo(nuevoArticulo);
+
     }
     public void agregarArticulo(Articulo articulo) {
         String id = articulo.getCodigo();
@@ -160,11 +164,10 @@ public class Datos {
         } else {
             System.out.println("Artículo no encontrado.");
         }
+
     }
 
     public void listArticulos() {
-
-
         int cLista = listaArticulos.getSize();
         if (cLista >= 1){
             System.out.println("Los artículos disponibles son los siguientes");
@@ -215,6 +218,7 @@ public class Datos {
                             "_" + fecha.get(Calendar.HOUR_OF_DAY) + fecha.get(Calendar.MINUTE)+ fecha.get(Calendar.MILLISECOND);
                     Pedidos pedido = new Pedidos(id,cnuevo,arti,cantidad);
                     listaPedidos.agregarPedido(pedido);
+                    System.out.println("Pedido agregado correctamente");
                 } else if (tipocliente.equals("Premium")) {
                     ClientePremium cnuevo = new ClientePremium(nombre, domicilio, email, nif);
                     listaClientes.agregarclientesPremium(cnuevo);
@@ -222,19 +226,102 @@ public class Datos {
                             "_" + fecha.get(Calendar.HOUR_OF_DAY) + fecha.get(Calendar.MINUTE)+ fecha.get(Calendar.MILLISECOND);
                     Pedidos pedido = new Pedidos(id,cnuevo,arti,cantidad);
                     listaPedidos.agregarPedido(pedido);
+                    System.out.println("Pedido agregado correctamente");
                 }
             }else {
                 String id = cliente.getNif() + "_" + fecha.get(Calendar.DAY_OF_YEAR) + "_" + fecha.get(Calendar.YEAR) +
                         "_" + fecha.get(Calendar.HOUR_OF_DAY) + fecha.get(Calendar.MINUTE)+ fecha.get(Calendar.MILLISECOND);
                 Pedidos pedido = new Pedidos(id,cliente,arti,cantidad);
                 listaPedidos.agregarPedido(pedido);
+                System.out.println("Pedido agregado correctamente");
             }
         }else {
             System.out.println("No existe el artículo indicado.");
         }
 
+    }
+    public void eliminarPedidos() {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Ingrese el id del pedido: ");
+        String id = scanner.nextLine();
+        Pedidos ped =  buscarPedidos(id);
+        if (ped != null) {
+            listaPedidos.eliminarPedido(ped);
+
+        } else {
+            System.out.println("Pedido no encontrado.");
+        }
 
     }
-
+    public Pedidos buscarPedidos(String id) {
+        return listaPedidos.buscarPorId(id);
+    }
+    public String filtroCliente() {
+        Scanner scanner = new Scanner(System.in);
+        int optio;
+        System.out.println("\n═════════════════════════════════════════════");
+        System.out.println("════════ ¿Desea filtrar por cliente? ════════");
+        System.out.println("1. Si");
+        System.out.println("2. No");
+        optio = scanner.nextInt();
+        scanner.nextLine();
+        if (optio == 1) {
+            System.out.print("Indique el email del cliente: ");
+            String email = scanner.nextLine();
+            Cliente c = buscarCliente(email);
+            if (c != null) {
+                return email;
+            }else {
+                System.out.println("Cliente no registrado.");
+            }
+        }
+        return null;
+    }
+    public void listarPedidosPendientes() {
+        int cLista = listaPedidos.getSize();
+        if (cLista >= 1){
+            String filtro = filtroCliente();
+            System.out.println("Los pedidos pendientes son los siguientes");
+            System.out.println("═════════════════════════════════════════════");
+            for(int i = 0;i < cLista;i++){
+                if (!listaPedidos.getAt(i).pedidoEnviado()){
+                    if(filtro != null){
+                        if(listaPedidos.getAt(i).getCliente().getEmail().equals(filtro)){
+                            Pedidos pedido = listaPedidos.getAt(i);
+                            System.out.println(pedido.toString());
+                        }
+                    }else{
+                        Pedidos pedido = listaPedidos.getAt(i);
+                        System.out.println(pedido.toString());
+                    }
+                }
+            }
+        } else {
+            System.out.println("No hay pedidos registrados...");
+        }
+    }
+    public void listarPedidosEnviados() {
+        int cLista = listaPedidos.getSize();
+        if (cLista >= 1){
+            String filtro = filtroCliente();
+            System.out.println("Los pedidos enviados son los siguientes");
+            System.out.println("═════════════════════════════════════════════");
+            for(int i = 0;i < cLista;i++){
+                if (listaPedidos.getAt(i).pedidoEnviado()){
+                    if(filtro != null){
+                        if(listaPedidos.getAt(i).getCliente().getEmail().equals(filtro)){
+                            Pedidos pedido = listaPedidos.getAt(i);
+                            System.out.println(pedido.toString());
+                        }
+                    }else{
+                        Pedidos pedido = listaPedidos.getAt(i);
+                        System.out.println(pedido.toString());
+                    }
+                }
+            }
+        } else {
+            System.out.println("No hay pedidos registrados...");
+        }
+    }
 }
 

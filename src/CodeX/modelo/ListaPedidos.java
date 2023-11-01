@@ -37,7 +37,7 @@ public class ListaPedidos extends Lista<Pedidos> {
 
     public Pedidos buscarPorId(String idPedido) {
         for (Pedidos pedido : lista ) {
-            if (pedido.getIdPedido() == idPedido) {
+            if (pedido.getIdPedido().equals(idPedido)) {
                 return pedido;
             }
         }

@@ -37,9 +37,10 @@ public class GestionOS {
         } while (!salir);
     }
     char pedirOpcion() {
+        Scanner scanner = new Scanner(System.in);
         String resp;
         System.out.print("Elige una opción (1,2,3 o 0): ");
-                resp = teclado.nextLine();
+        resp = scanner.nextLine();
         if (resp.isEmpty()) {
             resp = " ";
         }
@@ -96,6 +97,7 @@ public class GestionOS {
             System.out.println("6. Volver al Menú Principal");
             System.out.print("Ingrese su opción: ");
             opcionClientes = scanner.nextInt();
+            scanner.nextLine();
 
             switch (opcionClientes) {
                 case 1:
@@ -125,8 +127,6 @@ public class GestionOS {
                     break;
             }
         } while (opcionClientes != 6);
-
-        scanner.close();
     }
 
 
@@ -154,10 +154,10 @@ public class GestionOS {
                     controlador.eliminarPedido();
                     break;
                 case 3:
-
+                    controlador.listarPendientes();
                     break;
                 case 4:
-
+                    controlador.listarEnviados();
                     break;
                 case 5:
                     System.out.println("Volviendo al Menú Principal.");

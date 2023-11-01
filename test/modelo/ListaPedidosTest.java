@@ -18,7 +18,7 @@ public class ListaPedidosTest {
 
     @Test
     public void testAgregarPedido() {
-        Pedidos pedido = new Pedidos("001"); // Asumo que la clase Pedidos tiene un constructor con id como parámetro.
+        Pedidos pedido = new Pedidos(); // Asumo que la clase Pedidos tiene un constructor con id como parámetro.
         listaPedidos.agregarPedido(pedido);
         assertEquals(1, listaPedidos.obtenerLista().size());
     }
