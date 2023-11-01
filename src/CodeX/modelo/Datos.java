@@ -35,6 +35,9 @@ public class Datos {
                 case 3:
                     System.out.println("Cancelando...");
                     break;
+                default:
+                    System.out.println("Opción no válida. Intente de nuevo.");
+                    break;
             }
         }while (optio != 3);
         return null;
