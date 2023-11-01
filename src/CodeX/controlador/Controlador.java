@@ -33,11 +33,12 @@ public class Controlador {
     public void eliminarArticulo(){
         datos.eliminarArticulo();
     }
-    public void listarArticulos(){
-         datos.listArticulos();
-    }
+    public void listarArticulos(){datos.listArticulos();}
     //PEDIDOS
-    public void agregarPedidos(){
+    public void hacerPedido(){ datos.hacerPedido();}
+    public void eliminarPedido(){ datos.eliminarPedido();}
+    public void listarPedidos(){ datos.listarPedidos();}
+    public void buscarPedido(){ datos.buscarPedido();}
             datos.hacerPedido();
 
     }
