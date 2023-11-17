@@ -7,5 +7,8 @@
     </CLASSES>
     <JAVADOC />
     <SOURCES />
+    <excluded>
+      <root url="jar://$PROJECT_DIR$/../POO_Base de Datos/mysql-connector-j-8.2.0/mysql-connector-j-8.2.0.jar!/" />
+    </excluded>
   </library>
 </component>

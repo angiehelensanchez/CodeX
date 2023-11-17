@@ -2,6 +2,11 @@ package CodeX.modelo;
 
 import java.util.Scanner;
 import java.util.*;
+import CodeX.DAO.ArticuloDAO;
+
+import CodeX.DAO.ClienteDAO;
+import CodeX.DAO.PedidosDAO;
+
 
 public class Datos {
 
@@ -58,282 +63,266 @@ public class Datos {
         String email = scanner.nextLine();
         System.out.print("Ingrese el nif del Cliente: ");
         String nif = scanner.nextLine();
-        // Crear una instancia del cliente
-        if (tipocliente.equals("Estandar")){
-            ClienteEstandar cnuevo = new ClienteEstandar(nombre, domicilio, email, nif);
-            listaClientes.agregarclienteEstandar(cnuevo);
-        } else if (tipocliente.equals("Premium")) {
-            ClientePremium cnuevo = new ClientePremium(nombre, domicilio, email, nif);
-            listaClientes.agregarclientesPremium(cnuevo);
+
+        ClienteDAO clienteDAO = new ClienteDAO();
+        Cliente cliente;
+        if (tipocliente.equals("Estandar")) {
+            cliente = new ClienteEstandar(nombre, domicilio, email, nif);
+        } else { // asumiendo que el otro tipo es "Premium"
+            cliente = new ClientePremium(nombre, domicilio, email, nif);
         }
+        clienteDAO.addCliente(cliente);
     }
+
     public void eliminarCliente(String email) {
-        Cliente cliente = buscarCliente(email);
+        ClienteDAO clienteDAO = new ClienteDAO();
+        Cliente cliente = clienteDAO.getClienteByEmail(email); // Suponiendo que ClienteDAO tiene este método
         if (cliente != null) {
-            listaClientes.eliminar(cliente);
+            clienteDAO.deleteCliente(cliente.getNif());
         } else {
             System.out.println("Cliente no encontrado.");
         }
     }
-    public Cliente buscarCliente(String id) {
-        return listaClientes.buscarPorMail(id);
+
+    public Cliente buscarCliente(String email) {
+        ClienteDAO clienteDAO = new ClienteDAO();
+        return clienteDAO.getClienteByEmail(email); // Suponiendo que ClienteDAO tiene este método
     }
 
     public void listarClientes() {
-        int cLista = listaClientes.getSize();
-        if (cLista >= 1){
-            System.out.println("Los clientes disponibles son los siguientes");
-            System.out.println("═════════════════════════════════════════════");
-            for(int i = 0;i < cLista;i++){
-                Cliente cListar = listaClientes.listarCliente(i);
-                System.out.println(cListar.toString());
-            }
-        } else {
-            System.out.println("No hay clientes registrados...");
+        ClienteDAO clienteDAO = new ClienteDAO();
+        for (Cliente cliente : clienteDAO.listClientes()) { // Suponiendo que ClienteDAO tiene este método
+            System.out.println(cliente.toString());
         }
     }
-    public void listarClientesFiltro(String tipo){
-        int cLista = listaClientes.getSize();
-        boolean check = false;
-        if (cLista >= 1){
-            for(int i = 0;i < cLista;i++){
-                Cliente cListar = listaClientes.listarClienteFiltro(i, tipo);
-                if (cListar != null){
-                    if(!check){
-                        System.out.println("Los clientes "+ tipo + " disponibles son los siguientes");
-                        System.out.println("═════════════════════════════════════════════");
-                        check = true;
-                    }
-                    System.out.println(cListar.toString());
-                }
-            }
-            if (!check){
-                System.out.println("═════════════════════════════════════════════");
-                System.out.println("No hay clientes " + tipo + " registrados...");
-            }
-        } else {
-            System.out.println("═════════════════════════════════════════════");
-            System.out.println("No hay clientes " + tipo + " registrados...");
+
+    public void listarClientesFiltro(String tipo) {
+        ClienteDAO clienteDAO = new ClienteDAO();
+        for (Cliente cliente : clienteDAO.listClientesFiltradosPorTipo(tipo)) { // Suponiendo que ClienteDAO tiene este método
+            System.out.println(cliente.toString());
         }
     }
+
+    public Cliente getCliente(String nif) {
+        ClienteDAO clienteDAO = new ClienteDAO();
+        return clienteDAO.getCliente(nif);
+    }
+
+    public void updateCliente(Cliente cliente) {
+        ClienteDAO clienteDAO = new ClienteDAO();
+        clienteDAO.updateCliente(cliente);
+    }
+
 
     // ARTÍCULOS
 
-    public void crearArticulo(){
-            Scanner scanner = new Scanner(System.in);
+    // Método para crear y agregar un nuevo Articulo
+    public void crearArticulo() {
+        Scanner scanner = new Scanner(System.in);
 
-            System.out.println("----- Agregar Artículo -----");
-            System.out.print("Ingrese el codigo del artículo: ");
-            String codigo = scanner.nextLine();
+        System.out.println("----- Agregar Artículo -----");
+        System.out.print("Ingrese el codigo del artículo: ");
+        String codigo = scanner.nextLine();
 
-            System.out.print("Ingrese la descripción del artículo: ");
-            String descripcion = scanner.nextLine();
+        System.out.print("Ingrese la descripción del artículo: ");
+        String descripcion = scanner.nextLine();
 
-            System.out.print("Ingrese el precio del artículo: ");
-            while (!scanner.hasNextFloat()) {
-                System.out.println("Entrada no válida. Debes ingresar un número flotante.");
-                scanner.next(); // Descarta la entrada incorrecta
-            }
-            float precio = scanner.nextFloat();
-            scanner.nextLine();
-            System.out.print("Ingrese el importe de gastos de envios: ");
-            while (!scanner.hasNextFloat()) {
-                System.out.println("Entrada no válida. Debes ingresar un número flotante.");
-                scanner.next(); // Descarta la entrada incorrecta
-            }
-            float gastosenvios = scanner.nextFloat();
-            scanner.nextLine();
-            System.out.print("Ingrese el tiempo de preparacion: ");
+        System.out.print("Ingrese el precio del artículo: ");
+        while (!scanner.hasNextFloat()) {
+            System.out.println("Entrada no válida. Debes ingresar un número flotante.");
+            scanner.next(); // Descarta la entrada incorrecta
+        }
+        float precio = scanner.nextFloat();
+        scanner.nextLine();
 
-            int tpreparacion = scanner.nextInt();
-            scanner.nextLine();
-            // Crear una instancia del artículo
-            Articulo nuevoArticulo = new Articulo(codigo, descripcion, precio, gastosenvios, tpreparacion);
-            agregarArticulo(nuevoArticulo);
+        System.out.print("Ingrese el importe de gastos de envios: ");
+        while (!scanner.hasNextFloat()) {
+            System.out.println("Entrada no válida. Debes ingresar un número flotante.");
+            scanner.next(); // Descarta la entrada incorrecta
+        }
+        float gastosenvios = scanner.nextFloat();
+        scanner.nextLine();
 
+        System.out.print("Ingrese el tiempo de preparacion: ");
+        while (!scanner.hasNextInt()) {
+            System.out.println("Entrada no válida. Debes ingresar un número entero.");
+            scanner.next(); // Descarta la entrada incorrecta
+        }
+        int tpreparacion = scanner.nextInt();
+        scanner.nextLine();
+
+        Articulo nuevoArticulo = new Articulo(codigo, descripcion, precio, gastosenvios, tpreparacion);
+        agregarArticulo(nuevoArticulo);
     }
+
+    // Método para agregar un Articulo usando ArticuloDAO
     public void agregarArticulo(Articulo articulo) {
-        String id = articulo.getCodigo();
-        if (buscarArticulo(id) == null) {
-            listaArticulos.agregarArticulo(articulo);
+        ArticuloDAO articuloDAO = new ArticuloDAO();
+        if (articuloDAO.getArticulo(articulo.getCodigo()) == null) {
+            articuloDAO.addArticulo(articulo);
         } else {
             System.out.println("Artículo ya existe.");
         }
     }
+
+    // Método para buscar un Articulo
     public Articulo buscarArticulo(String codigo) {
-        return listaArticulos.buscarPorCodigo(codigo);
+        ArticuloDAO articuloDAO = new ArticuloDAO();
+        return articuloDAO.getArticulo(codigo);
     }
+
+    // Método para eliminar un Articulo
     public void eliminarArticulo() {
         Scanner scanner = new Scanner(System.in);
         System.out.print("Ingrese el id del artículo: ");
         String id = scanner.nextLine();
-        Articulo articulo = buscarArticulo(id);
-        if (articulo != null) {
-            listaArticulos.eliminarArticulo(articulo);
 
+        ArticuloDAO articuloDAO = new ArticuloDAO();
+        if (articuloDAO.getArticulo(id) != null) {
+            articuloDAO.deleteArticulo(id);
         } else {
             System.out.println("Artículo no encontrado.");
         }
-
     }
 
+    // Método para listar todos los Articulos
+    // Este método requiere una implementación adicional en ArticuloDAO
     public void listArticulos() {
-        int cLista = listaArticulos.getSize();
-        if (cLista >= 1){
-            System.out.println("Los artículos disponibles son los siguientes");
-            System.out.println("═════════════════════════════════════════════");
-            for(int i = 0;i < cLista;i++){
-                Articulo arti = listaArticulos.getAt(i);
-                System.out.println(arti.toString());
-
-            }
-        } else {
-            System.out.println("No hay artículos en el inventario...");
+        ArticuloDAO articuloDAO = new ArticuloDAO();
+        // Suponiendo que ArticuloDAO tiene un método listArticulos() que devuelve List<Articulo>
+        for (Articulo arti : articuloDAO.listArticulos()) {
+            System.out.println(arti.toString());
         }
-
     }
 
 
     // PEDIDOS
     public void hacerPedidos() {
         Scanner scanner = new Scanner(System.in);
-        Calendar fecha = new GregorianCalendar();
+        PedidosDAO pedidosDAO = new PedidosDAO();
+        ClienteDAO clienteDAO = new ClienteDAO(); // Asume que tienes esta clase
+        ArticuloDAO articuloDAO = new ArticuloDAO(); // Asume que tienes esta clase
+
         System.out.print("Ingrese el codigo del articulo: ");
         String codigo = scanner.nextLine();
-        Articulo arti = null;
-        if (buscarArticulo(codigo)!=null){
-            for (Articulo articulo: listaArticulos.lista){
-                if (articulo.getCodigo().equals(codigo)){
-                    arti = articulo;
-                }
-            }
+        Articulo arti = articuloDAO.getArticulo(codigo); // Busca el artículo en la base de datos
+
+        if (arti != null) {
             System.out.print("Ingrese la cantidad del articulo: ");
-            int cantidad  = scanner.nextInt();
+            int cantidad = scanner.nextInt();
             scanner.nextLine();
-            System.out.print("Introduzca el email del ciente: ");
+            System.out.print("Introduzca el email del cliente: ");
             String email = scanner.nextLine();
-            Cliente cliente = listaClientes.existeCliente(email);
-            if (cliente == null){
+            Cliente cliente = clienteDAO.getClienteByEmail(email); // Busca el cliente en la base de datos
+
+            if (cliente == null) {
+                // Crear un nuevo cliente
                 System.out.print("Ingrese el nombre del Cliente: ");
                 String nombre = scanner.nextLine();
                 System.out.print("Ingrese domicilio del Cliente: ");
                 String domicilio = scanner.nextLine();
                 System.out.print("Ingrese el nif del Cliente: ");
                 String nif = scanner.nextLine();
-                String tipocliente = seleccionartipocliente();
-                if (tipocliente.equals("Estandar")){
-                    ClienteEstandar cnuevo = new ClienteEstandar(nombre, domicilio, email, nif);
-                    listaClientes.agregarclienteEstandar(cnuevo);
-                    //id = nif+_+diaaño+_+año+_+horaminutosmilisegundos
-                    String id = cnuevo.getNif() + "_" + fecha.get(Calendar.DAY_OF_YEAR) + "_" + fecha.get(Calendar.YEAR) +
-                            "_" + fecha.get(Calendar.HOUR_OF_DAY) + fecha.get(Calendar.MINUTE)+ fecha.get(Calendar.MILLISECOND);
-                    Pedidos pedido = new Pedidos(id,cnuevo,arti,cantidad);
-                    listaPedidos.agregarPedido(pedido);
-                    System.out.println("Pedido agregado correctamente");
-                } else if (tipocliente.equals("Premium")) {
-                    ClientePremium cnuevo = new ClientePremium(nombre, domicilio, email, nif);
-                    listaClientes.agregarclientesPremium(cnuevo);
-                    String id = cnuevo.getNif() + "_" + fecha.get(Calendar.DAY_OF_YEAR) + "_" + fecha.get(Calendar.YEAR) +
-                            "_" + fecha.get(Calendar.HOUR_OF_DAY) + fecha.get(Calendar.MINUTE)+ fecha.get(Calendar.MILLISECOND);
-                    Pedidos pedido = new Pedidos(id,cnuevo,arti,cantidad);
-                    listaPedidos.agregarPedido(pedido);
-                    System.out.println("Pedido agregado correctamente");
-                }
-            }else {
-                String id = cliente.getNif() + "_" + fecha.get(Calendar.DAY_OF_YEAR) + "_" + fecha.get(Calendar.YEAR) +
-                        "_" + fecha.get(Calendar.HOUR_OF_DAY) + fecha.get(Calendar.MINUTE)+ fecha.get(Calendar.MILLISECOND);
-                Pedidos pedido = new Pedidos(id,cliente,arti,cantidad);
-                listaPedidos.agregarPedido(pedido);
-                System.out.println("Pedido agregado correctamente");
+                cliente = new ClienteEstandar(nombre, domicilio, email, nif); // O ClientePremium, según la lógica
+                clienteDAO.addCliente(cliente); // Agrega el cliente a la base de datos
             }
-        }else {
+
+            String idPedido = generarIdPedido(cliente); // Implementa la lógica para generar ID del pedido
+            Pedidos pedido = new Pedidos(idPedido, cliente, arti, cantidad);
+            pedidosDAO.addPedido(pedido);
+            System.out.println("Pedido agregado correctamente");
+        } else {
             System.out.println("No existe el artículo indicado.");
         }
-
     }
+
+    private String generarIdPedido(Cliente cliente) {
+        Calendar fecha = Calendar.getInstance();
+        return cliente.getNif() + "_" + fecha.get(Calendar.DAY_OF_YEAR) + "_" +
+                fecha.get(Calendar.YEAR) + "_" + fecha.get(Calendar.HOUR_OF_DAY) +
+                fecha.get(Calendar.MINUTE) + fecha.get(Calendar.MILLISECOND);
+    }
+
     public void eliminarPedidos() {
         Scanner scanner = new Scanner(System.in);
+        PedidosDAO pedidosDAO = new PedidosDAO();
+
         System.out.print("Ingrese el id del pedido: ");
         String id = scanner.nextLine();
-        Pedidos ped =  buscarPedidos(id);
-        if (ped != null) {
-            listaPedidos.eliminarPedido(ped);
 
+        // Primero verifica si el pedido existe en la base de datos
+        Pedidos ped = pedidosDAO.getPedido(id);
+        if (ped != null) {
+            // Si el pedido existe, procede a eliminarlo
+            pedidosDAO.deletePedido(id);
+            System.out.println("Pedido eliminado.");
         } else {
             System.out.println("Pedido no encontrado.");
         }
-        System.out.println("Pedido eliminado.");
+    }
 
-    }
     public Pedidos buscarPedidos(String id) {
-        return listaPedidos.buscarPorId(id);
+        PedidosDAO pedidosDAO = new PedidosDAO();
+        return pedidosDAO.getPedido(id);
     }
+
     public String filtroCliente() {
         Scanner scanner = new Scanner(System.in);
-        int optio;
+        ClienteDAO clienteDAO = new ClienteDAO(); // Asume que tienes esta clase
+
         System.out.println("\n═════════════════════════════════════════════");
         System.out.println("════════ ¿Desea filtrar por cliente? ════════");
         System.out.println("1. Si");
         System.out.println("2. No");
-        optio = scanner.nextInt();
+
+        int opcion = scanner.nextInt();
         scanner.nextLine();
-        if (optio == 1) {
+
+        if (opcion == 1) {
             System.out.print("Indique el email del cliente: ");
             String email = scanner.nextLine();
-            Cliente c = buscarCliente(email);
-            if (c != null) {
+
+            // Usa ClienteDAO para buscar el cliente en la base de datos
+            Cliente cliente = clienteDAO.getClienteByEmail(email);
+
+            if (cliente != null) {
                 return email;
-            }else {
+            } else {
                 System.out.println("Cliente no registrado.");
             }
         }
         return null;
     }
+
     public void listarPedidosPendientes() {
-        int cLista = listaPedidos.getSize();
-        if (cLista >= 1){
-            String filtro = filtroCliente();
-            System.out.println("Los pedidos pendientes son los siguientes");
-            System.out.println("═════════════════════════════════════════════");
-            for(int i = 0;i < cLista;i++){
-                if (!listaPedidos.getAt(i).pedidoEnviado()){
-                    if(filtro != null){
-                        if(listaPedidos.getAt(i).getCliente().getEmail().equals(filtro)){
-                            Pedidos pedido = listaPedidos.getAt(i);
-                            System.out.println(pedido.toString());
-                        }
-                    }else{
-                        Pedidos pedido = listaPedidos.getAt(i);
-                        System.out.println(pedido.toString());
-                    }
-                }
+        PedidosDAO pedidosDAO = new PedidosDAO();
+        List<Pedidos> todosLosPedidos = pedidosDAO.listarTodosLosPedidos(); // Asume que tienes este método
+        String filtroEmail = filtroCliente();
+
+        System.out.println("Los pedidos pendientes son los siguientes:");
+        System.out.println("═════════════════════════════════════════════");
+
+        for (Pedidos pedido : todosLosPedidos) {
+            if (!pedido.pedidoEnviado() && (filtroEmail == null || pedido.getCliente().getEmail().equals(filtroEmail))) {
+                System.out.println(pedido.toString());
             }
-        } else {
-            System.out.println("No hay pedidos registrados...");
         }
     }
+
     public void listarPedidosEnviados() {
-        int cLista = listaPedidos.getSize();
-        if (cLista >= 1){
-            String filtro = filtroCliente();
-            System.out.println("Los pedidos enviados son los siguientes");
-            System.out.println("═════════════════════════════════════════════");
-            for(int i = 0;i < cLista;i++){
-                if (listaPedidos.getAt(i).pedidoEnviado()){
-                    if(filtro != null){
-                        if(listaPedidos.getAt(i).getCliente().getEmail().equals(filtro)){
-                            Pedidos pedido = listaPedidos.getAt(i);
-                            System.out.println(pedido.toString());
-                        }
-                    }else{
-                        Pedidos pedido = listaPedidos.getAt(i);
-                        System.out.println(pedido.toString());
-                    }
-                }
+        PedidosDAO pedidosDAO = new PedidosDAO();
+        List<Pedidos> todosLosPedidos = pedidosDAO.listarTodosLosPedidos(); // Asume que tienes este método
+        String filtroEmail = filtroCliente();
+
+        System.out.println("Los pedidos enviados son los siguientes:");
+        System.out.println("═════════════════════════════════════════════");
+
+        for (Pedidos pedido : todosLosPedidos) {
+            if (pedido.pedidoEnviado() && (filtroEmail == null || pedido.getCliente().getEmail().equals(filtroEmail))) {
+                System.out.println(pedido.toString());
             }
-        } else {
-            System.out.println("No hay pedidos registrados...");
         }
     }
+
 }
 

@@ -1,11 +1,7 @@
 package CodeX.modelo;
 
 public class ListaClientes extends Lista<Cliente>{
-    //private ArrayList<Cliente> listaClientes;
 
-    //public ListaClientes() {
-    //    listaClientes = new ArrayList<>();
-    //}
     public ListaClientes(){
         super();
     }
@@ -78,7 +74,5 @@ public class ListaClientes extends Lista<Cliente>{
         }
         return null;
     }
-
-
 
 }
