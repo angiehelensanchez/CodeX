@@ -1,8 +1,11 @@
 package CodeX.vista;
 
 import CodeX.controlador.Controlador;
+import CodeX.modelo.Articulo;
 
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 public class GestionOS {
     private Controlador controlador;
@@ -50,6 +53,10 @@ public class GestionOS {
         }
         return resp.charAt(0);
     }
+    private String escribirErrores(Exception e){
+        String errores = e.getMessage();
+        return errores;
+    }
 // ARTICULOS
     private void menuArticulos() {
         Scanner scanner = new Scanner(System.in);
@@ -71,13 +78,13 @@ public class GestionOS {
 
             switch (opcionArticulos) {
                 case 1:
-                    controlador.agregarArticulo();
+                    agregarArticulo();
                     break;
                 case 2:
-                    controlador.eliminarArticulo();
+                    eliminarArticulo();
                     break;
                 case 3:
-                    controlador.listarArticulos();
+                    listarArticulo();
                     break;
                 case 4:
                     System.out.println("Volviendo al Menú Principal.");
@@ -87,6 +94,59 @@ public class GestionOS {
                     break;
             }
         }while (opcionArticulos != 4);
+    }
+    // Menu de solicitud de datos para agregar un nuevo articulo
+    private  void agregarArticulo(){
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("----- Agregar Artículo -----");
+        System.out.print("Ingrese el codigo del artículo: ");
+        String codigo = scanner.nextLine();
+        System.out.print("Ingrese la descripción del artículo: ");
+        String descripcion = scanner.nextLine();
+        System.out.print("Ingrese el precio del artículo: ");
+        while (!scanner.hasNextFloat()) {
+            System.out.println("Entrada no válida. Debes ingresar un número flotante.");
+            scanner.next(); // Descarta la entrada incorrecta
+        }
+        float precio = scanner.nextFloat();
+        scanner.nextLine();
+        System.out.print("Ingrese el importe de gastos de envios: ");
+        while (!scanner.hasNextFloat()) {
+            System.out.println("Entrada no válida. Debes ingresar un número flotante.");
+            scanner.next(); // Descarta la entrada incorrecta
+        }
+        float gastosenvios = scanner.nextFloat();
+        scanner.nextLine();
+        System.out.print("Ingrese el tiempo de preparacion: ");
+        while (!scanner.hasNextInt()) {
+            System.out.println("Entrada no válida. Debes ingresar un número entero.");
+            scanner.next(); // Descarta la entrada incorrecta
+        }
+        int tpreparacion = scanner.nextInt();
+        scanner.nextLine();
+        try {
+            controlador.aNuevoArticulo(codigo, descripcion, precio, gastosenvios, tpreparacion);
+        }
+        catch (Exception e){
+            System.out.println(escribirErrores(e));
+        }
+    }
+    private void eliminarArticulo(){
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Ingrese el id del artículo: ");
+        String id = scanner.nextLine();
+        try{
+            controlador.eArticulo(id);
+        }
+        catch (Exception e){
+            System.out.println(escribirErrores(e));
+        }
+    }
+    private void listarArticulo(){
+        ArrayList<String> articulos = controlador.lArticulo();
+        for(String arti:articulos){
+            System.out.println(arti);
+        }
     }
 
     //CLIENTES
@@ -113,23 +173,21 @@ public class GestionOS {
 
             switch (opcionClientes) {
                 case 1:
-                    controlador.agregarCliente();
+                    agregarCliente();
                 break;
                 case 2:
-                    controlador.listarCliente();
+                    listarCliente();
                 break;
                 case 3:
                     String tipo1 = "Estandar";
-                    controlador.listarCFiltrado(tipo1);
+                    listarCLienteFiltro(tipo1);
                 break;
                 case 4:
                     String tipo2 = "Premium";
-                    controlador.listarCFiltrado(tipo2);
+                    listarCLienteFiltro(tipo2);
                 break;
                 case 5:
-                    System.out.print("Por favor introduzca el email del cliente: ");
-                    String email = scanner.nextLine();
-                    controlador.eliminarCliente(email);
+                    eliminarCLiente();
                     break;
                 case 6:
                     System.out.println("Volviendo al Menú Principal.");
@@ -140,8 +198,75 @@ public class GestionOS {
             }
         } while (opcionClientes != 6);
     }
-
-
+    public String sTipoCliente(){
+        Scanner scanner = new Scanner(System.in);
+        String tipocliente = "";
+        int optio;
+        do {
+            System.out.println("\n═════════════════════════════════════════════");
+            System.out.println("════════ Seleccionar tipo de cliente ════════");
+            System.out.println("1. Estandar");
+            System.out.println("2. Premium -- Indicar cuota anual de 30€ y ventajas en un 20% de descuento en gastos de envío");
+            System.out.println("3. Salir");
+            while (!scanner.hasNextInt()) {
+                System.out.println("Entrada no válida. Debes ingresar un número.");
+                scanner.next(); // Descarta la entrada incorrecta
+            }
+            optio = scanner.nextInt();
+            switch (optio) {
+                case 1:
+                    tipocliente = "Estandar";
+                    return tipocliente;
+                case 2:
+                    tipocliente = "Premium";
+                    return tipocliente;
+                case 3:
+                    System.out.println("Cancelando...");
+                    break;
+                default:
+                    System.out.println("Opción no válida. Intente de nuevo.");
+                    break;
+            }
+        }while (optio != 3);
+        return null;
+    }
+    public void agregarCliente(){
+        String tipo = sTipoCliente();
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("----- Agregar Cliente -----");
+        System.out.print("Ingrese el nombre del Cliente: ");
+        String nombre = scanner.nextLine();
+        System.out.print("Ingrese domicilio del Cliente: ");
+        String domicilio = scanner.nextLine();
+        System.out.print("Ingrese el email del Cliente: ");
+        String email = scanner.nextLine();
+        System.out.print("Ingrese el nif del Cliente: ");
+        String nif = scanner.nextLine();
+        controlador.aNuevoCliente(tipo,nombre,domicilio,email,nif);
+    }
+    public void eliminarCLiente(){
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Por favor introduzca el email del cliente: ");
+        String email = scanner.nextLine();
+        try{
+            controlador.eCliente(email);
+        }
+        catch (Exception e){
+            System.out.println(escribirErrores(e));
+        }
+    }
+    public void listarCliente(){
+        ArrayList<String> Clientes = controlador.lClientes();
+        for(String cliente:Clientes){
+            System.out.println(cliente);
+        }
+    }
+    public void listarCLienteFiltro(String tipo){
+        ArrayList<String> Clientes = controlador.lcFiltro(tipo);
+        for(String cliente:Clientes){
+            System.out.println(cliente);
+        }
+    }
 // Pedidos
     private void menuPedidos() {
         Scanner scanner = new Scanner(System.in);
@@ -164,16 +289,16 @@ public class GestionOS {
 
             switch (opcionpedidos) {
                 case 1:
-                    controlador.hacerPedido();
+                    agregarPedido();
                     break;
                 case 2:
-                    controlador.eliminarPedido();
+                    eliminarPedido();
                     break;
                 case 3:
-                    controlador.listarPendientes();
+                    listarPendiente();
                     break;
                 case 4:
-                    controlador.listarEnviados();
+                    listarEnviado();
                     break;
                 case 5:
                     System.out.println("Volviendo al Menú Principal.");
@@ -184,7 +309,78 @@ public class GestionOS {
             }
         }while (opcionpedidos != 5);
     }
-
+    public void agregarPedido(){
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Ingrese el codigo del articulo: ");
+        String codigo = scanner.nextLine();
+        if(controlador.bArticulo(codigo) != null){
+            System.out.print("Ingrese la cantidad del articulo: ");
+            int cantidad = scanner.nextInt();
+            scanner.nextLine();
+            System.out.print("Introduzca el email del cliente: ");
+            String email = scanner.nextLine();
+            if (controlador.bCliente(email) == null){
+                String tipo = sTipoCliente();
+                System.out.print("Ingrese el nombre del Cliente: ");
+                String nombre = scanner.nextLine();
+                System.out.print("Ingrese domicilio del Cliente: ");
+                String domicilio = scanner.nextLine();
+                System.out.print("Ingrese el nif del Cliente: ");
+                String nif = scanner.nextLine();
+                controlador.aNuevoCliente(tipo,nombre,domicilio,email,nif);
+            }
+            controlador.aPedido(controlador.bArticulo(codigo),cantidad,controlador.bCliente(email));
+        } else{
+            System.out.println("No existe el articulo indicado");
+        }
+    }
+    public void eliminarPedido(){
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Ingrese el id del pedido: ");
+        String id = scanner.nextLine();
+        if (controlador.bPedido(id) != null && !controlador.bPedido(id).pedidoEnviado()) {
+            // Si el pedido existe y no se ha enviado, procede a eliminarlo
+            controlador.ePedido(id);
+            System.out.println("Pedido eliminado.");
+        } else {
+            System.out.println("Pedido no encontrado o fuera de plazo.");
+        }
+    }
+    public String filtroCliente(){
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("\n═════════════════════════════════════════════");
+        System.out.println("════════ ¿Desea filtrar por cliente? ════════");
+        System.out.println("1. Si");
+        System.out.println("2. No");
+        int opcion = scanner.nextInt();
+        scanner.nextLine();
+        if (opcion == 1) {
+            System.out.print("Indique el email del cliente: ");
+            String email = scanner.nextLine();
+            if (controlador.bCliente(email) != null) {
+                return email;
+            } else {
+                System.out.println("Cliente no registrado.");
+            }
+        }
+        return null;
+    }
+    public void listarPendiente(){
+        System.out.println("Los pedidos pendientes son los siguientes:");
+        System.out.println("═════════════════════════════════════════════");
+        ArrayList<String> Pendientes = controlador.lPendientes(filtroCliente());
+        for(String pedido:Pendientes){
+            System.out.println(pedido);
+        }
+    }
+    public void listarEnviado(){
+        System.out.println("Los pedidos enviados son los siguientes:");
+        System.out.println("═════════════════════════════════════════════");
+        ArrayList<String> Enviados = controlador.lEnviados(filtroCliente());
+        for(String pedido:Enviados){
+            System.out.println(pedido);
+        }
+    }
 }
 
 

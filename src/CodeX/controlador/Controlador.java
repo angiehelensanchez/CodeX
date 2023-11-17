@@ -1,6 +1,8 @@
 package CodeX.controlador;
 import CodeX.modelo.*;
 
+import java.util.ArrayList;
+
 public class Controlador {
         private Datos datos;
         public Controlador() {
@@ -8,38 +10,45 @@ public class Controlador {
         }
 
     //CLIENTES
-    public void agregarCliente() {
-        String tipocliente = datos.seleccionartipocliente();
-        datos.agregarCliente(tipocliente);
+    public void aNuevoCliente(String tipocliente, String nombre, String domicilio, String email, String nif){
+        datos.agregarCliente(tipocliente, nombre, domicilio, email, nif);
 
     }
-    public void eliminarCliente(String email){
+    public void eCliente(String email) throws Exception{
         datos.eliminarCliente(email);
     }
-    public void listarCliente(){
-        datos.listarClientes();
+    public ArrayList<String> lClientes(){
+        return datos.listarClientes();
     }
-    public void listarCFiltrado(String tipo){
-        datos.listarClientesFiltro(tipo);
+    public ArrayList<String> lcFiltro(String tipo){
+        return datos.listarClientesFiltro(tipo);
     }
-
+    public Cliente bCliente(String mail){
+        return datos.getCliente(mail);
+    }
     //ARTICULOS
-    public void agregarArticulo(){
-        datos.crearArticulo();
+    public void aNuevoArticulo(String codigo, String descripcion, Float precio, Float gastosenvios, int tpreparacion) throws Exception{
+        datos.crearArticulo(codigo, descripcion, precio, gastosenvios, tpreparacion);
     }
-    public void eliminarArticulo(){
-        datos.eliminarArticulo();
+    public void eArticulo(String id) throws Exception{
+        datos.eliminarArticulo(id);
     }
-    public void listarArticulos(){datos.listArticulos();}
+    public ArrayList<String> lArticulo(){
+        return datos.listArticulos();
+    }
+    public Articulo bArticulo(String codigo){
+        return datos.getArticulo(codigo);
+    }
     //PEDIDOS
-    public void hacerPedido(){ datos.hacerPedidos();}
-    public void eliminarPedido(){
-        datos.eliminarPedidos();
+    public void aPedido(Articulo arti, int cantidad, Cliente cliente){ datos.hacerPedidos(arti,cantidad,cliente);}
+    public Pedidos bPedido(String id){ return datos.buscarPedidos(id);}
+    public void ePedido(String id){
+        datos.eliminarPedidos(id);
     }
-    public void listarPendientes(){
-        datos.listarPedidosPendientes();
+    public ArrayList<String> lPendientes(String email){
+        return datos.listarPedidosPendientes(email);
     }
-    public void listarEnviados(){
-        datos.listarPedidosEnviados();
+    public ArrayList<String> lEnviados(String email){
+        return datos.listarPedidosEnviados(email);
     }
 }
