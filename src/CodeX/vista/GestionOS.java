@@ -1,15 +1,10 @@
 package CodeX.vista;
 
 import CodeX.controlador.Controlador;
-import CodeX.modelo.Articulo;
-
-
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
 public class GestionOS {
     private Controlador controlador;
-    Scanner teclado = new Scanner(System.in);
     public GestionOS() {
         controlador = new Controlador();
     }

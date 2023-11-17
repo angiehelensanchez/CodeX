@@ -2,7 +2,6 @@ package CodeX.DAO;
 
 import CodeX.modelo.Articulo;
 import CodeX.dbutilidad.utilidad;
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;

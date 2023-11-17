@@ -1,6 +1,5 @@
 package CodeX.modelo;
 
-import java.util.Scanner;
 import java.util.*;
 import CodeX.DAO.ArticuloDAO;
 import CodeX.DAO.ClienteDAO;

@@ -2,9 +2,7 @@ package CodeX.DAO;
 
 import CodeX.modelo.Pedidos;
 import CodeX.modelo.Cliente;
-import CodeX.DAO.ClienteDAO;
 import CodeX.modelo.Articulo;
-import CodeX.DAO.ArticuloDAO;
 import CodeX.dbutilidad.utilidad;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
