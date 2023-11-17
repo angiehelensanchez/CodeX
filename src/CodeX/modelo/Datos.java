@@ -68,7 +68,7 @@ public class Datos {
         Cliente cliente;
         if (tipocliente.equals("Estandar")) {
             cliente = new ClienteEstandar(nombre, domicilio, email, nif);
-        } else { // asumiendo que el otro tipo es "Premium"
+        } else {
             cliente = new ClientePremium(nombre, domicilio, email, nif);
         }
         clienteDAO.addCliente(cliente);
@@ -76,7 +76,7 @@ public class Datos {
 
     public void eliminarCliente(String email) {
         ClienteDAO clienteDAO = new ClienteDAO();
-        Cliente cliente = clienteDAO.getClienteByEmail(email); // Suponiendo que ClienteDAO tiene este método
+        Cliente cliente = clienteDAO.getClienteByEmail(email);
         if (cliente != null) {
             clienteDAO.deleteCliente(cliente.getNif());
         } else {
@@ -86,19 +86,19 @@ public class Datos {
 
     public Cliente buscarCliente(String email) {
         ClienteDAO clienteDAO = new ClienteDAO();
-        return clienteDAO.getClienteByEmail(email); // Suponiendo que ClienteDAO tiene este método
+        return clienteDAO.getClienteByEmail(email);
     }
 
     public void listarClientes() {
         ClienteDAO clienteDAO = new ClienteDAO();
-        for (Cliente cliente : clienteDAO.listClientes()) { // Suponiendo que ClienteDAO tiene este método
+        for (Cliente cliente : clienteDAO.listClientes()) {
             System.out.println(cliente.toString());
         }
     }
 
     public void listarClientesFiltro(String tipo) {
         ClienteDAO clienteDAO = new ClienteDAO();
-        for (Cliente cliente : clienteDAO.listClientesFiltradosPorTipo(tipo)) { // Suponiendo que ClienteDAO tiene este método
+        for (Cliente cliente : clienteDAO.listClientesFiltradosPorTipo(tipo)) {
             System.out.println(cliente.toString());
         }
     }
@@ -185,8 +185,7 @@ public class Datos {
         }
     }
 
-    // Método para listar todos los Articulos
-    // Este método requiere una implementación adicional en ArticuloDAO
+
     public void listArticulos() {
         ArticuloDAO articuloDAO = new ArticuloDAO();
         // Suponiendo que ArticuloDAO tiene un método listArticulos() que devuelve List<Articulo>
@@ -200,8 +199,8 @@ public class Datos {
     public void hacerPedidos() {
         Scanner scanner = new Scanner(System.in);
         PedidosDAO pedidosDAO = new PedidosDAO();
-        ClienteDAO clienteDAO = new ClienteDAO(); // Asume que tienes esta clase
-        ArticuloDAO articuloDAO = new ArticuloDAO(); // Asume que tienes esta clase
+        ClienteDAO clienteDAO = new ClienteDAO();
+        ArticuloDAO articuloDAO = new ArticuloDAO();
 
         System.out.print("Ingrese el codigo del articulo: ");
         String codigo = scanner.nextLine();
@@ -268,7 +267,7 @@ public class Datos {
 
     public String filtroCliente() {
         Scanner scanner = new Scanner(System.in);
-        ClienteDAO clienteDAO = new ClienteDAO(); // Asume que tienes esta clase
+        ClienteDAO clienteDAO = new ClienteDAO();
 
         System.out.println("\n═════════════════════════════════════════════");
         System.out.println("════════ ¿Desea filtrar por cliente? ════════");
@@ -296,7 +295,7 @@ public class Datos {
 
     public void listarPedidosPendientes() {
         PedidosDAO pedidosDAO = new PedidosDAO();
-        List<Pedidos> todosLosPedidos = pedidosDAO.listarTodosLosPedidos(); // Asume que tienes este método
+        List<Pedidos> todosLosPedidos = pedidosDAO.listarTodosLosPedidos();
         String filtroEmail = filtroCliente();
 
         System.out.println("Los pedidos pendientes son los siguientes:");
@@ -311,7 +310,7 @@ public class Datos {
 
     public void listarPedidosEnviados() {
         PedidosDAO pedidosDAO = new PedidosDAO();
-        List<Pedidos> todosLosPedidos = pedidosDAO.listarTodosLosPedidos(); // Asume que tienes este método
+        List<Pedidos> todosLosPedidos = pedidosDAO.listarTodosLosPedidos();
         String filtroEmail = filtroCliente();
 
         System.out.println("Los pedidos enviados son los siguientes:");
