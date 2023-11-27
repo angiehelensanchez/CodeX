@@ -30,33 +30,41 @@ public class ClienteDAO {
             e.printStackTrace();
         }
     }
-
-    // Método para obtener un cliente por NIF
-    public Cliente getCliente(String nif) {
-        String sql = "SELECT * FROM Cliente WHERE nif = ?";
+    // Método para obtener un cliente por Email
+    public Cliente getCliente(String email) {
+        String sql = "SELECT * FROM Cliente WHERE email = ?";
         try (Connection conn = utilidad.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
-            pstmt.setString(1, nif);
+            pstmt.setString(1, email);
             ResultSet rs = pstmt.executeQuery();
 
             if (rs.next()) {
                 String nombre = rs.getString("nombre");
                 String domicilio = rs.getString("domicilio");
-                String email = rs.getString("email");
+                String nif = rs.getString("nif");
                 String tipoCliente = rs.getString("tipoCliente");
 
+                Cliente cliente;
                 if ("Estandar".equals(tipoCliente)) {
-                    return new ClienteEstandar(nombre, domicilio, email, nif);
+                    cliente = new ClienteEstandar(nombre, domicilio, email, nif);
                 } else if ("Premium".equals(tipoCliente)) {
-                    return new ClientePremium(nombre, domicilio, email, nif);
+                    cliente = new ClientePremium(nombre, domicilio, email, nif);
+                } else {
+                    // Manejar situación si el tipo de cliente no es ni Estandar ni Premium
+                    return null;
                 }
+                // Asignar el email recuperado de la base de datos al cliente
+                cliente.setEmail(email);
+                return cliente;
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
         return null;
     }
+
+
 
     // Método para actualizar un cliente
     public void updateCliente(Cliente cliente) {

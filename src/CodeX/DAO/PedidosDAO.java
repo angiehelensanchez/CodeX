@@ -20,7 +20,7 @@ public class PedidosDAO {
 
     // Método para agregar un pedido
     public void addPedido(Pedidos pedido) {
-        String sql = "INSERT INTO Pedidos (idPedido, nifCliente, codigoArticulo, cantidadArticulo, fechaPedido) VALUES (?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO Pedidos (idPedido, nifCliente, codigoArticulo, cantidadArticulo, fechaPedido, emailCliente) VALUES (?, ?, ?, ?, ?, ?)";
         try (Connection conn = utilidad.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
@@ -28,13 +28,15 @@ public class PedidosDAO {
             pstmt.setString(2, pedido.getCliente().getNif());
             pstmt.setString(3, pedido.getArticulo().getCodigo());
             pstmt.setInt(4, pedido.getCantidadArticulo());
-            pstmt.setTimestamp(5, new Timestamp(pedido.getFecha().getTime())); // Agrega la fecha del pedido
+            pstmt.setTimestamp(5, new Timestamp(pedido.getFecha().getTime()));
+            pstmt.setString(6, pedido.getCliente().getEmail()); // Añade el email del cliente
 
             pstmt.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
+
 
     // Método para obtener un pedido por ID
     public Pedidos getPedido(String idPedido) {
@@ -53,12 +55,22 @@ public class PedidosDAO {
 
                 ClienteDAO clienteDAO = new ClienteDAO();
                 Cliente cliente = clienteDAO.getCliente(nifCliente);
+                if (cliente == null) {
+                    // Cliente no encontrado, se debe manejar esta situación.
+                    return null;
+                }
 
                 ArticuloDAO articuloDAO = new ArticuloDAO();
                 Articulo articulo = articuloDAO.getArticulo(codigoArticulo);
+                if (articulo == null) {
+                    // Artículo no encontrado, se debe manejar esta situación.
+                    return null;
+                }
 
                 Pedidos pedido = new Pedidos(idPedido, cliente, articulo, cantidad);
-                pedido.setFecha(new Date(fechaPedidoTS.getTime())); // Establece la fecha del pedido
+                if (fechaPedidoTS != null) {
+                    pedido.setFecha(new Date(fechaPedidoTS.getTime())); // Establece la fecha del pedido
+                }
 
                 return pedido;
             }
@@ -67,6 +79,7 @@ public class PedidosDAO {
         }
         return null;
     }
+
 
     // Método para eliminar un pedido
     public void deletePedido(String idPedido) {
@@ -94,17 +107,25 @@ public class PedidosDAO {
                 String codigoArticulo = rs.getString("codigoArticulo");
                 int cantidad = rs.getInt("cantidadArticulo");
                 Timestamp fechaPedidoTS = rs.getTimestamp("fechaPedido");
+                String emailCliente = rs.getString("emailCliente");
 
                 ClienteDAO clienteDAO = new ClienteDAO();
                 Cliente cliente = clienteDAO.getCliente(nifCliente);
+                if (cliente == null) {
+                    continue; // Omitir este pedido si el cliente es nulo
+                }
 
                 ArticuloDAO articuloDAO = new ArticuloDAO();
                 Articulo articulo = articuloDAO.getArticulo(codigoArticulo);
+                if (articulo == null) {
+                    continue; // Omitir este pedido si el artículo es nulo
+                }
 
                 Pedidos pedido = new Pedidos(idPedido, cliente, articulo, cantidad);
                 if (fechaPedidoTS != null) {
-                    pedido.setFecha(new Date(fechaPedidoTS.getTime())); // Establece la fecha del pedido
+                    pedido.setFecha(new Date(fechaPedidoTS.getTime()));
                 }
+                cliente.setEmail(emailCliente); // Asignar el email al cliente
 
                 pedidos.add(pedido);
             }
@@ -113,4 +134,6 @@ public class PedidosDAO {
         }
         return pedidos;
     }
+
+
 }

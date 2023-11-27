@@ -46,9 +46,9 @@ public class Datos {
         return datos;
     }
 
-    public Cliente getCliente(String mail) {
+    public Cliente getCliente(String email) {
         ClienteDAO clienteDAO = new ClienteDAO();
-        return clienteDAO.getCliente(mail);
+        return clienteDAO.getCliente(email);
     }
 
     public void updateCliente(Cliente cliente) {
@@ -114,8 +114,14 @@ public class Datos {
 
     public void eliminarPedidos(String id) {
         PedidosDAO pedidosDAO = new PedidosDAO();
-        pedidosDAO.deletePedido(id);
+        Pedidos ped = buscarPedidos(id);
+        if (ped != null) {
+            pedidosDAO.deletePedido(id);
+        } else {
+            System.out.println("Pedido no encontrado o datos incompletos.");
+        }
     }
+
 
     public Pedidos buscarPedidos(String id) {
         PedidosDAO pedidosDAO = new PedidosDAO();
