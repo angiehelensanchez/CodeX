@@ -1,6 +1,5 @@
 package CodeX.controlador;
 import CodeX.modelo.*;
-
 import java.util.ArrayList;
 
 public class Controlador {
@@ -40,7 +39,7 @@ public class Controlador {
         return datos.getArticulo(codigo);
     }
     //PEDIDOS
-    public void aPedido(Articulo arti, int cantidad, Cliente cliente){ datos.hacerPedidos(arti,cantidad,cliente);}
+    public void aPedido(String arti, int cantidad, String cliente){ datos.hacerPedidos(arti,cantidad,cliente);}
     public Pedidos bPedido(String id){ return datos.buscarPedidos(id);}
     public void ePedido(String id){
         datos.eliminarPedidos(id);

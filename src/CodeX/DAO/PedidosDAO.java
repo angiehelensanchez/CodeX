@@ -20,16 +20,17 @@ public class PedidosDAO {
 
     // Método para agregar un pedido
     public void addPedido(Pedidos pedido) {
-        String sql = "INSERT INTO Pedidos (idPedido, nifCliente, codigoArticulo, cantidadArticulo, fechaPedido, emailCliente) VALUES (?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO Pedidos (idPedido, nombreCliente, emailCliente, codigoArticulo, cantidadArticulo, fechaPedido) VALUES (?, ?, ?, ?, ?, ?)";
         try (Connection conn = utilidad.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
             pstmt.setString(1, pedido.getIdPedido());
-            pstmt.setString(2, pedido.getCliente().getNif());
-            pstmt.setString(3, pedido.getArticulo().getCodigo());
-            pstmt.setInt(4, pedido.getCantidadArticulo());
-            pstmt.setTimestamp(5, new Timestamp(pedido.getFecha().getTime()));
-            pstmt.setString(6, pedido.getCliente().getEmail()); // Añade el email del cliente
+            pstmt.setString(2, pedido.getCliente().getNombre());
+            pstmt.setString(3, pedido.getCliente().getEmail()); // Añade el email del cliente
+            pstmt.setString(4, pedido.getArticulo().getCodigo());
+            pstmt.setInt(5, pedido.getCantidadArticulo());
+            pstmt.setTimestamp(6, new Timestamp(pedido.getFecha().getTime()));
+
 
             pstmt.executeUpdate();
         } catch (SQLException e) {
@@ -48,13 +49,13 @@ public class PedidosDAO {
             ResultSet rs = pstmt.executeQuery();
 
             if (rs.next()) {
-                String nifCliente = rs.getString("nifCliente");
+                String emailCliente = rs.getString("emailCliente");
                 String codigoArticulo = rs.getString("codigoArticulo");
                 int cantidad = rs.getInt("cantidadArticulo");
                 Timestamp fechaPedidoTS = rs.getTimestamp("fechaPedido");
 
                 ClienteDAO clienteDAO = new ClienteDAO();
-                Cliente cliente = clienteDAO.getCliente(nifCliente);
+                Cliente cliente = clienteDAO.getCliente(emailCliente);
                 if (cliente == null) {
                     // Cliente no encontrado, se debe manejar esta situación.
                     return null;
@@ -96,21 +97,21 @@ public class PedidosDAO {
     // Método para listar todos los pedidos
     public List<Pedidos> listarTodosLosPedidos() {
         List<Pedidos> pedidos = new ArrayList<>();
-        String sql = "SELECT * FROM Pedidos";
+        String sql = "SELECT * FROM pedidos";
         try (Connection conn = utilidad.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql);
              ResultSet rs = pstmt.executeQuery()) {
 
             while (rs.next()) {
                 String idPedido = rs.getString("idPedido");
-                String nifCliente = rs.getString("nifCliente");
+                String emailCliente = rs.getString("emailCliente");
                 String codigoArticulo = rs.getString("codigoArticulo");
                 int cantidad = rs.getInt("cantidadArticulo");
                 Timestamp fechaPedidoTS = rs.getTimestamp("fechaPedido");
-                String emailCliente = rs.getString("emailCliente");
+
 
                 ClienteDAO clienteDAO = new ClienteDAO();
-                Cliente cliente = clienteDAO.getCliente(nifCliente);
+                Cliente cliente = clienteDAO.getCliente(emailCliente);
                 if (cliente == null) {
                     continue; // Omitir este pedido si el cliente es nulo
                 }
@@ -125,7 +126,6 @@ public class PedidosDAO {
                 if (fechaPedidoTS != null) {
                     pedido.setFecha(new Date(fechaPedidoTS.getTime()));
                 }
-                cliente.setEmail(emailCliente); // Asignar el email al cliente
 
                 pedidos.add(pedido);
             }

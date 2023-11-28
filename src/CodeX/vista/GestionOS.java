@@ -324,7 +324,7 @@ public class GestionOS {
                 String nif = scanner.nextLine();
                 controlador.aNuevoCliente(tipo,nombre,domicilio,email,nif);
             }
-            controlador.aPedido(controlador.bArticulo(codigo),cantidad,controlador.bCliente(email));
+            controlador.aPedido(codigo,cantidad,email);
         } else{
             System.out.println("No existe el articulo indicado");
         }
@@ -334,7 +334,6 @@ public class GestionOS {
         System.out.print("Ingrese el id del pedido: ");
         String id = scanner.nextLine();
         if (controlador.bPedido(id) != null && !controlador.bPedido(id).pedidoEnviado()) {
-            // Si el pedido existe y no se ha enviado, procede a eliminarlo
             controlador.ePedido(id);
             System.out.println("Pedido eliminado.");
         } else {
@@ -361,17 +360,17 @@ public class GestionOS {
         return null;
     }
     public void listarPendiente(){
+        ArrayList<String> Pendientes = controlador.lPendientes(filtroCliente());
         System.out.println("Los pedidos pendientes son los siguientes:");
         System.out.println("═════════════════════════════════════════════");
-        ArrayList<String> Pendientes = controlador.lPendientes(filtroCliente());
         for(String pedido:Pendientes){
             System.out.println(pedido);
         }
     }
     public void listarEnviado(){
+        ArrayList<String> Enviados = controlador.lEnviados(filtroCliente());
         System.out.println("Los pedidos enviados son los siguientes:");
         System.out.println("═════════════════════════════════════════════");
-        ArrayList<String> Enviados = controlador.lEnviados(filtroCliente());
         for(String pedido:Enviados){
             System.out.println(pedido);
         }

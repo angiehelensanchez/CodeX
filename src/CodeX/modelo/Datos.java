@@ -1,5 +1,4 @@
 package CodeX.modelo;
-
 import java.util.*;
 import CodeX.DAO.ArticuloDAO;
 import CodeX.DAO.ClienteDAO;
@@ -99,10 +98,12 @@ public class Datos {
     }
 
     // PEDIDOS
-    public void hacerPedidos(Articulo arti, int cantidad, Cliente cliente) {
+    public void hacerPedidos(String arti, int cantidad, String cliente) {
         PedidosDAO pedidosDAO = new PedidosDAO();
-        String idPedido = generarIdPedido(cliente);
-        Pedidos pedido = new Pedidos(idPedido, cliente, arti, cantidad);
+        Cliente cli = getCliente(cliente);
+        String idPedido = generarIdPedido(cli);
+        Articulo art = getArticulo(arti);
+        Pedidos pedido = new Pedidos(idPedido, cli, art, cantidad);
         pedidosDAO.addPedido(pedido);
     }
     private String generarIdPedido(Cliente cliente) {

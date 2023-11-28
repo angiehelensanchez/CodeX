@@ -87,7 +87,7 @@ public class Pedidos {
     public String toString() {
         return "| | Pedido " + idPedido + " Fecha: " + fecha + '\n' +
                 "    |*  Nombre: " + cliente.getNombre() + "\n" +
-                "    |*  NIF: " + cliente.getNif() + "\n" +
+                "    |*  MAIL: " + cliente.getEmail() + "\n" +
                 "     ---------------\n" +
                 "    |*  Codigo: " + articulos.getCodigo() + "\n" +
                 "    |*  Descripcion: " + articulos.getDescripcion() + "\n" +
