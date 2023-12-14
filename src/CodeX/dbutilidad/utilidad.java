@@ -1,3 +1,5 @@
+/*
+
 package CodeX.dbutilidad;
 
 import java.sql.Connection;
@@ -16,7 +18,7 @@ public class utilidad {
     }
     private static final String URL = "jdbc:mysql://localhost:3306/dbOnlineShop";
     private static final String USER = "root";
-    private static final String PASSWORD = "0618jm01";
+    private static final String PASSWORD = "20iknos11";
 
     public static Connection getConnection() throws SQLException {
         return DriverManager.getConnection(URL, USER, PASSWORD);
@@ -32,3 +34,5 @@ public class utilidad {
         }
     }
 }
+
+ */

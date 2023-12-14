@@ -1,11 +1,11 @@
 package CodeX.modelo;
 import java.util.*;
 import CodeX.DAO.ArticuloDAO;
-import CodeX.DAO.ClienteDAO;
-import CodeX.DAO.PedidosDAO;
+/* import CodeX.DAO.ClienteDAO; */
+/* import CodeX.DAO.PedidosDAO; */
 
 public class Datos {
-
+/*
     // CLIENTES
     public void agregarCliente(String tipocliente, String nombre, String domicilio, String email, String nif) {
         ClienteDAO clienteDAO = new ClienteDAO();
@@ -54,7 +54,7 @@ public class Datos {
         ClienteDAO clienteDAO = new ClienteDAO();
         clienteDAO.updateCliente(cliente);
     }
-
+*/
 
     // ARTÍCULOS
 
@@ -96,7 +96,7 @@ public class Datos {
         ArticuloDAO articuloDAO = new ArticuloDAO();
         return articuloDAO.getArticulo(codigo);
     }
-
+/*
     // PEDIDOS
     public void hacerPedidos(String arti, int cantidad, String cliente) {
         PedidosDAO pedidosDAO = new PedidosDAO();
@@ -153,5 +153,7 @@ public class Datos {
         }
         return datos;
     }
+
+ */
 }
 

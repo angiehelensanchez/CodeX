@@ -1,0 +1,28 @@
+<!DOCTYPE hibernate-configuration PUBLIC
+        "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+    <session-factory>
+        <!-- Configuración de la conexión a la base de datos -->
+        <property name="hibernate.connection.driver_class">com.mysql.cj.jdbc.Driver</property>
+        <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/dbOnlineShop</property>
+        <property name="hibernate.connection.username">root</property>
+        <property name="hibernate.connection.password">20iknos11</property>
+
+        <!-- Configuración del dialecto - Eliminado debido a la advertencia -->
+        <!-- <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property> -->
+
+        <!-- Configuraciones adicionales -->
+        <property name="show_sql">true</property>
+        <property name="format_sql">true</property>
+
+        <!-- Mapeo de entidades -->
+        <!-- Asegúrate de agregar aquí tus clases de entidad -->
+        <mapping class="CodeX.modelo.Articulo"/>
+        <mapping class="CodeX.modelo.Cliente"/>
+        <mapping class="CodeX.modelo.ClienteEstandar"/>
+        <mapping class="CodeX.modelo.ClientePremium"/>
+
+        <!-- Añadir otras entidades de la misma manera -->
+    </session-factory>
+</hibernate-configuration>

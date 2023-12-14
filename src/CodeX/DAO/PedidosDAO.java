@@ -1,4 +1,4 @@
-package CodeX.DAO;
+/* package CodeX.DAO;
 
 import CodeX.modelo.Pedidos;
 import CodeX.modelo.Cliente;
@@ -137,3 +137,5 @@ public class PedidosDAO {
 
 
 }
+
+ */

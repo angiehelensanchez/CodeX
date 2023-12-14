@@ -1,32 +1,26 @@
 package CodeX.DAO;
 
 import CodeX.modelo.Cliente;
-import CodeX.modelo.ClienteEstandar;
-import CodeX.modelo.ClientePremium;
-import CodeX.dbutilidad.utilidad;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.ArrayList;
+import CodeX.dbutilidad.HibernateUtil;
+import org.hibernate.Session;
+import org.hibernate.Transaction;
+
 import java.util.List;
 
 public class ClienteDAO {
 
     // Método para agregar un cliente
+
     public void addCliente(Cliente cliente) {
-        String sql = "INSERT INTO Cliente (nombre, domicilio, email, nif, tipoCliente) VALUES (?, ?, ?, ?, ?)";
-        try (Connection conn = utilidad.getConnection();
-             PreparedStatement pstmt = conn.prepareStatement(sql)) {
-
-            pstmt.setString(1, cliente.getNombre());
-            pstmt.setString(2, cliente.getDomicilio());
-            pstmt.setString(3, cliente.getEmail());
-            pstmt.setString(4, cliente.getNif());
-            pstmt.setString(5, cliente.tipoCliente()); // Retorna "Estandar" o "Premium"
-
-            pstmt.executeUpdate();
-        } catch (SQLException e) {
+        Transaction transaction = null;
+        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+            transaction = session.beginTransaction();
+            session.save(cliente);
+            transaction.commit();
+        } catch (Exception e) {
+            if (transaction != null) {
+                transaction.rollback();
+            }
             e.printStackTrace();
         }
     }
@@ -68,17 +62,15 @@ public class ClienteDAO {
 
     // Método para actualizar un cliente
     public void updateCliente(Cliente cliente) {
-        String sql = "UPDATE Cliente SET nombre = ?, domicilio = ?, email = ? WHERE nif = ?";
-        try (Connection conn = utilidad.getConnection();
-             PreparedStatement pstmt = conn.prepareStatement(sql)) {
-
-            pstmt.setString(1, cliente.getNombre());
-            pstmt.setString(2, cliente.getDomicilio());
-            pstmt.setString(3, cliente.getEmail());
-            pstmt.setString(4, cliente.getNif());
-
-            pstmt.executeUpdate();
-        } catch (SQLException e) {
+        Transaction transaction = null;
+        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+            transaction = session.beginTransaction();
+            session.update(cliente);
+            transaction.commit();
+        } catch (Exception e) {
+            if (transaction != null) {
+                transaction.rollback();
+            }
             e.printStackTrace();
         }
     }
@@ -86,13 +78,18 @@ public class ClienteDAO {
 
     // Método para eliminar un cliente
     public void deleteCliente(String nif) {
-        String sql = "DELETE FROM Cliente WHERE nif = ?";
-        try (Connection conn = utilidad.getConnection();
-             PreparedStatement pstmt = conn.prepareStatement(sql)) {
-
-            pstmt.setString(1, nif);
-            pstmt.executeUpdate();
-        } catch (SQLException e) {
+        Transaction transaction = null;
+        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+            transaction = session.beginTransaction();
+            Cliente cliente = session.get(Cliente.class, nif);
+            if (cliente != null) {
+                session.delete(cliente);
+            }
+            transaction.commit();
+        } catch (Exception e) {
+            if (transaction != null) {
+                transaction.rollback();
+            }
             e.printStackTrace();
         }
     }
@@ -178,3 +175,4 @@ public class ClienteDAO {
     }
 
 }
+
