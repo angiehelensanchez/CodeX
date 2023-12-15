@@ -1,12 +1,15 @@
 package CodeX.modelo;
-import java.util.*;
+import CodeX.DAO.ClienteDAO;
 import CodeX.DAO.ArticuloDAO;
-/* import CodeX.DAO.ClienteDAO; */
-/* import CodeX.DAO.PedidosDAO; */
+import CodeX.DAO.PedidosDAO;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Calendar;
+
 
 public class Datos {
-/*
-    // CLIENTES
+
+    // CLIENTES----------------------------------------------------------------
     public void agregarCliente(String tipocliente, String nombre, String domicilio, String email, String nif) {
         ClienteDAO clienteDAO = new ClienteDAO();
         Cliente cliente;
@@ -24,13 +27,15 @@ public class Datos {
         if (cliente != null) {
             clienteDAO.deleteCliente(cliente.getNif());
         } else {
-            throw new Exception("Artículo no encontrado.");
+            throw new Exception("Cliente no encontrado.");
         }
     }
+
     public ArrayList<String> listarClientes() {
         ClienteDAO clienteDAO = new ClienteDAO();
-        ArrayList<String> datos = new ArrayList<String>();
-        for (Cliente cliente : clienteDAO.listClientes()) {
+        List<Cliente> listaClientes = clienteDAO.listClientes();
+        ArrayList<String> datos = new ArrayList<>();
+        for (Cliente cliente : listaClientes) {
             datos.add(cliente.toString());
         }
         return datos;
@@ -38,8 +43,9 @@ public class Datos {
 
     public ArrayList<String> listarClientesFiltro(String tipo) {
         ClienteDAO clienteDAO = new ClienteDAO();
-        ArrayList<String> datos = new ArrayList<String>();
-        for (Cliente cliente : clienteDAO.listClientesFiltradosPorTipo(tipo)) {
+        List<Cliente> listaClientes = clienteDAO.listClientesFiltradosPorTipo(tipo);
+        ArrayList<String> datos = new ArrayList<>();
+        for (Cliente cliente : listaClientes) {
             datos.add(cliente.toString());
         }
         return datos;
@@ -47,22 +53,23 @@ public class Datos {
 
     public Cliente getCliente(String email) {
         ClienteDAO clienteDAO = new ClienteDAO();
-        return clienteDAO.getCliente(email);
+        return clienteDAO.getClienteByEmail(email);
     }
 
     public void updateCliente(Cliente cliente) {
         ClienteDAO clienteDAO = new ClienteDAO();
         clienteDAO.updateCliente(cliente);
     }
-*/
 
-    // ARTÍCULOS
+
+    // ARTÍCULOS ---------------------------------------------------------------------
 
     // Método para crear y agregar un nuevo Articulo
     public void crearArticulo(String codigo, String descripcion, Float precio, Float gastosenvios, int tpreparacion) throws Exception {
         Articulo nuevoArticulo = new Articulo(codigo, descripcion, precio, gastosenvios, tpreparacion);
         agregarArticulo(nuevoArticulo);
     }
+
     public void agregarArticulo(Articulo articulo) throws Exception {
         ArticuloDAO articuloDAO = new ArticuloDAO();
         if (articuloDAO.getArticulo(articulo.getCodigo()) == null) {
@@ -71,6 +78,7 @@ public class Datos {
             throw new Exception("El articulo ya existe.");
         }
     }
+
 
     // Método para eliminar un Articulo
     public void eliminarArticulo(String id) throws Exception {
@@ -96,22 +104,34 @@ public class Datos {
         ArticuloDAO articuloDAO = new ArticuloDAO();
         return articuloDAO.getArticulo(codigo);
     }
-/*
-    // PEDIDOS
-    public void hacerPedidos(String arti, int cantidad, String cliente) {
+
+    // PEDIDOS ------------------------------------------------------------
+
+    // HACER PEDIDO NUEVO
+    public void hacerPedidos(String arti, int cantidad, String emailCliente) {
         PedidosDAO pedidosDAO = new PedidosDAO();
-        Cliente cli = getCliente(cliente);
-        String idPedido = generarIdPedido(cli);
+        Cliente cli = getCliente(emailCliente);
+        if (cli == null) {
+            // Manejar la situación si no se encuentra el cliente
+            return;
+        }
         Articulo art = getArticulo(arti);
+        if (art == null) {
+            // Manejar la situación si no se encuentra el artículo
+            return;
+        }
+        String idPedido = generarIdPedido(cli);
         Pedidos pedido = new Pedidos(idPedido, cli, art, cantidad);
         pedidosDAO.addPedido(pedido);
     }
+
     private String generarIdPedido(Cliente cliente) {
         Calendar fecha = Calendar.getInstance();
         return cliente.getNif() + "_" + fecha.get(Calendar.DAY_OF_YEAR) + "_" +
                 fecha.get(Calendar.YEAR) + "_" + fecha.get(Calendar.HOUR_OF_DAY) +
                 fecha.get(Calendar.MINUTE) + fecha.get(Calendar.MILLISECOND);
     }
+
 
     public void eliminarPedidos(String id) {
         PedidosDAO pedidosDAO = new PedidosDAO();
@@ -154,6 +174,5 @@ public class Datos {
         return datos;
     }
 
- */
 }
 

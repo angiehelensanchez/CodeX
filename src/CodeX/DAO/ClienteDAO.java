@@ -4,8 +4,12 @@ import CodeX.modelo.Cliente;
 import CodeX.dbutilidad.HibernateUtil;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.hibernate.query.Query;
+
 
 import java.util.List;
+import java.util.ArrayList;
+
 
 public class ClienteDAO {
 
@@ -26,38 +30,32 @@ public class ClienteDAO {
     }
     // Método para obtener un cliente por Email
     public Cliente getCliente(String email) {
-        String sql = "SELECT * FROM Cliente WHERE email = ?";
-        try (Connection conn = utilidad.getConnection();
-             PreparedStatement pstmt = conn.prepareStatement(sql)) {
-
-            pstmt.setString(1, email);
-            ResultSet rs = pstmt.executeQuery();
-
-            if (rs.next()) {
-                String nombre = rs.getString("nombre");
-                String domicilio = rs.getString("domicilio");
-                String nif = rs.getString("nif");
-                String tipoCliente = rs.getString("tipoCliente");
-
-                Cliente cliente;
-                if ("Estandar".equals(tipoCliente)) {
-                    cliente = new ClienteEstandar(nombre, domicilio, email, nif);
-                } else if ("Premium".equals(tipoCliente)) {
-                    cliente = new ClientePremium(nombre, domicilio, email, nif);
-                } else {
-                    // Manejar situación si el tipo de cliente no es ni Estandar ni Premium
-                    return null;
-                }
-                // Asignar el email recuperado de la base de datos al cliente
-                cliente.setEmail(email);
-                return cliente;
+        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+            // Utiliza HQL (Hibernate Query Language) para buscar el cliente
+            String hql = "FROM Cliente WHERE email = :email";
+            Query<Cliente> query = session.createQuery(hql, Cliente.class);
+            query.setParameter("email", email);
+            List<Cliente> result = query.getResultList();
+            if (!result.isEmpty()) {
+                // Retorna el primer cliente encontrado con ese email
+                return result.get(0);
             }
-        } catch (SQLException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return null;
     }
 
+    public Cliente getClienteByEmail(String email) {
+        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+            return session.createQuery("from Cliente where email = :email", Cliente.class)
+                    .setParameter("email", email)
+                    .uniqueResult();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
 
 
     // Método para actualizar un cliente
@@ -95,83 +93,28 @@ public class ClienteDAO {
     }
 
     // Método para listar todos los clientes
-    public List<Cliente> listClientes() {
-        List<Cliente> clientes = new ArrayList<>();
-        String sql = "SELECT * FROM Cliente";
-        try (Connection conn = utilidad.getConnection();
-             PreparedStatement pstmt = conn.prepareStatement(sql)) {
-
-            ResultSet rs = pstmt.executeQuery();
-
-            while (rs.next()) {
-                String nombre = rs.getString("nombre");
-                String domicilio = rs.getString("domicilio");
-                String email = rs.getString("email");
-                String nif = rs.getString("nif");
-                String tipoCliente = rs.getString("tipoCliente");
-
-                if ("Estandar".equals(tipoCliente)) {
-                    clientes.add(new ClienteEstandar(nombre, domicilio, email, nif));
-                } else if ("Premium".equals(tipoCliente)) {
-                    clientes.add(new ClientePremium(nombre, domicilio, email, nif));
-                }
-            }
-        } catch (SQLException e) {
+       public List<Cliente> listClientes() {
+        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+            // Utiliza HQL para obtener todos los clientes
+            String hql = "FROM Cliente";
+            Query<Cliente> query = session.createQuery(hql, Cliente.class);
+            return query.getResultList();
+        } catch (Exception e) {
             e.printStackTrace();
+            return null;
         }
-        return clientes;
     }
 
-    public Cliente getClienteByEmail(String email) {
-        String sql = "SELECT * FROM Cliente WHERE email = ?";
-        try (Connection conn = utilidad.getConnection();
-             PreparedStatement pstmt = conn.prepareStatement(sql)) {
-
-            pstmt.setString(1, email);
-            ResultSet rs = pstmt.executeQuery();
-
-            if (rs.next()) {
-                String nombre = rs.getString("nombre");
-                String domicilio = rs.getString("domicilio");
-                String nif = rs.getString("nif");
-                String tipoCliente = rs.getString("tipoCliente");
-
-                if ("Estandar".equals(tipoCliente)) {
-                    return new ClienteEstandar(nombre, domicilio, email, nif);
-                } else if ("Premium".equals(tipoCliente)) {
-                    return new ClientePremium(nombre, domicilio, email, nif);
-                }
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return null;
-    }
+    // Método para listar clientes filtrados por tipo
     public List<Cliente> listClientesFiltradosPorTipo(String tipo) {
-        List<Cliente> clientes = new ArrayList<>();
-        String sql = "SELECT * FROM Cliente WHERE tipoCliente = ?";
-        try (Connection conn = utilidad.getConnection();
-             PreparedStatement pstmt = conn.prepareStatement(sql)) {
-
-            pstmt.setString(1, tipo);
-            ResultSet rs = pstmt.executeQuery();
-
-            while (rs.next()) {
-                String nombre = rs.getString("nombre");
-                String domicilio = rs.getString("domicilio");
-                String email = rs.getString("email");
-                String nif = rs.getString("nif");
-
-                if ("Estandar".equals(tipo)) {
-                    clientes.add(new ClienteEstandar(nombre, domicilio, email, nif));
-                } else if ("Premium".equals(tipo)) {
-                    clientes.add(new ClientePremium(nombre, domicilio, email, nif));
-                }
-            }
-        } catch (SQLException e) {
+        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+            Query<Cliente> query = session.createQuery("from Cliente where tipoCliente = :tipo", Cliente.class);
+            query.setParameter("tipo", tipo);
+            return query.list();
+        } catch (Exception e) {
             e.printStackTrace();
+            return new ArrayList<>();
         }
-        return clientes;
     }
 
 }

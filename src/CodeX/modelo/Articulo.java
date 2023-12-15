@@ -9,7 +9,7 @@ import javax.persistence.Column;
 @Table(name = "Articulo")
 public class Articulo {
     @Id
-    @Column(name = "codigo") // Asegúrate de que el nombre de la columna sea el correcto en la base de datos
+    @Column(name = "codigo")
     private String codigo;
 
     @Column(name = "descripcion")

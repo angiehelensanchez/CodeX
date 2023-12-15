@@ -8,7 +8,7 @@ public class Controlador {
             datos = new Datos ();
         }
 
-   /* //CLIENTES
+    //CLIENTES
     public void aNuevoCliente(String tipocliente, String nombre, String domicilio, String email, String nif){
         datos.agregarCliente(tipocliente, nombre, domicilio, email, nif);
 
@@ -26,7 +26,7 @@ public class Controlador {
         return datos.getCliente(mail);
     }
 
-    */
+
     //ARTICULOS
     public void aNuevoArticulo(String codigo, String descripcion, Float precio, Float gastosenvios, int tpreparacion) throws Exception{
         datos.crearArticulo(codigo, descripcion, precio, gastosenvios, tpreparacion);
@@ -40,7 +40,7 @@ public class Controlador {
     public Articulo bArticulo(String codigo){
         return datos.getArticulo(codigo);
     }
-    /*
+
     //PEDIDOS
     public void aPedido(String arti, int cantidad, String cliente){ datos.hacerPedidos(arti,cantidad,cliente);}
     public Pedidos bPedido(String id){ return datos.buscarPedidos(id);}
@@ -54,5 +54,5 @@ public class Controlador {
         return datos.listarPedidosEnviados(email);
     }
     
-     */
+
 }
