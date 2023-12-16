@@ -5,10 +5,8 @@ import jakarta.persistence.*;
 @Entity
 @Table(name = "Cliente")
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
-@DiscriminatorColumn(name = "tipoCliente", discriminatorType = DiscriminatorType.STRING)
 public abstract class Cliente {
 
-    @Id
     @Column(name = "nif")
     private String nif;
 
@@ -18,6 +16,7 @@ public abstract class Cliente {
     @Column(name = "domicilio")
     private String domicilio;
 
+    @Id
     @Column(name = "email")
     private String email;
 
@@ -68,8 +67,6 @@ public abstract class Cliente {
     public abstract float calcAnual();
 
     public abstract float descuentoEnv();
-
-    public abstract String tipoCliente();
 
     @Override
     public String toString() {

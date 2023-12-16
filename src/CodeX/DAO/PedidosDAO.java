@@ -70,7 +70,7 @@ public class PedidosDAO {
     // Método para listar todos los pedidos
     public List<Pedidos> listarTodosLosPedidos() {
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
-            return session.createQuery("from Pedidos", Pedidos.class).list();
+            return session.createQuery("from pedidos", Pedidos.class).list();
         } catch (Exception e) {
             e.printStackTrace();
             return null;

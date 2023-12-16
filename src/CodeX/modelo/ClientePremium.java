@@ -1,5 +1,6 @@
 package CodeX.modelo;
 
+
 import jakarta.persistence.DiscriminatorValue;
 import jakarta.persistence.Entity;
 
@@ -11,9 +12,9 @@ public class ClientePremium extends Cliente {
     protected ClientePremium() {
         super();
     }
-
     public ClientePremium(String nombre, String domicilio, String email, String nif) {
         super(nombre, domicilio, email, nif);
+
     }
 
     @Override
@@ -26,7 +27,6 @@ public class ClientePremium extends Cliente {
         return 20f;
     }
 
-    @Override
     public String tipoCliente() {
         return "Premium";
     }
