@@ -31,10 +31,11 @@ public class Controlador {
 
  */
     //ARTICULOS
-    /*
+
     public void aNuevoArticulo(String codigo, String descripcion, Float precio, Float gastosenvios, int tpreparacion) throws Exception{
         datos.crearArticulo(codigo, descripcion, precio, gastosenvios, tpreparacion);
     }
+    /*
     public void eArticulo(String id) throws Exception{
         datos.eliminarArticulo(id);
     }

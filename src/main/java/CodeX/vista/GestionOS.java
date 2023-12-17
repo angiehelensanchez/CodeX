@@ -120,7 +120,7 @@ public class GestionOS {
         int tpreparacion = scanner.nextInt();
         scanner.nextLine();
         try {
-            //controlador.aNuevoArticulo(codigo, descripcion, precio, gastosenvios, tpreparacion);
+            controlador.aNuevoArticulo(codigo, descripcion, precio, gastosenvios, tpreparacion);
         }
         catch (Exception e){
             System.out.println(escribirErrores(e));

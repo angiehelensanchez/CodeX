@@ -71,7 +71,7 @@ public class Datos {
     // ARTÍCULOS ---------------------------------------------------------------------
 
     // Método para crear y agregar un nuevo Articulo
-    /*
+*/
     public void crearArticulo(String codigo, String descripcion, Float precio, Float gastosenvios, int tpreparacion) throws Exception {
         Articulo nuevoArticulo = new Articulo(codigo, descripcion, precio, gastosenvios, tpreparacion);
         agregarArticulo(nuevoArticulo);
@@ -85,7 +85,7 @@ public class Datos {
             throw new Exception("El articulo ya existe.");
         }
     }
-
+/*
 
     // Método para eliminar un Articulo
     public void eliminarArticulo(String id) throws Exception {
@@ -110,11 +110,12 @@ public class Datos {
         }
         return datos;
     }
-    /*
+
     public Articulo getArticulo(String codigo) {
         ArticuloDAO articuloDAO = new ArticuloDAO();
         return articuloDAO.getArticulo(codigo);
     }
+/*
 
     // PEDIDOS ------------------------------------------------------------
 

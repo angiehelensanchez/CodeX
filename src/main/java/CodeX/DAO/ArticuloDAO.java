@@ -13,53 +13,29 @@ public class ArticuloDAO {
     public ArticuloDAO() {
         this.factory = new Configuration().configure("hibernate.cfg.xml").addAnnotatedClass(Articulo.class).buildSessionFactory();
     }
-
     // Agregar un nuevo artículo
-    /*
+
     public void addArticulo(Articulo articulo) {
         try (Session session = factory.getCurrentSession()) {
             session.beginTransaction();
             session.save(articulo);
-            transaction.commit();
-        } catch (Exception e) {
-            if (transaction != null) {
-                transaction.rollback();
-            }
-            e.printStackTrace();
-        }
-
-          try (Session session = factory.getCurrentSession()) {
-            // Inicia la transacción
-            session.beginTransaction();
-
-            // Recupera todos los artículos de la base de datos
-            List<Articulo> articulos = session.createQuery("from Articulo", Articulo.class).getResultList();
-
-            // Imprime los artículos
-            for (Articulo articulo : articulos) {
-                System.out.println(articulo);
-            }
-
-            // Commit de la transacción
             session.getTransaction().commit();
-
-            return articulos; // Devuelve la lista de artículos
         } catch (Exception e) {
             e.printStackTrace();
         }
 
-        return null;
     }
 
-    // Obtener un artículo por su código
+    // Obtener un artículo por su código ----------dudas
     public Articulo getArticulo(String codigo) {
-        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+        try (Session session = factory.getCurrentSession()) {
             return session.get(Articulo.class, codigo);
         } catch (Exception e) {
             e.printStackTrace();
             return null;
         }
     }
+    /*
 
     // Actualizar un artículo existente
     public void updateArticulo(Articulo articulo) {
@@ -108,12 +84,6 @@ public class ArticuloDAO {
 
             // Recupera todos los artículos de la base de datos
             List<Articulo> articulos = session.createQuery("from Articulo", Articulo.class).getResultList();
-
-            // Imprime los artículos
-            for (Articulo articulo : articulos) {
-                System.out.println(articulo);
-            }
-
             // Commit de la transacción
             session.getTransaction().commit();
 
