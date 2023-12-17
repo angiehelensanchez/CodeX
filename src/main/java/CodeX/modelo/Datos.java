@@ -85,7 +85,7 @@ public class Datos {
             throw new Exception("El articulo ya existe.");
         }
     }
-/*
+
 
     // Método para eliminar un Articulo
     public void eliminarArticulo(String id) throws Exception {
@@ -96,9 +96,6 @@ public class Datos {
            throw new Exception("Artículo no encontrado.");
         }
     }
-
-
-     */
 
     //Metodo para listar un Articulo
     public ArrayList<String> listArticulos() {

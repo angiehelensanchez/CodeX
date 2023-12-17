@@ -35,20 +35,19 @@ public class Controlador {
     public void aNuevoArticulo(String codigo, String descripcion, Float precio, Float gastosenvios, int tpreparacion) throws Exception{
         datos.crearArticulo(codigo, descripcion, precio, gastosenvios, tpreparacion);
     }
-    /*
+
     public void eArticulo(String id) throws Exception{
         datos.eliminarArticulo(id);
     }
 
-     */
     public ArrayList<String> lArticulo(){
         return datos.listArticulos();
     }
-    /*
+
     public Articulo bArticulo(String codigo){
         return datos.getArticulo(codigo);
     }
-
+/*
     //PEDIDOS
     public void aPedido(String arti, int cantidad, String cliente){ datos.hacerPedidos(arti,cantidad,cliente);}
     public Pedidos bPedido(String id){ return datos.buscarPedidos(id);}

@@ -131,7 +131,7 @@ public class GestionOS {
         System.out.print("Ingrese el id del artículo: ");
         String id = scanner.nextLine();
         try{
-            //controlador.eArticulo(id);
+            controlador.eArticulo(id);
         }
         catch (Exception e){
             System.out.println(escribirErrores(e));

@@ -4,9 +4,7 @@ import CodeX.modelo.Articulo;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
-
 import java.util.List;
-
 
 public class ArticuloDAO {
     private final SessionFactory factory;
@@ -25,13 +23,14 @@ public class ArticuloDAO {
         }
 
     }
-
     // Obtener un artículo por su código ----------dudas
     public Articulo getArticulo(String codigo) {
         try (Session session = factory.getCurrentSession()) {
-            return session.get(Articulo.class, codigo);
+            session.beginTransaction();
+            Articulo articulo = session.get(Articulo.class, codigo);
+            session.getTransaction().commit();
+            return articulo;
         } catch (Exception e) {
-            e.printStackTrace();
             return null;
         }
     }
@@ -51,29 +50,21 @@ public class ArticuloDAO {
             e.printStackTrace();
         }
     }
+*/
 
     // Eliminar un artículo
     public void deleteArticulo(String codigo) {
-        Transaction transaction = null;
-        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
-            transaction = session.beginTransaction();
+        try (Session session = factory.getCurrentSession()) {
+            session.beginTransaction();
             Articulo articulo = session.get(Articulo.class, codigo);
             if (articulo != null) {
                 session.delete(articulo);
             }
-            transaction.commit();
+            session.getTransaction().commit();
         } catch (Exception e) {
-            if (transaction != null) {
-                transaction.rollback();
-            }
             e.printStackTrace();
         }
     }
-
-
-     */
-
-
 
     // Método para listar todos los artículos
     public List<Articulo> listArticulos() {
@@ -94,8 +85,6 @@ public class ArticuloDAO {
 
         return null;
     }
-
-
     // Método para cerrar la fábrica de sesiones (debería llamarse al finalizar la aplicación)
     public void cerrarFactory() {
         if (factory != null && !factory.isClosed()) {
