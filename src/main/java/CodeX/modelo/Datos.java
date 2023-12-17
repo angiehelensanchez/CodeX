@@ -1,8 +1,7 @@
 package CodeX.modelo;
-/*
+
 import CodeX.DAO.ClienteDAO;
 
- */
 import CodeX.DAO.ArticuloDAO;
 import CodeX.DAO.PedidosDAO;
 
@@ -12,7 +11,7 @@ import java.util.Calendar;
 
 
 public class Datos {
-/*
+
     // CLIENTES----------------------------------------------------------------
     public void agregarCliente(String tipocliente, String nombre, String domicilio, String email, String nif) {
         ClienteDAO clienteDAO = new ClienteDAO();
@@ -27,9 +26,9 @@ public class Datos {
 
     public void eliminarCliente(String email) throws Exception{
         ClienteDAO clienteDAO = new ClienteDAO();
-        Cliente cliente = clienteDAO.getClienteByEmail(email);
+        Cliente cliente = clienteDAO.getCliente(email);
         if (cliente != null) {
-            clienteDAO.deleteCliente(cliente.getNif());
+            clienteDAO.deleteCliente(email);
         } else {
             throw new Exception("Cliente no encontrado.");
         }
@@ -57,19 +56,12 @@ public class Datos {
 
     public Cliente getCliente(String email) {
         ClienteDAO clienteDAO = new ClienteDAO();
-        return clienteDAO.getClienteByEmail(email);
-    }
-
-    public void updateCliente(Cliente cliente) {
-        ClienteDAO clienteDAO = new ClienteDAO();
-        clienteDAO.updateCliente(cliente);
+        return clienteDAO.getCliente(email);
     }
 
 
     // ARTÍCULOS ---------------------------------------------------------------------
 
-    // Método para crear y agregar un nuevo Articulo
-*/
     public void crearArticulo(String codigo, String descripcion, Float precio, Float gastosenvios, int tpreparacion) throws Exception {
         Articulo nuevoArticulo = new Articulo(codigo, descripcion, precio, gastosenvios, tpreparacion);
         agregarArticulo(nuevoArticulo);

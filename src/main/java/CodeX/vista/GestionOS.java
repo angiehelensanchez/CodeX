@@ -171,15 +171,15 @@ public class GestionOS {
                     agregarCliente();
                 break;
                 case 2:
-                    //listarCliente();
+                    listarCliente();
                 break;
                 case 3:
                     String tipo1 = "Estandar";
-                    //listarCLienteFiltro(tipo1);
+                    listarCLienteFiltro(tipo1);
                 break;
                 case 4:
                     String tipo2 = "Premium";
-                    //listarCLienteFiltro(tipo2);
+                    listarCLienteFiltro(tipo2);
                 break;
                 case 5:
                     eliminarCLiente();
@@ -237,20 +237,20 @@ public class GestionOS {
         String email = scanner.nextLine();
         System.out.print("Ingrese el nif del Cliente: ");
         String nif = scanner.nextLine();
-        //controlador.aNuevoCliente(tipo,nombre,domicilio,email,nif);
+        controlador.aNuevoCliente(tipo,nombre,domicilio,email,nif);
     }
     public void eliminarCLiente(){
         Scanner scanner = new Scanner(System.in);
         System.out.print("Por favor introduzca el email del cliente: ");
         String email = scanner.nextLine();
         try{
-           // controlador.eCliente(email);
+          controlador.eCliente(email);
         }
         catch (Exception e){
             System.out.println(escribirErrores(e));
         }
     }
-    /*
+
     public void listarCliente(){
         ArrayList<String> Clientes = controlador.lClientes();
         for(String cliente:Clientes){
@@ -264,7 +264,6 @@ public class GestionOS {
         }
     }
 
-     */
 // Pedidos
     private void menuPedidos() {
         Scanner scanner = new Scanner(System.in);

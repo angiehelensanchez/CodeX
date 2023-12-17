@@ -8,7 +8,7 @@ public class Controlador {
         public Controlador() {
             datos = new Datos ();
         }
-/*
+
     //CLIENTES
     public void aNuevoCliente(String tipocliente, String nombre, String domicilio, String email, String nif){
         datos.agregarCliente(tipocliente, nombre, domicilio, email, nif);
@@ -28,8 +28,6 @@ public class Controlador {
     }
 
 
-
- */
     //ARTICULOS
 
     public void aNuevoArticulo(String codigo, String descripcion, Float precio, Float gastosenvios, int tpreparacion) throws Exception{
