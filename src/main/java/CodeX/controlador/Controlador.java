@@ -1,6 +1,8 @@
 package CodeX.controlador;
 import CodeX.modelo.*;
 
+import java.util.ArrayList;
+
 public class Controlador {
         private Datos datos;
         public Controlador() {
