@@ -4,10 +4,8 @@ import CodeX.DAO.ClienteDAO;
 
  */
 import CodeX.DAO.ArticuloDAO;
-/*
 import CodeX.DAO.PedidosDAO;
 
- */
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Calendar;
@@ -112,7 +110,7 @@ public class Datos {
         ArticuloDAO articuloDAO = new ArticuloDAO();
         return articuloDAO.getArticulo(codigo);
     }
-/*
+
 
     // PEDIDOS ------------------------------------------------------------
 
@@ -184,6 +182,5 @@ public class Datos {
     }
 
 
-     */
 }
 

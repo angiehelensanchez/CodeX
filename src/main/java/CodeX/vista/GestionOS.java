@@ -287,16 +287,16 @@ public class GestionOS {
 
             switch (opcionpedidos) {
                 case 1:
-                    //agregarPedido();
+                    agregarPedido();
                     break;
                 case 2:
-                    //eliminarPedido();
+                    eliminarPedido();
                     break;
                 case 3:
-                    //listarPendiente();
+                    listarPendiente();
                     break;
                 case 4:
-                    //listarEnviado();
+                    listarEnviado();
                     break;
                 case 5:
                     System.out.println("Volviendo al Menú Principal.");
@@ -307,7 +307,6 @@ public class GestionOS {
             }
         }while (opcionpedidos != 5);
     }
-    /*
     public void agregarPedido(){
         Scanner scanner = new Scanner(System.in);
         System.out.print("Ingrese el codigo del articulo: ");
@@ -380,7 +379,6 @@ public class GestionOS {
         }
     }
 
-     */
 }
 
 
