@@ -15,6 +15,8 @@ public abstract class Cliente {
 
     @Column(name = "domicilio")
     private String domicilio;
+    @Column(name = "tipoCliente")
+    private String tipoCliente;
 
     @Id
     @Column(name = "email")

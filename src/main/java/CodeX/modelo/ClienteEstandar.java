@@ -15,7 +15,7 @@ public class ClienteEstandar extends Cliente {
 
     public ClienteEstandar(String nombre, String domicilio, String email, String nif) {
         super(nombre, domicilio, email, nif);
-        this.tipoCliente=tipoCliente;
+        this.tipoCliente=tipoCliente();
     }
 
     @Override
