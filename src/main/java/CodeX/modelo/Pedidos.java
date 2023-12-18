@@ -31,6 +31,8 @@ public class Pedidos {
 
     @Transient
     public float pEnvio;
+    protected Pedidos() {
+    }
 
     public Pedidos(String idPedido, Cliente cliente, Articulo articulos, int cantidadArticulo) {
         this.idPedido = idPedido;
