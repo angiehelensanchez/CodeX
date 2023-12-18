@@ -5,6 +5,8 @@ import javax.persistence.*;
 @Entity
 @Table(name = "Cliente")
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@DiscriminatorColumn(name="tipoCliente", discriminatorType = DiscriminatorType.STRING)
+
 public abstract class Cliente {
 
     @Column(name = "nif")
@@ -15,8 +17,6 @@ public abstract class Cliente {
 
     @Column(name = "domicilio")
     private String domicilio;
-    @Column(name = "tipoCliente")
-    private String tipoCliente;
 
     @Id
     @Column(name = "email")

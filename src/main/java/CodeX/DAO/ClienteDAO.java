@@ -1,6 +1,5 @@
 package CodeX.DAO;
 
-import CodeX.modelo.Articulo;
 import CodeX.modelo.Cliente;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -12,7 +11,7 @@ import java.util.List;
 public class ClienteDAO {
     private final SessionFactory factory;
     public ClienteDAO() {
-        this.factory = new Configuration().configure("hibernate.cfg.xml").addAnnotatedClass(Articulo.class).buildSessionFactory();
+        this.factory = new Configuration().configure("hibernate.cfg.xml").addAnnotatedClass(Cliente.class).buildSessionFactory();
     }
 
     public void addCliente(Cliente cliente) {

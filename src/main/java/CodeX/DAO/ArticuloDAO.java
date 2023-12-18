@@ -77,7 +77,6 @@ public class ArticuloDAO {
             List<Articulo> articulos = session.createQuery("from Articulo", Articulo.class).getResultList();
             // Commit de la transacción
             session.getTransaction().commit();
-
             return articulos; // Devuelve la lista de artículos
         } catch (Exception e) {
             e.printStackTrace();

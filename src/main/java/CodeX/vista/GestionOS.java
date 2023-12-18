@@ -363,19 +363,29 @@ public class GestionOS {
     }
     public void listarPendiente(){
         ArrayList<String> Pendientes = controlador.lPendientes(filtroCliente());
-        System.out.println("Los pedidos pendientes son los siguientes:");
-        System.out.println("═════════════════════════════════════════════");
-        for(String pedido:Pendientes){
-            System.out.println(pedido);
+        if(!Pendientes.isEmpty()){
+            System.out.println("Los pedidos pendientes son los siguientes:");
+            System.out.println("═════════════════════════════════════════════");
+            for(String pedido:Pendientes){
+                System.out.println(pedido);
+            }
+        } else {
+            System.out.println("No hay pedidos pendientes...");
         }
+
     }
     public void listarEnviado(){
         ArrayList<String> Enviados = controlador.lEnviados(filtroCliente());
-        System.out.println("Los pedidos enviados son los siguientes:");
-        System.out.println("═════════════════════════════════════════════");
-        for(String pedido:Enviados){
-            System.out.println(pedido);
+        if (!Enviados.isEmpty()) {
+            System.out.println("Los pedidos enviados son los siguientes:");
+            System.out.println("═════════════════════════════════════════════");
+            for (String pedido : Enviados) {
+                System.out.println(pedido);
+            }
+        }else {
+            System.out.println("No hay pedidos enviados...");
         }
+
     }
 
 }

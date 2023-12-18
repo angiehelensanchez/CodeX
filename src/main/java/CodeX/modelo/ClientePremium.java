@@ -7,15 +7,12 @@ import javax.persistence.*;
 @DiscriminatorValue("Premium")
 public class ClientePremium extends Cliente {
 
-    @Column(name = "tipoCliente")
-    private String tipoCliente;
     // Constructor vacío protegido para Hibernate
     protected ClientePremium() {
         super();
     }
     public ClientePremium(String nombre, String domicilio, String email, String nif) {
         super(nombre, domicilio, email, nif);
-        this.tipoCliente = tipoCliente();
     }
 
     @Override

@@ -10,12 +10,9 @@ public class ClienteEstandar extends Cliente {
     protected ClienteEstandar() {
         super();
     }
-    @Column(name = "tipoCliente")
-    private String tipoCliente;
 
     public ClienteEstandar(String nombre, String domicilio, String email, String nif) {
         super(nombre, domicilio, email, nif);
-        this.tipoCliente=tipoCliente();
     }
 
     @Override
