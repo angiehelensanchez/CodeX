@@ -1,13 +1,14 @@
 package CodeX.modelo;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 @Entity
 @Table(name = "Cliente")
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name="tipoCliente", discriminatorType = DiscriminatorType.STRING)
 
-public abstract class Cliente {
+public abstract class Cliente implements Serializable {
 
     @Column(name = "nif")
     private String nif;
@@ -31,6 +32,7 @@ public abstract class Cliente {
         this.domicilio = domicilio;
         this.email = email;
         this.nif = nif;
+
     }
 
     // Getters y setters

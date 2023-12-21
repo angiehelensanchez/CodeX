@@ -3,6 +3,7 @@ package CodeX.DAO;
 
 import CodeX.modelo.Pedidos;
 import org.hibernate.Session;
+import org.hibernate.Hibernate;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 import java.util.List;
@@ -72,6 +73,10 @@ public class PedidosDAO {
         try (Session session = factory.getCurrentSession()) {
             session.beginTransaction();
             List<Pedidos> pedidos = session.createQuery("from Pedidos", Pedidos.class).list();
+            for (Pedidos pedido : pedidos) {
+                Hibernate.initialize(pedido.getCliente());
+                Hibernate.initialize(pedido.getArticulo());
+            }
             session.getTransaction().commit();
             return pedidos;
         } catch (Exception e) {

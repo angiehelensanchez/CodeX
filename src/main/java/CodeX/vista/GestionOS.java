@@ -362,6 +362,7 @@ public class GestionOS {
         return null;
     }
     public void listarPendiente(){
+
         ArrayList<String> Pendientes = controlador.lPendientes(filtroCliente());
         if(!Pendientes.isEmpty()){
             System.out.println("Los pedidos pendientes son los siguientes:");

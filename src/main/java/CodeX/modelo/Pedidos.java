@@ -4,7 +4,7 @@ import javax.persistence.*;
 import java.util.Date;
 
 @Entity
-@Table(name = "Pedidos")
+@Table(name = "pedidos")
 public class Pedidos {
 
     @Id
@@ -12,8 +12,10 @@ public class Pedidos {
     private String idPedido;
 
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "nifCliente", referencedColumnName = "nif")
+    @JoinColumn(name = "nombreCliente", referencedColumnName = "nombre")
+    @JoinColumn(name = "emailCliente", referencedColumnName = "email")
     private Cliente cliente;
+
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "codigoArticulo", referencedColumnName = "codigo")
@@ -84,5 +86,8 @@ public class Pedidos {
 
     public Cliente getCliente() {
         return cliente;
+    }
+    public Articulo getArticulo() {
+        return articulos;
     }
 }

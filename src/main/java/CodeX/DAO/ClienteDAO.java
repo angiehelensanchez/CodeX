@@ -4,7 +4,6 @@ import CodeX.modelo.Cliente;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
-
 import java.util.ArrayList;
 import java.util.List;
 
