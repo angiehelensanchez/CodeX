@@ -50,7 +50,7 @@ public class ClienteDAO {
     }
 
     // Método para listar todos los clientes
-       public List<Cliente> listClientes() {
+    public List<Cliente> listClientes() {
         try (Session session =  factory.getCurrentSession()) {
             session.beginTransaction();
             List<Cliente> clientes = session.createQuery("from Cliente", Cliente.class).getResultList();

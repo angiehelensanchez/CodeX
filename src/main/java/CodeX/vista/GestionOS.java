@@ -1,4 +1,4 @@
-package CodeX.vista;
+/* package CodeX.vista;
 
 import CodeX.controlador.Controlador;
 import java.util.ArrayList;
@@ -52,7 +52,7 @@ public class GestionOS {
         String errores = e.getMessage();
         return errores;
     }
-// ARTICULOS
+    // ARTICULOS
     private void menuArticulos() {
         Scanner scanner = new Scanner(System.in);
         int opcionArticulos;
@@ -169,18 +169,18 @@ public class GestionOS {
             switch (opcionClientes) {
                 case 1:
                     agregarCliente();
-                break;
+                    break;
                 case 2:
                     listarCliente();
-                break;
+                    break;
                 case 3:
                     String tipo1 = "Estandar";
                     listarCLienteFiltro(tipo1);
-                break;
+                    break;
                 case 4:
                     String tipo2 = "Premium";
                     listarCLienteFiltro(tipo2);
-                break;
+                    break;
                 case 5:
                     eliminarCLiente();
                     break;
@@ -244,7 +244,7 @@ public class GestionOS {
         System.out.print("Por favor introduzca el email del cliente: ");
         String email = scanner.nextLine();
         try{
-          controlador.eCliente(email);
+            controlador.eCliente(email);
         }
         catch (Exception e){
             System.out.println(escribirErrores(e));
@@ -264,7 +264,7 @@ public class GestionOS {
         }
     }
 
-// Pedidos
+    // Pedidos
     private void menuPedidos() {
         Scanner scanner = new Scanner(System.in);
         int opcionpedidos;
@@ -362,7 +362,6 @@ public class GestionOS {
         return null;
     }
     public void listarPendiente(){
-
         ArrayList<String> Pendientes = controlador.lPendientes(filtroCliente());
         if(!Pendientes.isEmpty()){
             System.out.println("Los pedidos pendientes son los siguientes:");
@@ -390,5 +389,7 @@ public class GestionOS {
     }
 
 }
+
+ */
 
 

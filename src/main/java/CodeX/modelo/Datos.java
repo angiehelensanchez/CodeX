@@ -34,6 +34,17 @@ public class Datos {
         }
     }
 
+    public List<Cliente> listarClientes() {
+        ClienteDAO clienteDAO = new ClienteDAO();
+        return clienteDAO.listClientes();
+    }
+
+    public List<Cliente> listarClientesFiltro(String tipo) {
+        ClienteDAO clienteDAO = new ClienteDAO();
+        return clienteDAO.listClientesFiltradosPorTipo(tipo);
+    }
+
+    /*
     public ArrayList<String> listarClientes() {
         ClienteDAO clienteDAO = new ClienteDAO();
         List<Cliente> listaClientes = clienteDAO.listClientes();
@@ -44,6 +55,8 @@ public class Datos {
         return datos;
     }
 
+     */
+/*
     public ArrayList<String> listarClientesFiltro(String tipo) {
         ClienteDAO clienteDAO = new ClienteDAO();
         List<Cliente> listaClientes = clienteDAO.listClientesFiltradosPorTipo(tipo);
@@ -53,6 +66,8 @@ public class Datos {
         }
         return datos;
     }
+
+ */
 
     public Cliente getCliente(String email) {
         ClienteDAO clienteDAO = new ClienteDAO();
@@ -88,7 +103,13 @@ public class Datos {
     }
 
     //Metodo para listar un Articulo
-    public ArrayList<String> listArticulos() {
+
+    public List<Articulo> listArticulos() {
+        ArticuloDAO articuloDAO = new ArticuloDAO();
+        return articuloDAO.listArticulos(); // Suponiendo que este método devuelve List<Articulo>
+    }
+
+   /* public ArrayList<String> listArticulos() {
         ArticuloDAO articuloDAO = new ArticuloDAO();
         ArrayList<String> datos = new ArrayList<String>();
         //Suponiendo que ArticuloDAO tiene un método listArticulos() que devuelve List<Articulo>
@@ -97,6 +118,8 @@ public class Datos {
         }
         return datos;
     }
+
+    */
 
     public Articulo getArticulo(String codigo) {
         ArticuloDAO articuloDAO = new ArticuloDAO();

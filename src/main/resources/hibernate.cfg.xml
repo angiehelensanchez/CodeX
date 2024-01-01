@@ -5,15 +5,16 @@
     <session-factory>
         <!-- Configuración de la conexión a la base de datos -->
         <property name="hibernate.connection.driver_class">com.mysql.cj.jdbc.Driver</property>
-        <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/dbonlineshop</property>
+        <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/dbOnlineShop</property>
         <property name="hibernate.connection.username">root</property>
-        <property name="hibernate.connection.password">****</property>
+        <property name="hibernate.connection.password">20iknos11</property>
         <property name="hibernate.dialect">org.hibernate.dialect.MySQL8Dialect</property>
         <property name="hibernate.current_session_context_class">thread</property>
 
 
+
         <!-- Otras configuraciones -->
-        <property name="hibernate.show_sql">false</property>
+        <property name="hibernate.show_sql">true</property>
         <property name="hibernate.hbm2ddl.auto">update</property>
 
         <!-- Mapeo de las clases de entidad -->
@@ -23,6 +24,8 @@
         <mapping class="CodeX.modelo.ClientePremium"/>
         <mapping class="CodeX.modelo.Datos"/>
         <mapping class="CodeX.modelo.Pedidos"/>
+        <mapping class="CodeX.modelo.ArticuloController"/>
+
         <!-- Agrega aquí tus clases de entidad -->
 
     </session-factory>

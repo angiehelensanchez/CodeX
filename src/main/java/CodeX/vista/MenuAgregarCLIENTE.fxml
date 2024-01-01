@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+
+
+<AnchorPane fx:id="MenuAgregarCliente" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="CodeX.controlador.ClienteController">
+   <children>
+      <Button fx:id="AgregarCliente01" layoutX="447.0" layoutY="192.0" mnemonicParsing="false" prefHeight="94.0" prefWidth="108.0" text="AGREGAR" onAction="#agregarCliente" />
+      <CheckBox fx:id="ClienteEstandar" layoutX="49.0" layoutY="82.0" mnemonicParsing="false" text="ESTANDAR" />
+      <CheckBox fx:id="ClientePremium" layoutX="158.0" layoutY="82.0" mnemonicParsing="false" text="PREMIUM" />
+      <Label layoutX="49.0" layoutY="57.0" text="Tipo Cliente:" />
+      <Label layoutX="49.0" layoutY="121.0" text="Nombre:" />
+      <Label layoutX="49.0" layoutY="175.0" text="Direccion:" />
+      <Label layoutX="49.0" layoutY="296.0" text="NIF:" />
+      <Label layoutX="49.0" layoutY="230.0" text="Mail" />
+      <TextField fx:id="NombreCliente" layoutX="49.0" layoutY="141.0" prefHeight="25.0" prefWidth="332.0" />
+      <TextField fx:id="DireccionCliente" layoutX="49.0" layoutY="200.0" prefHeight="25.0" prefWidth="332.0" />
+      <TextField fx:id="MailCliente" layoutX="49.0" layoutY="256.0" prefHeight="25.0" prefWidth="332.0" />
+      <TextField fx:id="NIFCliente" layoutX="49.0" layoutY="320.0" prefHeight="25.0" prefWidth="332.0" />
+      <Button fx:id="VolverMenuClente" layoutX="437.0" layoutY="353.0" mnemonicParsing="false" text="Volver Menu Cliente" onAction="#volverAMenuClientes" />
+      <Label layoutX="14.0" layoutY="14.0" text="Menu Agregar Cliente - Oline Shop . CodeX" />
+   </children>
+</AnchorPane>
