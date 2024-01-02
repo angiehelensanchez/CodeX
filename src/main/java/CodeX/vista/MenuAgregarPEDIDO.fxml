@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane fx:id="MenuAgregarPedidos" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="CodeX.controlador.PedidosController">
+   <children>
+      <Button fx:id="Agregar" layoutX="440.0" layoutY="168.0" mnemonicParsing="false" prefHeight="65.0" prefWidth="134.0" text="Agregar" onAction="#agregarPedido"/>
+      <Button fx:id="VolverMenuPedidos01" layoutX="440.0" layoutY="345.0" mnemonicParsing="false" text="Volver Menu Pedidos" onAction="#volverAMenuPedidos" />
+      <Label layoutX="14.0" layoutY="6.0" text="Menu Agregar Pedido - OnlineShop - CodeX" />
+      <Label layoutX="39.0" layoutY="77.0" text="Ingrese el Codigo del Articulo" />
+      <Label layoutX="35.0" layoutY="160.0" text="Ingrese la cantidad del Articulo" />
+      <Label layoutX="35.0" layoutY="244.0" text="Introduzca el Mail del cliente" />
+      <TextField fx:id="AgregarCodigoArticulo" layoutX="48.0" layoutY="104.0" prefHeight="25.0" prefWidth="300.0" />
+      <TextField fx:id="AgregarCantidad" layoutX="48.0" layoutY="188.0" prefHeight="25.0" prefWidth="300.0" />
+      <TextField fx:id="IntroducirMail" layoutX="48.0" layoutY="268.0" prefHeight="25.0" prefWidth="300.0" />
+   </children>
+</AnchorPane>

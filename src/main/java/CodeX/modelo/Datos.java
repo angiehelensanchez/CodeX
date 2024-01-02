@@ -8,6 +8,9 @@ import CodeX.DAO.PedidosDAO;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Calendar;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+
 
 
 public class Datos {
@@ -172,29 +175,22 @@ public class Datos {
     }
 
 
-    public ArrayList<String> listarPedidosPendientes(String email) {
+    public List<Pedidos> listarPedidosPendientes(String email) {
         PedidosDAO pedidosDAO = new PedidosDAO();
         List<Pedidos> todosLosPedidos = pedidosDAO.listarTodosLosPedidos();
-        ArrayList<String> datos = new ArrayList<String>();
-        for (Pedidos pedido : todosLosPedidos) {
-            if (!pedido.pedidoEnviado() && (email == null || pedido.getCliente().getEmail().equals(email))) {
-                datos.add(pedido.toString());
-            }
-        }
-        return datos;
+        return todosLosPedidos.stream()
+                .filter(pedido -> !pedido.pedidoEnviado() && (email == null || pedido.getCliente().getEmail().equals(email)))
+                .collect(Collectors.toList());
     }
 
-    public ArrayList<String> listarPedidosEnviados(String email) {
+    public List<Pedidos> listarPedidosEnviados(String email) {
         PedidosDAO pedidosDAO = new PedidosDAO();
         List<Pedidos> todosLosPedidos = pedidosDAO.listarTodosLosPedidos();
-        ArrayList<String> datos = new ArrayList<String>();
-        for (Pedidos pedido : todosLosPedidos) {
-            if (pedido.pedidoEnviado() && (email == null || pedido.getCliente().getEmail().equals(email))) {
-                datos.add(pedido.toString());
-            }
-        }
-        return datos;
+        return todosLosPedidos.stream()
+                .filter(pedido -> pedido.pedidoEnviado() && (email == null || pedido.getCliente().getEmail().equals(email)))
+                .collect(Collectors.toList());
     }
+
 
 
 }

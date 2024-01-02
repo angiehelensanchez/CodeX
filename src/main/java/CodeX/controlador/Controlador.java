@@ -96,7 +96,7 @@ public class Controlador {
         return datos.getArticulo(codigo);
     }
     */
-
+/*
     //PEDIDOS
     public void aPedido(String arti, int cantidad, String cliente){ datos.hacerPedidos(arti,cantidad,cliente);}
     public Pedidos bPedido(String id){ return datos.buscarPedidos(id);}
@@ -109,5 +109,7 @@ public class Controlador {
     public ArrayList<String> lEnviados(String email){
         return datos.listarPedidosEnviados(email);
     }
+
+ */
 
 }

@@ -191,8 +191,7 @@ public class ClienteController {
     // ----------------- Métodos para Eliminar Cliente -------------------
 
     // Componentes de la vista EliminarCliente
-    @FXML
-    private TextField IngresarMailClienteEliminar;
+    @FXML private TextField IngresarMailClienteEliminar;
     @FXML private Button VolverMenuCliente04;
 
     @FXML
