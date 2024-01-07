@@ -4,6 +4,7 @@ import CodeX.modelo.Cliente;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -62,7 +63,32 @@ public class ClienteDAO {
         }
     }
 
+    public List<Cliente> listClientesEstandar() {
+        try (Session session = factory.getCurrentSession()) {
+            session.beginTransaction();
+            List<Cliente> clientes = session.createQuery("from ClienteEstandar", Cliente.class).getResultList();
+            session.getTransaction().commit();
+            return clientes;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new ArrayList<>();
+        }
+    }
+    public List<Cliente> listClientesPremium() {
+        try (Session session = factory.getCurrentSession()) {
+            session.beginTransaction();
+            List<Cliente> clientes = session.createQuery("from ClientePremium", Cliente.class).getResultList();
+            session.getTransaction().commit();
+            return clientes;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new ArrayList<>();
+        }
+    }
+
+
     // Método para listar clientes filtrados por tipo
+    /*
     public List<Cliente> listClientesFiltradosPorTipo(String tipo) {
         try (Session session = factory.getCurrentSession()) {
             session.beginTransaction();
@@ -74,6 +100,8 @@ public class ClienteDAO {
             return new ArrayList<>();
         }
     }
+
+     */
 
 }
 

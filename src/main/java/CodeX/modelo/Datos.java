@@ -1,16 +1,13 @@
 package CodeX.modelo;
 
-import CodeX.DAO.ClienteDAO;
 
 import CodeX.DAO.ArticuloDAO;
+import CodeX.DAO.ClienteDAO;
 import CodeX.DAO.PedidosDAO;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Calendar;
+import java.util.List;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
-
 
 
 public class Datos {
@@ -42,11 +39,26 @@ public class Datos {
         return clienteDAO.listClientes();
     }
 
+
+    public List<Cliente> listarClientesFiltro(String tipo) {
+        ClienteDAO clienteDAO = new ClienteDAO();
+        if ("Estandar".equalsIgnoreCase(tipo)) {
+            return clienteDAO.listClientesEstandar();
+        } else if ("Premium".equalsIgnoreCase(tipo)) {
+            return clienteDAO.listClientesPremium();
+        } else {
+            // Opcionalmente puedes manejar un caso por defecto
+            // Por ejemplo, devolver todos los clientes si el tipo no coincide
+            return clienteDAO.listClientes();
+        }
+    }
+
+/*
     public List<Cliente> listarClientesFiltro(String tipo) {
         ClienteDAO clienteDAO = new ClienteDAO();
         return clienteDAO.listClientesFiltradosPorTipo(tipo);
     }
-
+*/
     /*
     public ArrayList<String> listarClientes() {
         ClienteDAO clienteDAO = new ClienteDAO();
@@ -109,6 +121,8 @@ public class Datos {
 
     public List<Articulo> listArticulos() {
         ArticuloDAO articuloDAO = new ArticuloDAO();
+        List<Articulo> articulos = articuloDAO.listArticulos();
+        System.out.println("Articulos en Datos: " + articulos);
         return articuloDAO.listArticulos(); // Suponiendo que este método devuelve List<Articulo>
     }
 

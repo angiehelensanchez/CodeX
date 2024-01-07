@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane fx:id="MostrarClientes02" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1">
+    <children>
+        <Label layoutX="14.0" layoutY="14.0" text="Menu Mostrar Clientes - Online Shop -CodeX" />
+        <Button fx:id="VolverMenuClientes02" layoutX="434.0" layoutY="355.0" mnemonicParsing="false" onAction="#volverAMenuClientes" text="Volver Menu Clientes" />
+        <Button fx:id="filtrarEstandarBtn" layoutX="36.0" layoutY="36.0" mnemonicParsing="false" onAction="#filtrarEstandar" prefHeight="35.0" prefWidth="147.0" text="Filtrar Clientes Estandar" />
+        <Button fx:id="filtrarPremiumBtn" layoutX="261.0" layoutY="36.0" mnemonicParsing="false" onAction="#filtrarPremium" prefHeight="35.0" prefWidth="147.0" text="Filtrar Clientes Premium" />
+        <Button fx:id="TodosBtn" layoutX="468.0" layoutY="36.0" mnemonicParsing="false" onAction="#resetFiltro" prefHeight="35.0" prefWidth="100.0" text="Todos" />
+      <ListView fx:id="ListaClientes" layoutX="21.0" layoutY="81.0" prefHeight="266.0" prefWidth="561.0" />
+    </children>
+</AnchorPane>

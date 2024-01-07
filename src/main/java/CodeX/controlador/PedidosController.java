@@ -1,29 +1,21 @@
 package CodeX.controlador;
 
 import CodeX.modelo.*;
-import CodeX.controlador.Controlador;
-import javafx.fxml.FXML;
-import javafx.scene.control.TextField;
-import javafx.scene.control.Button;
-import javafx.scene.control.TableView;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextArea;
-import javafx.scene.layout.Pane;
-import javafx.stage.Stage;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.CheckBox;
-import javafx.scene.control.Alert;
-import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
+import javafx.scene.control.*;
 import javafx.scene.control.Alert.AlertType;
-import java.util.List;
+import javafx.stage.Stage;
+import javafx.scene.control.cell.PropertyValueFactory;
+
 import java.util.ArrayList;
+import java.util.List;
 
 
 public class PedidosController {
@@ -37,10 +29,10 @@ public class PedidosController {
     @FXML private Button VolverMenuPrincipal;
 
     // Los archivos FXML separados para cada vista
-    private final String agregarPedidoView = "/CodeX/vista/MenuAgregarPEDIDO.fxml";
-    private final String mostrarPedidosView = "/CodeX/vista/MenuMostrarPEDIDOS.fxml";
-    private final String eliminarPedidoView = "/CodeX/vista/MenuEliminarPEDIDO.fxml";
-    private final String menuPrincipalView = "/CodeX/vista/MenuPrincipal.fxml";
+    private final String agregarPedidoView = "/vista/MenuAgregarPEDIDO.fxml";
+    private final String mostrarPedidosView = "/vista/MenuListarPEDIDOSv2.fxml";
+    private final String eliminarPedidoView = "/vista/MenuEliminarPEDIDO.fxml";
+    private final String menuPrincipalView = "/vista/MenuInicial.fxml";
 
     public PedidosController() {
         datos = new Datos();
@@ -55,10 +47,20 @@ public class PedidosController {
     private void abrirEliminarPedido(ActionEvent event) throws Exception {
         cambiarVista(event, eliminarPedidoView);
     }
+    // Método para abrir la ventana de mostrar pedidos
     @FXML
     private void abrirMostrarPedidos(ActionEvent event) throws Exception {
-        cambiarVista(event, mostrarPedidosView);
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/vista/MenuListarPEDIDOSv2.fxml")); // Asegúrate de que el nombre del archivo FXML sea correcto
+        PedidosControllerTable pedidosControllerTable = new PedidosControllerTable();
+        pedidosControllerTable.setDatos(datos);
+        loader.setController(pedidosControllerTable);
+
+        Parent root = loader.load();
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        stage.setScene(new Scene(root));
+        stage.show();
     }
+
     @FXML
     private void volverMenuInicial(ActionEvent event) throws Exception {
         cambiarVista(event, menuPrincipalView);
@@ -72,10 +74,10 @@ public class PedidosController {
         stage.show();
     }
 
-    // Metodo volver vista MenuClientes
+    // Metodo volver vista MenuCPedidos
     @FXML
     private void volverAMenuPedidos(ActionEvent event) throws Exception {
-        cambiarVista(event, "/CodeX/vista/MenuPedidos.fxml");
+        cambiarVista(event, "/vista/MenuPedidos.fxml");
     }
 
     // Métodos para manejar acciones específicas (agregar, eliminar, listar)
@@ -145,7 +147,7 @@ public class PedidosController {
             datos.eliminarPedidos(idPedido);
 
             // Muestra una confirmación de éxito
-            Alert alertaExito = new Alert(Alert.AlertType.INFORMATION);
+            Alert alertaExito = new Alert(AlertType.INFORMATION);
             alertaExito.setTitle("Pedido Eliminado");
             alertaExito.setHeaderText(null);
             alertaExito.setContentText("El pedido ha sido eliminado con éxito.");
@@ -155,14 +157,14 @@ public class PedidosController {
             IngresIdPedido.clear();
         } catch (Exception e) {
             // Muestra un mensaje de error
-            Alert alertaError = new Alert(Alert.AlertType.ERROR);
+            Alert alertaError = new Alert(AlertType.ERROR);
             alertaError.setTitle("Error al Eliminar Pedido");
             alertaError.setHeaderText("Error en el Pedido");
             alertaError.setContentText(e.getMessage());
             alertaError.showAndWait();
         }
     }
-
+/*
     // ----------------- Métodos para Mostrar Pedidos -------------------
 
     // Componentes de la vista MostrarPedidos (variantes Pendientes/Enviados)
@@ -173,6 +175,23 @@ public class PedidosController {
     @FXML private Button Todos;
     @FXML private Button VolverMenuPedidos03;
 
+    @FXML
+    private void configurarYCargarPedidos() {
+        // Configura las columnas de la tabla
+        idPedido.setCellValueFactory(new PropertyValueFactory<>("idPedido"));
+        nombreCliente.setCellValueFactory(new PropertyValueFactory<>("nombreCliente"));
+        emailCliente.setCellValueFactory(new PropertyValueFactory<>("emailCliente"));
+        codigoArticulo.setCellValueFactory(new PropertyValueFactory<>("codigoArticulo"));
+        cantidadArticulo.setCellValueFactory(new PropertyValueFactory<>("cantidadArticulo"));
+        fechaPedido.setCellValueFactory(new PropertyValueFactory<>("fechaPedido"));
+        nifCliente.setCellValueFactory(new PropertyValueFactory<>("nifCliente"));
+
+        // Cargar todos los pedidos
+        List<Pedidos> listaPedidos = new ArrayList<>();
+        listaPedidos.addAll(datos.listarPedidosPendientes(null));
+        listaPedidos.addAll(datos.listarPedidosEnviados(null));
+        cargarPedidosEnTabla(listaPedidos);
+    }
     @FXML
     private void listarPedidosPendientes(ActionEvent event) {
         List<Pedidos> listaPedidos = datos.listarPedidosPendientes(null);
@@ -185,19 +204,17 @@ public class PedidosController {
         cargarPedidosEnTabla(listaPedidos);
     }
 
+    // Este método se llama cuando se hace clic en el botón "Todos"
     @FXML
     private void listarTodosLosPedidos(ActionEvent event) {
-        List<Pedidos> listaPedidos = new ArrayList<>();
-        listaPedidos.addAll(datos.listarPedidosPendientes(null));
-        listaPedidos.addAll(datos.listarPedidosEnviados(null));
-        cargarPedidosEnTabla(listaPedidos);
+        configurarYCargarPedidos();
     }
-
+    // Método para cargar los pedidos en la tabla
     private void cargarPedidosEnTabla(List<Pedidos> listaPedidos) {
         ObservableList<Pedidos> pedidos = FXCollections.observableArrayList(listaPedidos);
         tableViewPedidos.setItems(pedidos);
     }
 
+ */
+
 }
-
-

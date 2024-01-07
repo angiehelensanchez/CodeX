@@ -1,31 +1,21 @@
 package CodeX.controlador;
 
 import CodeX.modelo.*;
-import CodeX.controlador.Controlador;
-import javafx.fxml.FXML;
-import javafx.scene.control.TextField;
-import javafx.scene.control.Button;
-import javafx.scene.control.TableView;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextArea;
-import javafx.scene.layout.Pane;
-import javafx.stage.Stage;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.CheckBox;
-import javafx.scene.control.Alert;
-import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
+import javafx.scene.control.*;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.Stage;
+import javafx.scene.control.CheckBox;
 
 
-
-import java.util.ArrayList;
 import java.util.List;
 
 public class ClienteController {
@@ -39,10 +29,10 @@ public class ClienteController {
     @FXML private Button VolverMenu;
 
     // Los archivos FXML separados para cada vista
-    private final String agregarClienteView = "/CodeX/vista/MenuAgregarCLIENTE.fxml";
-    private final String mostrarClientesView = "/CodeX/vista/MenuMostrarCLIENTES.fxml";
-    private final String eliminarClienteView = "/CodeX/vista/MenuEliminarCLIENTE.fxml";
-    private final String menuPrincipalView = "/CodeX/vista/MenuPrincipal.fxml";
+    private final String agregarClienteView = "/vista/MenuAgregarCLIENTE.fxml";
+    private final String mostrarClientesView = "/vista/MenuMostrarCLIENTESv2.fxml";
+    private final String eliminarClienteView = "/vista/MenuEliminarCLIENTE.fxml";
+    private final String menuPrincipalView = "/vista/MenuInicial.fxml";
 
     public ClienteController() {
         datos = new Datos();
@@ -56,8 +46,18 @@ public class ClienteController {
     }
     @FXML
     private void abrirMostrarClientes(ActionEvent event) throws Exception {
-        cambiarVista(event, mostrarClientesView);
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/vista/MenuMostrarCLIENTESv2.fxml"));
+        ClienteControllerTable clienteControllerTable = new ClienteControllerTable();
+        clienteControllerTable.setDatos(datos);
+        loader.setController(clienteControllerTable);
+
+        Parent root = loader.load();
+
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        stage.setScene(new Scene(root));
+        stage.show();
     }
+
     @FXML
     private void abrirEliminarCliente(ActionEvent event) throws Exception {
         cambiarVista(event, eliminarClienteView);
@@ -73,6 +73,11 @@ public class ClienteController {
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         stage.setScene(scene);
         stage.show();
+    }
+    // Metodo volver vista MenuClientes
+    @FXML
+    private void volverAMenuClientes(ActionEvent event) throws Exception {
+        cambiarVista(event, "/vista/MenuClientes.fxml");
     }
 
     // Métodos específicos para las acciones de cliente >
@@ -126,6 +131,8 @@ public class ClienteController {
         alert.showAndWait();
     }
 
+    /*
+
     // ----------------- Métodos para Mostrar Clientes -------------------
 
     // Componentes de la vista MostrarClientes (variantes Estandar/Premium)
@@ -137,9 +144,12 @@ public class ClienteController {
     @FXML private TableColumn<Cliente, String> tipoCliente;
     @FXML private TableColumn<Cliente, String> DTYPE;
     @FXML private Button VolverMenuClientes02;
-
+    @FXML private Button filtrarEstandarBtn;
+    @FXML private Button filtrarPremiumBtn;
+    @FXML private Button TodosBtn;
     // métodos específicos Clientes general
-    public void initialize() {
+
+    private void configurarYCargarClientes() {
         nif.setCellValueFactory(new PropertyValueFactory<>("nif"));
         nombre.setCellValueFactory(new PropertyValueFactory<>("nombre"));
         domicilio.setCellValueFactory(new PropertyValueFactory<>("domicilio"));
@@ -155,7 +165,8 @@ public class ClienteController {
         MostrarClientes01.getItems().setAll(clientes);
     }
 
-    // Componentes de la vista MostrarClientes (variante Estandar)
+
+   // Componentes de la vista MostrarClientes (variante Estandar)
     @FXML
     private void filtrarEstandar(ActionEvent event) {
         cargarClientesFiltrados("Estandar");
@@ -168,7 +179,7 @@ public class ClienteController {
 
     @FXML
     private void resetFiltro(ActionEvent event) {
-        cargarClientesFiltrados(null);
+        configurarYCargarClientes();
     }
 
     private void cargarClientesFiltrados(String tipo) {
@@ -185,8 +196,10 @@ public class ClienteController {
     // Metodo volver vista MenuClientes
     @FXML
     private void volverAMenuClientes(ActionEvent event) throws Exception {
-        cambiarVista(event, "/CodeX/vista/MenuClientes.fxml");
+        cambiarVista(event, "/vista/MenuClientes.fxml");
     }
+
+     */
 
     // ----------------- Métodos para Eliminar Cliente -------------------
 

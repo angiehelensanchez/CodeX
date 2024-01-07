@@ -10,7 +10,7 @@ public class OnlineStore extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("/CodeX/vista/MenuInicial.fxml")); // MainMenu.fxml es la pantalla de inicio
+        Parent root = FXMLLoader.load(getClass().getResource("/vista/MenuInicial.fxml"));
         primaryStage.setTitle("OnlineShop - CodeX");
         primaryStage.setScene(new Scene(root));
         primaryStage.show();

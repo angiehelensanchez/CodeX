@@ -1,7 +1,7 @@
 package CodeX.modelo;
 
 
-import javax.persistence.*;
+import jakarta.persistence.*;
 
 @Entity
 @DiscriminatorValue("Premium")
@@ -31,6 +31,7 @@ public class ClientePremium extends Cliente {
 
     @Override
     public String toString() {
-        return "| * Cliente: " + super.toString();
+        return super.toString() + ", tipo='Premium'";
     }
+
 }

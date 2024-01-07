@@ -4,6 +4,7 @@ import CodeX.modelo.Articulo;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
+
 import java.util.List;
 
 public class ArticuloDAO {
@@ -77,6 +78,8 @@ public class ArticuloDAO {
             List<Articulo> articulos = session.createQuery("from Articulo", Articulo.class).getResultList();
             // Commit de la transacción
             session.getTransaction().commit();
+            // Imprimir para depuración
+            System.out.println("Articulos recuperados: " + articulos);
             return articulos; // Devuelve la lista de artículos
         } catch (Exception e) {
             e.printStackTrace();

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane fx:id="MenuListarPedidos" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Label layoutX="14.0" layoutY="6.0" text="Menu Listar Pedidos - OnlineShop - CodeX" />
+      <Button fx:id="ListarPendientes" layoutX="33.0" layoutY="51.0" mnemonicParsing="false" onAction="#listarPedidosPendientes" text="Pedidos Pendientes" />
+      <Button fx:id="ListarEnviados" layoutX="216.0" layoutY="51.0" mnemonicParsing="false" onAction="#listarPedidosEnviados" prefHeight="25.0" prefWidth="126.0" text="Pedidos Enviados" />
+      <Button fx:id="Todos" layoutX="389.0" layoutY="51.0" mnemonicParsing="false" onAction="#listarTodosLosPedidos" prefHeight="25.0" prefWidth="126.0" text="Todos los Pedidos" />
+      <Button fx:id="VolverMenuPedidos03" layoutX="428.0" layoutY="354.0" mnemonicParsing="false" onAction="#volverAMenuPedidos" text="Volver Menus Pedidos" />
+      <ListView fx:id="ListaPedidos" layoutX="14.0" layoutY="86.0" prefHeight="264.0" prefWidth="570.0" />
+   </children>
+</AnchorPane>

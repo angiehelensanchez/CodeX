@@ -1,9 +1,9 @@
 package CodeX.modelo;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
-import javax.persistence.Column;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "articulo")
@@ -11,16 +11,12 @@ public class Articulo {
     @Id
     @Column(name = "codigo")
     private String codigo;
-
     @Column(name = "descripcion")
     private String descripcion;
-
     @Column(name = "precio")
     private float precio;
-
     @Column(name = "gastosEnvio")
     private float gastosenvio;
-
     @Column(name = "tpreparacion")
     private int tpreparacion;
 
@@ -40,39 +36,30 @@ public class Articulo {
     public String getCodigo() {
         return codigo;
     }
-
     public void setCodigo(String codigo) {
         this.codigo = codigo;
     }
-
     public String getDescripcion() {
         return descripcion;
     }
-
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
     }
-
     public float getPrecio() {
         return precio;
     }
-
     public void setPrecio(float precio) {
         this.precio = precio;
     }
-
     public float getGastosenvio() {
         return gastosenvio;
     }
-
     public void setGastosenvio(float gastosenvio) {
         this.gastosenvio = gastosenvio;
     }
-
     public int getTpreparacion() {
         return tpreparacion;
     }
-
     public void setTpreparacion(int tpreparacion) {
         this.tpreparacion = tpreparacion;
     }
